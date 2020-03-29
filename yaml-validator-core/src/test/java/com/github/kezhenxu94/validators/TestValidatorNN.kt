@@ -29,6 +29,8 @@ class TestValidatorNN {
       students:
         - name: abc
           age: 23
+        - name: abc
+          age: 23
     """.trimIndent(), Map::class.java)
     YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
         .ignoreMissing()
@@ -43,6 +45,22 @@ class TestValidatorNN {
         students:
           - name: ~
             age: 23
+          - name: ~
+            age: "23"
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+
+    assertThrows<ValidateException> {
+      val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
+        students:
+          - name: whatever
+            age: 23
+          - name: whatever
+            age: 24
       """.trimIndent(), Map::class.java)
       YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
           .ignoreMissing()

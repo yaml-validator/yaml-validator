@@ -29,6 +29,8 @@ class TestValidatorGT {
       students:
         - name: whatever
           age: 23
+        - name: whatever
+          age: "23"
     """.trimIndent(), Map::class.java)
     YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
         .ignoreMissing()

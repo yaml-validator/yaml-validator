@@ -14,5 +14,8 @@
 
 students:
   - name: !nn
-    age: !gt 12
+    age: &age !gt 12
+    height: !lt 200
+  - name: !nn
+    age: *age
     height: !lt 200

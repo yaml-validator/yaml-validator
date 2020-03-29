@@ -40,10 +40,10 @@ class TestValidatorGT {
   fun shouldFail() {
     assertThrows<ValidateException> {
       val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
-      students:
-        - name: whatever
-          age: 10
-    """.trimIndent(), Map::class.java)
+        students:
+          - name: whatever
+            age: 10
+      """.trimIndent(), Map::class.java)
       YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
           .ignoreMissing()
           .build()

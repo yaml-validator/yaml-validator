@@ -40,10 +40,10 @@ class TestValidatorNOT {
   fun shouldFail() {
     assertThrows<ValidateException> {
       val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
-      students:
-        - name: whatever
-          age: 12
-    """.trimIndent(), Map::class.java)
+        students:
+          - name: whatever
+            age: 12
+      """.trimIndent(), Map::class.java)
       YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
           .ignoreMissing()
           .build()
@@ -52,10 +52,10 @@ class TestValidatorNOT {
 
     assertThrows<ValidateException> {
       val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
-      students:
-        - name: ~
-          age: 13
-    """.trimIndent(), Map::class.java)
+        students:
+          - name: ~
+            age: 13
+      """.trimIndent(), Map::class.java)
       YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
           .ignoreMissing()
           .build()

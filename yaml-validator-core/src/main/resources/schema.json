@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON schema for yaml-validator expectation",
+  "definitions": {
+    "validator": {
+      "anyOf": [
+        {
+          "enum": [
+            "!gt ",
+            "!lt ",
+            "!nn",
+            "!not.",
+            "!not.gt ",
+            "!not.lt ",
+            "!not.nn"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        },
+        {
+          "$ref": "#"
+        }
+      ]
+    }
+  },
+  "patternProperties": {
+    "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
+      "$ref": "#/definitions/validator"
+    }
+  }
+}

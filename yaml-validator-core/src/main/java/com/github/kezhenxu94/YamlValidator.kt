@@ -22,7 +22,7 @@ import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
 
 class YamlValidator private constructor(private val builder: Builder) {
-  private val validator = Yaml(RootConstructor).loadAs<Map<*, *>>(builder.inputStream, Map::class.java)
+  private val validator = Yaml(RootConstructor).loadAs(builder.inputStream, Map::class.java)
 
   fun validate(toValidate: Any?) = traverse(validator, toValidate)
 

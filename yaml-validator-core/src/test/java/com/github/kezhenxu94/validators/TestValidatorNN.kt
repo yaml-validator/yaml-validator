@@ -25,7 +25,7 @@ import org.yaml.snakeyaml.Yaml
 class TestValidatorNN {
   @Test
   fun shouldPass() {
-    val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
+    val toValidate: Map<*, *> = Yaml().loadAs("""
       students:
         - name: abc
           age: 23
@@ -41,7 +41,7 @@ class TestValidatorNN {
   @Test
   fun shouldFail() {
     assertThrows<ValidateException> {
-      val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
+      val toValidate: Map<*, *> = Yaml().loadAs("""
         students:
           - name: ~
             age: 23
@@ -55,7 +55,7 @@ class TestValidatorNN {
     }
 
     assertThrows<ValidateException> {
-      val toValidate: Map<*, *> = Yaml().loadAs<Map<*, *>>("""
+      val toValidate: Map<*, *> = Yaml().loadAs("""
         students:
           - name: whatever
             age: 23

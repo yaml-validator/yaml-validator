@@ -35,6 +35,8 @@
     <snakeyaml.version>1.26</snakeyaml.version>
     <reflections.version>0.9.12</reflections.version>
     <junit-jupiter.version>5.6.0</junit-jupiter.version>
+
+    <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
@@ -66,6 +68,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
         <configuration>
           <source>8</source>
           <target>8</target>

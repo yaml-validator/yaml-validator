@@ -16,4 +16,7 @@
 
 package io.github.kezhenxu94.exceptions
 
+/**
+ * [Exception] indicates the validations are failed.
+ */
 class ValidateException(message: String? = null) : Exception(message)

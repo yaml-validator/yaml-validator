@@ -16,12 +16,11 @@
 
 package io.github.kezhenxu94.validators.lt
 
-import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(tags = ["!lt"], construct = LessThanConstruct::class)
-internal class LessThanValidator(private val expected: Double = 0.0) : Validatable {
+internal class LessThanValidator(private val expected: Double = 0.0) : io.github.kezhenxu94.Validator {
   private var actual: Double? = null
 
   @Throws(ValidateException::class)

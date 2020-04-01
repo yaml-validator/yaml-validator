@@ -16,12 +16,11 @@
 
 package io.github.kezhenxu94.validators.not
 
-import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(prefixes = ["!not."], construct = NotConstruct::class)
-internal class NotValidator(private val validator: Validatable) : Validatable {
+internal class NotValidator(private val validator: io.github.kezhenxu94.Validator) : io.github.kezhenxu94.Validator {
   @Throws(ValidateException::class)
   override fun validate(any: Any?) {
     try {

@@ -16,12 +16,11 @@
 
 package io.github.kezhenxu94.validators.nn
 
-import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(tags = ["!nn"], construct = NotNullConstruct::class)
-internal class NotNullValidator : Validatable {
+internal class NotNullValidator : io.github.kezhenxu94.Validator {
   @Throws(ValidateException::class)
   override fun validate(any: Any?) {
     if (any == null) {

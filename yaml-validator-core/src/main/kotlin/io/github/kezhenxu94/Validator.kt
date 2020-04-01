@@ -18,7 +18,15 @@ package io.github.kezhenxu94
 
 import io.github.kezhenxu94.exceptions.ValidateException
 
-interface Validatable {
+/**
+ * [Validator] is the main concept of YAML-Validator which validates the candidates based on the configured rules.
+ */
+interface Validator {
+  /**
+   * [validate]s the given object.
+   *
+   * @param any the object to validate
+   */
   @Throws(ValidateException::class)
   fun validate(any: Any?)
 }

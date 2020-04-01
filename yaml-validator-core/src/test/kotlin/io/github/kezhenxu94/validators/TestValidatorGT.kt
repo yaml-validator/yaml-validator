@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-class TestValidatorGT {
+internal class TestValidatorGT {
   @Test
-  fun `should pass when greater than`() {
+  internal fun `should pass when greater than`() {
     val toValidate = Yaml().loadAs("""
       students:
         - name: whatever
@@ -32,21 +32,21 @@ class TestValidatorGT {
         - name: whatever
           age: "23"
     """.trimIndent(), Map::class.java)
-    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+    YamlValidator.from(yamlInputStream)
         .ignoreMissing()
         .build()
         .validate(toValidate)
   }
 
   @Test
-  fun `should fail when not greater than`() {
+  internal fun `should fail when not greater than`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
             age: 10
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+      YamlValidator.from(yamlInputStream)
           .ignoreMissing()
           .build()
           .validate(toValidate)
@@ -54,14 +54,14 @@ class TestValidatorGT {
   }
 
   @Test
-  fun `should fail when type mismatch`() {
+  internal fun `should fail when type mismatch`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
             age: true
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+      YamlValidator.from(yamlInputStream)
           .ignoreMissing()
           .build()
           .validate(toValidate)
@@ -69,15 +69,19 @@ class TestValidatorGT {
   }
 
   @Test
-  fun `should pass with POJO`() {
+  internal fun `should pass with POJO`() {
     val toValidate = mapOf("students" to listOf(
         Student(name = "whatever", age = 23),
         Student(name = "whatever", age = 23)
     ))
 
-    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+    YamlValidator.from(yamlInputStream)
         .ignoreMissing()
         .build()
         .validate(toValidate)
+  }
+
+  companion object {
+    private val yamlInputStream get() = TestValidatorGT::class.java.getResourceAsStream("/nn.v.yaml")
   }
 }

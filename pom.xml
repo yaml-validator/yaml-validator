@@ -35,6 +35,7 @@
     <snakeyaml.version>1.26</snakeyaml.version>
     <reflections.version>0.9.12</reflections.version>
     <junit-jupiter.version>5.6.0</junit-jupiter.version>
+    <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 
     <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
   </properties>
@@ -97,6 +98,26 @@
         <configuration>
           <jvmTarget>1.8</jvmTarget>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>coverage-initialize</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>coverage-report</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -72,5 +72,7 @@ class YamlValidator private constructor(private val builder: Builder) {
     }
 
     fun from(inputStream: InputStream) = Builder(inputStream)
+
+    fun from(yaml: String) = Builder(yaml.byteInputStream())
   }
 }

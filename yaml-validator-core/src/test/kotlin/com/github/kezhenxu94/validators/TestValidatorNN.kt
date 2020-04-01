@@ -24,6 +24,15 @@ import org.yaml.snakeyaml.Yaml
 
 class TestValidatorNN {
   @Test
+  fun `should pass when top level object is validatable`() {
+    val toValidate = Yaml().loadAs("name: abc", Map::class.java)
+    YamlValidator.from("name: !nn")
+        .ignoreMissing()
+        .build()
+        .validate(toValidate)
+  }
+
+  @Test
   fun `should pass when nut null`() {
     val toValidate = Yaml().loadAs("""
       students:
@@ -64,6 +73,31 @@ class TestValidatorNN {
             age: 23
           - name: whatever
             age: 24
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+  }
+
+  @Test
+  fun `should fail when type mismatch`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        student:
+          name: whatever
+          age: 23
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        student: ~
       """.trimIndent(), Map::class.java)
       YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
           .ignoreMissing()

@@ -22,44 +22,47 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-class TestValidatorNOT {
+class TestValidatorGT {
   @Test
-  fun shouldPass() {
+  fun `should pass when greater than`() {
     val toValidate = Yaml().loadAs("""
       students:
-        - name: null
-          age: 12
+        - name: whatever
+          age: 23
+        - name: whatever
+          age: "23"
     """.trimIndent(), Map::class.java)
-    YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
+    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
         .ignoreMissing()
         .build()
         .validate(toValidate)
   }
 
   @Test
-  fun shouldFail() {
+  fun `should fail when not greater than`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
-            age: 12
+            age: 10
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
+      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
           .ignoreMissing()
           .build()
           .validate(toValidate)
     }
+  }
 
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: ~
-            age: 13
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
-    }
+  @Test
+  fun `should pass with POJO`() {
+    val toValidate = mapOf("students" to listOf(
+        Student(name = "whatever", age = 23),
+        Student(name = "whatever", age = 23)
+    ))
+
+    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+        .ignoreMissing()
+        .build()
+        .validate(toValidate)
   }
 }

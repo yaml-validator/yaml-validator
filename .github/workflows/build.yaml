@@ -28,5 +28,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./mvnw --batch-mode verify
+      - run: ./mvnw --batch-mode test
       - run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}

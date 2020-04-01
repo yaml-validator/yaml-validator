@@ -22,47 +22,44 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-class TestValidatorNN {
+class TestValidatorNOT {
   @Test
-  fun shouldPass() {
+  fun `should pass when NOT`() {
     val toValidate = Yaml().loadAs("""
       students:
-        - name: abc
-          age: 23
-        - name: abc
-          age: 23
+        - name: null
+          age: 12
     """.trimIndent(), Map::class.java)
-    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+    YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
         .ignoreMissing()
         .build()
         .validate(toValidate)
   }
 
   @Test
-  fun shouldFail() {
+  fun `should fail when not NOT NN`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
-          - name: ~
-            age: 23
-          - name: ~
-            age: "23"
+          - name: whatever
+            age: 12
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+      YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
           .ignoreMissing()
           .build()
           .validate(toValidate)
     }
+  }
 
+  @Test
+  fun `should fail when not NOT GT`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
-          - name: whatever
-            age: 23
-          - name: whatever
-            age: 24
+          - name: ~
+            age: 13
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+      YamlValidator.from(javaClass.getResourceAsStream("/not.v.yaml"))
           .ignoreMissing()
           .build()
           .validate(toValidate)

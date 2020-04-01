@@ -22,32 +22,33 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-class TestValidatorGT {
-
+class TestValidatorLT {
   @Test
-  fun shouldPass() {
+  fun `should pass when less than`() {
     val toValidate = Yaml().loadAs("""
       students:
         - name: whatever
-          age: 23
+          age: 11
         - name: whatever
-          age: "23"
+          age: "11"
     """.trimIndent(), Map::class.java)
-    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+    YamlValidator.from(javaClass.getResourceAsStream("/lt.v.yaml"))
         .ignoreMissing()
         .build()
         .validate(toValidate)
   }
 
   @Test
-  fun shouldFail() {
+  fun `should fail when not less than`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
-            age: 10
+            age: 12
+          - name: whatever
+            age: 12
       """.trimIndent(), Map::class.java)
-      YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+      YamlValidator.from(javaClass.getResourceAsStream("/lt.v.yaml"))
           .ignoreMissing()
           .build()
           .validate(toValidate)
@@ -55,15 +56,19 @@ class TestValidatorGT {
   }
 
   @Test
-  fun shouldPassWithPOJO() {
-    val toValidate = mapOf("students" to listOf(
-        Student(name = "whatever", age = 23),
-        Student(name = "whatever", age = 23)
-    ))
-
-    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
+  fun `should fail when not equal to anchor`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+          students:
+            - name: whatever
+              age: 11
+            - name: whatever
+              age: 10
+        """.trimIndent(), Map::class.java)
+      YamlValidator.from(javaClass.getResourceAsStream("/lt.v.yaml"))
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
   }
 }

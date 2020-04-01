@@ -17,7 +17,7 @@
 package com.github.kezhenxu94.validators
 
 import com.github.kezhenxu94.YamlValidator
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
@@ -25,7 +25,7 @@ import org.yaml.snakeyaml.Yaml
 class TestValidatorNN {
   @Test
   fun shouldPass() {
-    val toValidate: Map<*, *> = Yaml().loadAs("""
+    val toValidate = Yaml().loadAs("""
       students:
         - name: abc
           age: 23
@@ -41,7 +41,7 @@ class TestValidatorNN {
   @Test
   fun shouldFail() {
     assertThrows<ValidateException> {
-      val toValidate: Map<*, *> = Yaml().loadAs("""
+      val toValidate = Yaml().loadAs("""
         students:
           - name: ~
             age: 23
@@ -55,7 +55,7 @@ class TestValidatorNN {
     }
 
     assertThrows<ValidateException> {
-      val toValidate: Map<*, *> = Yaml().loadAs("""
+      val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
             age: 23

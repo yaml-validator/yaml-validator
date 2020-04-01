@@ -18,7 +18,7 @@ package com.github.kezhenxu94.validators.nn
 
 import com.github.kezhenxu94.Validatable
 import com.github.kezhenxu94.annotations.Validator
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(tags = ["!nn"], construct = NotNullConstruct::class)
 internal class NotNullValidator : Validatable {

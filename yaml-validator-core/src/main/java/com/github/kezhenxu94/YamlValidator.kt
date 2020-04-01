@@ -16,7 +16,7 @@
 
 package com.github.kezhenxu94
 
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 import com.github.kezhenxu94.validators.nn.NotNullValidator
 import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
@@ -24,7 +24,13 @@ import java.io.InputStream
 class YamlValidator private constructor(private val builder: Builder) {
   private val validator = Yaml(RootConstructor).loadAs(builder.inputStream, Map::class.java)
 
-  fun validate(toValidate: Any?) = traverse(validator, toValidate)
+  fun validate(toValidate: Any?) {
+    return when {
+      validator is Validatable -> validator.validate(toValidate)
+      toValidate is String     -> traverse(validator, Loader.loadAs(toValidate, Map::class.java))
+      else                     -> traverse(validator, Loader.loadAs(Dumper.dump(toValidate), Map::class.java))
+    }
+  }
 
   private fun traverse(validator: Any, toValidate: Any?) {
     when (validator) {

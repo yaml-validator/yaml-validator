@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.kezhenxu94
+package com.github.kezhenxu94.representers
 
-import com.github.kezhenxu94.exceptions.ValidateException
+import org.yaml.snakeyaml.introspector.Property
+import org.yaml.snakeyaml.nodes.MappingNode
+import org.yaml.snakeyaml.nodes.Tag
+import org.yaml.snakeyaml.representer.Representer
 
-interface Validatable {
-  @Throws(ValidateException::class)
-  fun validate(any: Any?)
+object MapRepresenter : Representer() {
+  override fun representJavaBean(properties: MutableSet<Property>?, javaBean: Any?): MappingNode {
+    javaBean?.let { addClassTag(it.javaClass, Tag.MAP) }
+    return super.representJavaBean(properties, javaBean)
+  }
 }

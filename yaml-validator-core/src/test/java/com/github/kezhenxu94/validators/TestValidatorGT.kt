@@ -17,15 +17,16 @@
 package com.github.kezhenxu94.validators
 
 import com.github.kezhenxu94.YamlValidator
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 class TestValidatorGT {
+
   @Test
   fun shouldPass() {
-    val toValidate: Map<*, *> = Yaml().loadAs("""
+    val toValidate = Yaml().loadAs("""
       students:
         - name: whatever
           age: 23
@@ -41,7 +42,7 @@ class TestValidatorGT {
   @Test
   fun shouldFail() {
     assertThrows<ValidateException> {
-      val toValidate: Map<*, *> = Yaml().loadAs("""
+      val toValidate = Yaml().loadAs("""
         students:
           - name: whatever
             age: 10
@@ -51,5 +52,18 @@ class TestValidatorGT {
           .build()
           .validate(toValidate)
     }
+  }
+
+  @Test
+  fun shouldPassWithPOJO() {
+    val toValidate = mapOf("students" to listOf(
+        Student(name = "whatever", age = 23),
+        Student(name = "whatever", age = 23)
+    ))
+
+    YamlValidator.from(javaClass.getResourceAsStream("/nn.v.yaml"))
+        .ignoreMissing()
+        .build()
+        .validate(toValidate)
   }
 }

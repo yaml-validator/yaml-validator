@@ -18,7 +18,7 @@ package com.github.kezhenxu94.validators.not
 
 import com.github.kezhenxu94.Validatable
 import com.github.kezhenxu94.annotations.Validator
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(prefixes = ["!not."], construct = NotConstruct::class)
 internal class NotValidator(private val validator: Validatable) : Validatable {

@@ -14,11 +14,6 @@
  * limitations under the License.
  */
 
-package com.github.kezhenxu94
+package com.github.kezhenxu94.exceptions
 
-import com.github.kezhenxu94.exceptions.ValidateException
-
-interface Validatable {
-  @Throws(ValidateException::class)
-  fun validate(any: Any?)
-}
+class ValidateException(message: String? = null) : Exception(message)

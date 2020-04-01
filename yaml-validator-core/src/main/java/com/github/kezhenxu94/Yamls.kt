@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-package com.github.kezhenxu94.exception
+package com.github.kezhenxu94
 
-class ValidateException(message: String? = null) : Exception(message)
+import com.github.kezhenxu94.representers.MapRepresenter
+import org.yaml.snakeyaml.DumperOptions
+import org.yaml.snakeyaml.Yaml
+
+internal object Loader : Yaml()
+
+internal object Dumper : Yaml(MapRepresenter, DumperOptions().apply {
+  isAllowReadOnlyProperties = true
+})

@@ -18,7 +18,7 @@ package com.github.kezhenxu94.validators.lt
 
 import com.github.kezhenxu94.Validatable
 import com.github.kezhenxu94.annotations.Validator
-import com.github.kezhenxu94.exception.ValidateException
+import com.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(tags = ["!lt"], construct = LessThanConstruct::class)
 internal class LessThanValidator(private val expected: Double = 0.0) : Validatable {

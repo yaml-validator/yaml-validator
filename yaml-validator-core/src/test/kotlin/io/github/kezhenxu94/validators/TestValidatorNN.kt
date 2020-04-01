@@ -33,6 +33,14 @@ internal class TestValidatorNN {
   }
 
   @Test
+  internal fun `should pass when top level object is string`() {
+    YamlValidator.from("name: !nn")
+        .ignoreMissing()
+        .build()
+        .validate("name: abc")
+  }
+
+  @Test
   internal fun `should pass when nut null`() {
     val toValidate = Yaml().loadAs("""
       students:
@@ -98,6 +106,22 @@ internal class TestValidatorNN {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         student: ~
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(yamlInputStream)
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+  }
+
+  @Test
+  internal fun `should fail when type mismatch 2`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        students:
+          - name: abc
+            age: 23
+          - 1
       """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
           .ignoreMissing()

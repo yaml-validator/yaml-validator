@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.not
+package io.github.kezhenxu94.validators.nn
 
+import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
 
-@Validator(prefixes = ["!not."], construct = NotConstruct::class)
-internal class NotValidator(private val validator: io.github.kezhenxu94.Validator) : io.github.kezhenxu94.Validator {
+@Validator(tags = ["!nn"], construct = NotNullConstruct::class)
+internal class NotNullValidatable : Validatable {
   @Throws(ValidateException::class)
   override fun validate(any: Any?) {
-    try {
-      validator.validate(any)
-    } catch (_: ValidateException) {
-      return
+    if (any == null) {
+      throw ValidateException()
     }
-    throw ValidateException()
   }
 }

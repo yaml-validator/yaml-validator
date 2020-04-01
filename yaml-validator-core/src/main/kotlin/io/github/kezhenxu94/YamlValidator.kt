@@ -17,36 +17,36 @@
 package io.github.kezhenxu94
 
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.nn.NotNullValidator
+import io.github.kezhenxu94.validators.nn.NotNullValidatable
 import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
 
 /**
- * A helper class to make it easy to construct a real [Validator] instance.
+ * A helper class to make it easy to construct a real [Validatable] instance.
  */
 class YamlValidator private constructor(private val builder: Builder) {
   private val validator = Yaml(RootConstructor).loadAs(builder.inputStream, Map::class.java)
 
   /**
-   * @see [Validator.validate]
+   * @see [Validatable.validate]
    */
   fun validate(toValidate: Any?) {
     return when {
-      validator is Validator -> validator.validate(toValidate)
-      toValidate is String   -> traverse(validator, Loader.loadAs(toValidate, Map::class.java))
-      else                   -> traverse(validator, Loader.loadAs(Dumper.dump(toValidate), Map::class.java))
+      validator is Validatable -> validator.validate(toValidate)
+      toValidate is String     -> traverse(validator, Loader.loadAs(toValidate, Map::class.java))
+      else                     -> traverse(validator, Loader.loadAs(Dumper.dump(toValidate), Map::class.java))
     }
   }
 
   private fun traverse(validator: Any, toValidate: Any?) {
     when (validator) {
-      is Validator -> {
-        if (!builder.ignoreMissing || validator is NotNullValidator || toValidate != null) {
+      is Validatable -> {
+        if (!builder.ignoreMissing || validator is NotNullValidatable || toValidate != null) {
           validator.validate(toValidate)
         }
       }
 
-      is Map<*, *> -> {
+      is Map<*, *>   -> {
         if (toValidate !is Map<*, *>) {
           throw ValidateException()
         }
@@ -55,7 +55,7 @@ class YamlValidator private constructor(private val builder: Builder) {
         }
       }
 
-      is List<*>   -> {
+      is List<*>     -> {
         if (toValidate !is List<*>) {
           throw ValidateException()
         }
@@ -73,13 +73,13 @@ class YamlValidator private constructor(private val builder: Builder) {
     ) {
 
       /**
-       * Ignore the missing fields when validating, if the corresponding validator is [NotNullValidator], this option
+       * Ignore the missing fields when validating, if the corresponding validator is [NotNullValidatable], this option
        * takes no effect.
        */
       fun ignoreMissing() = this.also { ignoreMissing = true }
 
       /**
-       * Build a real [Validator] instance from this [Builder].
+       * Build a real [Validatable] instance from this [Builder].
        */
       fun build() = YamlValidator(this)
     }

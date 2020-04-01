@@ -21,5 +21,5 @@ import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.ScalarNode
 
 internal class LessThanConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = LessThanValidator((node as ScalarNode).value.toDouble())
+  override fun construct(node: Node) = LessThanValidatable((node as ScalarNode).value.toDouble())
 }

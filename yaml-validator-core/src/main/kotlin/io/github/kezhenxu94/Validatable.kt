@@ -19,9 +19,9 @@ package io.github.kezhenxu94
 import io.github.kezhenxu94.exceptions.ValidateException
 
 /**
- * [Validator] is the main concept of YAML-Validator which validates the candidates based on the configured rules.
+ * [Validatable] is the main concept of YAML-Validator which validates the candidates based on the configured rules.
  */
-interface Validator {
+interface Validatable {
   /**
    * [validate]s the given object.
    *

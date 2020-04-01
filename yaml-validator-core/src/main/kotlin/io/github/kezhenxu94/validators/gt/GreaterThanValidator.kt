@@ -16,11 +16,12 @@
 
 package io.github.kezhenxu94.validators.gt
 
+import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
 
 @Validator(tags = ["!gt"], construct = GreaterThanConstruct::class)
-internal class GreaterThanValidator(private val expected: Double = 0.0) : io.github.kezhenxu94.Validator {
+internal class GreaterThanValidator(private val expected: Double = 0.0) : Validatable {
   private var actual: Double? = null
 
   @Throws(ValidateException::class)

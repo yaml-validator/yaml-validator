@@ -27,8 +27,8 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  Test:
-    name: Run tests
+  Build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source codes

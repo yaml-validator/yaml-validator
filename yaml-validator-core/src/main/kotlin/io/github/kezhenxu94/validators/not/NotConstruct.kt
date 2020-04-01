@@ -17,7 +17,7 @@
 package io.github.kezhenxu94.validators.not
 
 import io.github.kezhenxu94.RootConstructor
-import io.github.kezhenxu94.Validator
+import io.github.kezhenxu94.Validatable
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag
@@ -26,6 +26,6 @@ internal class NotConstruct : AbstractConstruct() {
   override fun construct(node: Node): Any {
     node.tag = Tag(node.tag.value.replace("!not.", "!"))
     val construct = RootConstructor.constructs[node.tag] ?: throw IllegalStateException()
-    return NotValidator(construct.construct(node) as Validator)
+    return NotValidatable(construct.construct(node) as Validatable)
   }
 }

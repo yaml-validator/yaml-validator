@@ -38,4 +38,4 @@ jobs:
       - name: Upload coverage data
         run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
       - name: Deploy to GitHub Package Registry
-        run: ./mvnw --settings settings.xml -Pgithub clean deploy
+        run: ./mvnw --settings settings.xml -Pgithub -DskipTests clean deploy

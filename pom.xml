@@ -129,4 +129,11 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub @kezhenxu94 Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/kezhenxu94/yaml-validator</url>
+    </repository>
+  </distributionManagement>
 </project>

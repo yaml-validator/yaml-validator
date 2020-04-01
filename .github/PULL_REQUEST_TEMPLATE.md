@@ -1,13 +1,13 @@
-### Motivation:
+### Motivation
 
 Explain here the context, and why you're making that change.
 What is the problem you're trying to solve.
 
-### Modification:
+### Modification
 
 Describe the modifications you've done.
 
-### Result:
+### Result
 
 Fixes #<GitHub issue number>.
 

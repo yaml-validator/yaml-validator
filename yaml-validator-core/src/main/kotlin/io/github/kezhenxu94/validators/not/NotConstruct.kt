@@ -26,6 +26,6 @@ internal class NotConstruct : AbstractConstruct() {
   override fun construct(node: Node): Any {
     node.tag = Tag(node.tag.value.replace("!not.", "!"))
     val construct = RootConstructor.constructs[node.tag] ?: throw IllegalStateException()
-    return NotValidatable(construct.construct(node) as Validatable)
+    return NotValidator(construct.construct(node) as Validatable)
   }
 }

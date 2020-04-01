@@ -17,7 +17,7 @@
 package io.github.kezhenxu94
 
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.nn.NotNullValidatable
+import io.github.kezhenxu94.validators.nn.NotNullValidator
 import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
 
@@ -41,7 +41,7 @@ class YamlValidator private constructor(private val builder: Builder) {
   private fun traverse(validator: Any, toValidate: Any?) {
     when (validator) {
       is Validatable -> {
-        if (!builder.ignoreMissing || validator is NotNullValidatable || toValidate != null) {
+        if (!builder.ignoreMissing || validator is NotNullValidator || toValidate != null) {
           validator.validate(toValidate)
         }
       }
@@ -73,7 +73,7 @@ class YamlValidator private constructor(private val builder: Builder) {
     ) {
 
       /**
-       * Ignore the missing fields when validating, if the corresponding validator is [NotNullValidatable], this option
+       * Ignore the missing fields when validating, if the corresponding validator is [NotNullValidator], this option
        * takes no effect.
        */
       fun ignoreMissing() = this.also { ignoreMissing = true }

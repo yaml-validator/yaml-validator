@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.math.gt
 
+import io.github.kezhenxu94.core.Context
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.ScalarNode
 
 internal class GreaterThanConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = GreaterThanValidator((node as ScalarNode).value.toDouble())
+  override fun construct(node: Node) = GreaterThanValidator(Context(node))
 }

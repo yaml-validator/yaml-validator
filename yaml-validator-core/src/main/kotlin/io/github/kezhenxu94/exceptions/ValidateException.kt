@@ -16,7 +16,16 @@
 
 package io.github.kezhenxu94.exceptions
 
+import io.github.kezhenxu94.core.Context
+
 /**
  * [Exception] indicates the validations are failed.
  */
-class ValidateException(message: String? = null) : Exception(message)
+class ValidateException(message: String? = null) : Exception(message) {
+  constructor(context: Context) : this(
+      """
+      ${context.node.tag?.value} validation failed
+          at line: ${context.node.startMark.line + 1}, column: ${context.node.startMark.column + 1}
+      """.trimIndent()
+  )
+}

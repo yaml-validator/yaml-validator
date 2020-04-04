@@ -17,12 +17,16 @@
 package io.github.kezhenxu94.validators.math.lt
 
 import io.github.kezhenxu94.annotations.TagProcessor
+import io.github.kezhenxu94.core.Context
 import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.validators.math.MathValidator
 import io.github.kezhenxu94.validators.math.lt.LessThanValidator.Companion.TAG
+import org.yaml.snakeyaml.nodes.ScalarNode
 
 @TagProcessor(tags = [TAG], construct = LessThanConstruct::class)
-internal class LessThanValidator(expected: Number = 0.0) : MathValidator(expected) {
+internal class LessThanValidator(override val context: Context)
+  : MathValidator((context.node as ScalarNode).value.toDouble()) {
+
   companion object {
     internal const val TAG = "!lt"
   }

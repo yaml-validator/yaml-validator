@@ -16,27 +16,36 @@
 
 package io.github.kezhenxu94.validators.composite.join
 
-import io.github.kezhenxu94.core.Validatable
+import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.annotations.TagProcessor
-import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.core.Context
 import io.github.kezhenxu94.core.Referable
+import io.github.kezhenxu94.core.Validatable
+import io.github.kezhenxu94.exceptions.ValidateException
+import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(tags = ["!join"], construct = JoinConstruct::class)
-internal class JoinValidator(private val expected: List<*>) : Validatable, Referable<String> {
+internal class JoinValidator(override val context: Context) : Validatable, Referable<String> {
   override var reference: String? = null
 
+  private val nodes = RootConstructor.constructs[Tag.SEQ]?.construct(context.node)
+
   override fun validate(any: Any?) {
-    val expectedString = expected.joinToString("", transform = {
+    val expected = (nodes as List<*>).joinToString("", transform = {
       when (it) {
         is Referable<*> -> it.reference.toString()
-        else                                                         -> it.toString()
+        else            -> it.toString()
       }
     })
 
-    reference = expectedString
+    reference = expected
 
-    if (expectedString != any) {
-      throw ValidateException()
+    if (expected != any) {
+      throw ValidateException(context)
     }
+  }
+
+  override fun reset() {
+    reference = null
   }
 }

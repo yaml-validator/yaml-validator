@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.math.ge
 
+import io.github.kezhenxu94.core.Context
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.ScalarNode
 
 internal class GreaterThanOrEqualConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = GreaterThanOrEqualValidator((node as ScalarNode).value.toDouble())
+  override fun construct(node: Node) = GreaterThanOrEqualValidator(Context(node))
 }

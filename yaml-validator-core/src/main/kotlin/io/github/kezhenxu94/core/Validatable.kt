@@ -22,6 +22,8 @@ import io.github.kezhenxu94.exceptions.ValidateException
  * [Validatable] is the main concept of YAML-Validator which validates the candidates based on the configured rules.
  */
 interface Validatable {
+  val context: Context
+
   /**
    * [validate]s the given object.
    *

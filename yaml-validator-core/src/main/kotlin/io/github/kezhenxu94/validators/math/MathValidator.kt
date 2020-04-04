@@ -16,9 +16,9 @@
 
 package io.github.kezhenxu94.validators.math
 
+import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.core.Referable
 
 internal abstract class MathValidator(protected val expected: Number = 0.0) : Validatable, Referable<Any> {
   protected abstract val tag: String
@@ -41,6 +41,10 @@ internal abstract class MathValidator(protected val expected: Number = 0.0) : Va
     } finally {
       reference = any
     }
+  }
+
+  override fun reset() {
+    reference = null
   }
 
   protected abstract fun validateAnchor(anchor: Number)

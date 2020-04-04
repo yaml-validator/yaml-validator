@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.basic.eq
 
+import io.github.kezhenxu94.core.Context
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.ScalarNode
 
 internal class EqualConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = EqualValidator((node as ScalarNode).value)
+  override fun construct(node: Node) = EqualValidator(Context(node))
 }

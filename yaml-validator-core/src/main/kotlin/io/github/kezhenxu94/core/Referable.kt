@@ -6,4 +6,6 @@ package io.github.kezhenxu94.core
  */
 interface Referable<T> {
   val reference: T?
+
+  fun reset()
 }

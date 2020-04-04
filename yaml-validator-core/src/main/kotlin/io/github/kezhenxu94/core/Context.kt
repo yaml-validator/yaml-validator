@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.basic.nn
+package io.github.kezhenxu94.core
 
-import io.github.kezhenxu94.core.Context
-import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
-internal class NotNullConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = NotNullValidator(Context(node))
-}
+class Context(val node: Node)

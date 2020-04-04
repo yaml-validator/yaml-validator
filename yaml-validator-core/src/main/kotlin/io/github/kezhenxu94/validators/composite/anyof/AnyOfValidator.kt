@@ -14,36 +14,43 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.composite.not
+package io.github.kezhenxu94.validators.composite.anyof
 
 import io.github.kezhenxu94.RootConstructor
+import io.github.kezhenxu94.YamlValidator
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context
+import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.composite.not.NotValidator.Companion.PREFIX
 import org.yaml.snakeyaml.nodes.Tag
 
-@TagProcessor(prefixes = [PREFIX], construct = NotConstruct::class)
-internal class NotValidator(override val context: Context) : Validatable {
-  companion object {
-    internal const val PREFIX = "!not."
-  }
+@TagProcessor(tags = ["!anyOf"], construct = AnyOfConstruct::class)
+internal class AnyOfValidator(override val context: Context) : Validatable, Referable<Any> {
+  override var reference: Any? = null
 
-  private val validatable: Validatable
+  private val validator: Any
 
   init {
     val node = context.node
-    node.tag = Tag(node.tag.value.replace(PREFIX, "!"))
-    validatable = RootConstructor.constructs[node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
+    validator = (RootConstructor.constructs[Tag.MAP] ?: error("should never happen")).construct(node)
   }
 
   override fun validate(any: Any?) {
-    try {
-      validatable.validate(any)
-    } catch (_: ValidateException) {
-      return
-    }
-    throw ValidateException()
+    val yamlValidator = YamlValidator.from(validator = validator).disableReference().build()
+
+    (any as List<*>).firstOrNull {
+      try {
+        yamlValidator.validate(it)
+        reference = it
+        true
+      } catch (_: ValidateException) {
+        false
+      }
+    } ?: throw ValidateException(context)
+  }
+
+  override fun reset() {
+    reference = null
   }
 }

@@ -20,24 +20,29 @@ import io.github.kezhenxu94.annotations.TagProcessor
 import org.reflections.Reflections
 import org.yaml.snakeyaml.constructor.Construct
 import org.yaml.snakeyaml.constructor.Constructor
+import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag
 
 internal object RootConstructor : Constructor() {
   init {
-    val validatorClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
+    val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
 
-    for (klass in validatorClasses) {
-      val validator = klass.getAnnotation(TagProcessor::class.java)
+    tagClasses.forEach { klass ->
+      klass.getAnnotation(TagProcessor::class.java).apply {
+        val instance = construct.java.newInstance()
 
-      for (tag in validator.tags) {
-        yamlConstructors[Tag(tag)] = validator.construct.java.newInstance()
-      }
+        tags.forEach {
+          yamlConstructors[Tag(it)] = instance
+        }
 
-      for (prefix in validator.prefixes) {
-        yamlMultiConstructors[prefix] = validator.construct.java.newInstance()
+        prefixes.forEach {
+          yamlMultiConstructors[it] = instance
+        }
       }
     }
   }
+
+  fun constructor(node: Node): Construct = getConstructor(node)
 
   val constructs: Map<Tag, Construct> get() = yamlConstructors
 }

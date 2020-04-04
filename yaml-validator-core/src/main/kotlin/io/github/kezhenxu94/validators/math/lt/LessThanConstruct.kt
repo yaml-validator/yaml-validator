@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.math.lt
 
+import io.github.kezhenxu94.core.Context
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.ScalarNode
 
 internal class LessThanConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = LessThanValidator((node as ScalarNode).value.toDouble())
+  override fun construct(node: Node) = LessThanValidator(Context(node))
 }

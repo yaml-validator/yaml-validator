@@ -16,20 +16,27 @@
 
 package io.github.kezhenxu94.validators.basic.eq
 
-import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
-import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.core.Context
 import io.github.kezhenxu94.core.Referable
+import io.github.kezhenxu94.core.Validatable
+import io.github.kezhenxu94.exceptions.ValidateException
+import org.yaml.snakeyaml.nodes.ScalarNode
 
 @TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
-internal open class EqualValidator(private val expected: String?) : Validatable, Referable<Any> {
+internal open class EqualValidator(override val context: Context) : Validatable, Referable<Any> {
   override var reference: Any? = null
 
   override fun validate(any: Any?) {
     reference = any
 
+    val expected = (context.node as ScalarNode).value
     if (expected != any?.toString()) {
-      throw ValidateException()
+      throw ValidateException(context)
     }
+  }
+
+  override fun reset() {
+    reference = null
   }
 }

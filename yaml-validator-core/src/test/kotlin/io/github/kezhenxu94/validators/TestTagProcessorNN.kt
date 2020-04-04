@@ -21,6 +21,7 @@ import io.github.kezhenxu94.exceptions.ValidateException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
+import org.yaml.snakeyaml.constructor.ConstructorException
 
 internal class TestTagProcessorNN {
   @Test
@@ -91,7 +92,7 @@ internal class TestTagProcessorNN {
 
   @Test
   internal fun `should fail when type mismatch`() {
-    assertThrows<ValidateException> {
+    assertThrows<Exception> {
       val toValidate = Yaml().loadAs("""
         student:
           name: whatever
@@ -103,7 +104,7 @@ internal class TestTagProcessorNN {
           .validate(toValidate)
     }
 
-    assertThrows<ValidateException> {
+    assertThrows<Exception> {
       val toValidate = Yaml().loadAs("""
         student: ~
       """.trimIndent(), Map::class.java)
@@ -116,7 +117,7 @@ internal class TestTagProcessorNN {
 
   @Test
   internal fun `should fail when type mismatch 2`() {
-    assertThrows<ValidateException> {
+    assertThrows<ConstructorException> {
       val toValidate = Yaml().loadAs("""
         students:
           - name: abc

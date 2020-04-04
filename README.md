@@ -1,4 +1,4 @@
-# yaml-validator - A validator based on YAML rules
+# yaml-validator - a validator based on YAML rules
 
 [![Build](https://github.com/kezhenxu94/yaml-validator/workflows/Build/badge.svg?branch=master)](https://github.com/kezhenxu94/yaml-validator/actions?query=branch%3Amaster+event%3Apush+workflow%3A%22Build%22)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%20v2.0-blue.svg)](https://apache.org)

@@ -65,10 +65,6 @@ class YamlValidator private constructor(private val builder: Builder) {
     }
   }
 
-  override fun toString(): String {
-    return "YamlValidator(validator=$validator)"
-  }
-
   companion object {
     class Builder(
         internal val inputStream: InputStream,

@@ -17,7 +17,7 @@
 package io.github.kezhenxu94.validators.composite.not
 
 import io.github.kezhenxu94.RootConstructor
-import io.github.kezhenxu94.Validatable
+import io.github.kezhenxu94.core.Validatable
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag

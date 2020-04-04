@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.basic.eq
 
-import io.github.kezhenxu94.Validatable
+import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
+import io.github.kezhenxu94.core.Referable
 
 @TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
 internal open class EqualValidator(private val expected: String?) : Validatable, Referable<Any> {

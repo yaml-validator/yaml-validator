@@ -16,10 +16,10 @@
 
 package io.github.kezhenxu94.validators.composite.join
 
-import io.github.kezhenxu94.Validatable
+import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
+import io.github.kezhenxu94.core.Referable
 
 @TagProcessor(tags = ["!join"], construct = JoinConstruct::class)
 internal class JoinValidator(private val expected: List<*>) : Validatable, Referable<String> {
@@ -29,7 +29,7 @@ internal class JoinValidator(private val expected: List<*>) : Validatable, Refer
     val expectedString = expected.joinToString("", transform = {
       when (it) {
         is Referable<*> -> it.reference.toString()
-        else            -> it.toString()
+        else                                                         -> it.toString()
       }
     })
 

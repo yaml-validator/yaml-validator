@@ -16,6 +16,7 @@
 
 package io.github.kezhenxu94
 
+import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.validators.basic.nn.NotNullValidator
 import org.yaml.snakeyaml.Yaml

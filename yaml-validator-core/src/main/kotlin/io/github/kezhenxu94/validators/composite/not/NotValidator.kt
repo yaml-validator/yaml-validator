@@ -16,7 +16,7 @@
 
 package io.github.kezhenxu94.validators.composite.not
 
-import io.github.kezhenxu94.Validatable
+import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
 

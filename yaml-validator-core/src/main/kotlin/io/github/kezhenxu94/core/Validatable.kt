@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94
+package io.github.kezhenxu94.core
 
 import io.github.kezhenxu94.exceptions.ValidateException
 

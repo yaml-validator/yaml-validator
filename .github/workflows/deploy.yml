@@ -12,24 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Build
+name: Deploy
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    tags:
+      - 'v*'
+
+env:
+  GITHUB_USERNAME: x-access-token
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+  OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+  GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
 jobs:
-  Build:
-    name: Build
+  deploy-github:
+    name: GitHub
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source codes
-        uses: actions/checkout@v2
-      - name: Run test cases
-        run: ./mvnw --batch-mode test
-      - name: Upload coverage data
-        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Deploy to GitHub
+        run: ./mvnw --batch-mode --settings settings.xml -Pgithub clean deploy

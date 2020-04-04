@@ -21,7 +21,7 @@ import io.github.kezhenxu94.exceptions.ValidateException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class TestYamlValidator {
+internal class TestYamlValidator {
   @Test
   fun `should pass when no tag and raw strings match`() {
     YamlValidator.from("""

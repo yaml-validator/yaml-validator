@@ -24,7 +24,7 @@ import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorGT {
   @Test
-  internal fun `should pass when greater than`() {
+  internal fun `should pass when gt`() {
     val toValidate = Yaml().loadAs("""
       students:
         - name: whatever
@@ -39,7 +39,7 @@ internal class TestTagProcessorGT {
   }
 
   @Test
-  internal fun `should fail when not greater than`() {
+  internal fun `should fail when not gt`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:

@@ -24,9 +24,6 @@ import org.yaml.snakeyaml.nodes.Tag
 internal class JoinConstruct : AbstractConstruct() {
   override fun construct(node: Node): Any {
     val nodes = RootConstructor.constructs[Tag.SEQ]?.construct(node)
-    if (nodes is List<*>) {
-      return JoinValidator(nodes)
-    }
-    return JoinValidator(emptyList<String>())
+    return JoinValidator(nodes as List<*>)
   }
 }

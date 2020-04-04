@@ -19,15 +19,10 @@ package io.github.kezhenxu94.validators.composite.not
 import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
 
 @TagProcessor(prefixes = ["!not."], construct = NotConstruct::class)
-internal class NotValidator(private val validatable: Validatable) : Validatable, Referable<Any> {
-  override var reference: Any? = null
-
+internal class NotValidator(private val validatable: Validatable) : Validatable {
   override fun validate(any: Any?) {
-    reference = any
-
     try {
       validatable.validate(any)
     } catch (_: ValidateException) {

@@ -36,7 +36,7 @@ internal class GreaterThanOrEqualValidator(expected: Number = 0.0) : MathValidat
   }
 
   override fun validateAlias(alias: Number) {
-    if (alias.toDouble() != (reference as? Double)) {
+    if (alias.toDouble() != reference.toString().toDouble()) {
       throw ValidateException()
     }
   }

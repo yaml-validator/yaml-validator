@@ -22,16 +22,15 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-internal class TestTagProcessorJoin {
+internal class TestTagProcessorEQ {
   @Test
-  internal fun `should pass when joining`() {
+  internal fun `should pass when eq`() {
     val toValidate = Yaml().loadAs("""
-      graph:
-        - source:
-            id: 1
-        - target:
-            id: 2
-      relation: "1_2"
+      students:
+        - name: whatever
+          age: 12
+        - name: whatever
+          age: "12"
     """.trimIndent(), Map::class.java)
     YamlValidator.from(yamlInputStream)
         .ignoreMissing()
@@ -40,15 +39,12 @@ internal class TestTagProcessorJoin {
   }
 
   @Test
-  internal fun `should fail when joining not eq`() {
+  internal fun `should fail when not eq`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
-        graph:
-          - source:
-              id: 1
-          - target:
-              id: 2
-        relation: "1.0_2.0"
+        students:
+          - name: whatever
+            age: 11
       """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
           .ignoreMissing()
@@ -57,7 +53,35 @@ internal class TestTagProcessorJoin {
     }
   }
 
+  @Test
+  internal fun `should fail when type mismatch`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        students:
+          - name: whatever
+            age: true
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(yamlInputStream)
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+  }
+
+  @Test
+  internal fun `should pass with POJO`() {
+    val toValidate = mapOf("students" to listOf(
+        Student(name = "whatever", age = 12),
+        Student(name = "whatever", age = 12)
+    ))
+
+    YamlValidator.from(yamlInputStream)
+        .ignoreMissing()
+        .build()
+        .validate(toValidate)
+  }
+
   companion object {
-    private val yamlInputStream get() = TestTagProcessorJoin::class.java.getResourceAsStream("/join.v.yaml")
+    private val yamlInputStream get() = TestTagProcessorEQ::class.java.getResourceAsStream("/eq.v.yaml")
   }
 }

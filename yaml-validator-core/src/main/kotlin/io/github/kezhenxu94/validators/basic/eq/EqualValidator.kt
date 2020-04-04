@@ -28,7 +28,7 @@ internal open class EqualValidator(private val expected: String?) : Validatable,
   override fun validate(any: Any?) {
     reference = any
 
-    if (expected?.equals(any) != true) {
+    if (expected != any?.toString()) {
       throw ValidateException()
     }
   }

@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.eq
+package io.github.kezhenxu94.validators.composite.not
 
+import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.Validatable
-import io.github.kezhenxu94.annotations.TagProcessor
-import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
+import org.yaml.snakeyaml.constructor.AbstractConstruct
+import org.yaml.snakeyaml.nodes.Node
+import org.yaml.snakeyaml.nodes.Tag
 
-@TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
-internal open class EqualValidator(private val expected: String?) : Validatable, Referable<Any> {
-  override var reference: Any? = null
-
-  override fun validate(any: Any?) {
-    reference = any
-
-    if (expected?.equals(any) != true) {
-      throw ValidateException()
-    }
+internal class NotConstruct : AbstractConstruct() {
+  override fun construct(node: Node): Any {
+    node.tag = Tag(node.tag.value.replace("!not.", "!"))
+    val construct = RootConstructor.constructs[node.tag] ?: throw IllegalStateException()
+    return NotValidator(construct.construct(node) as Validatable)
   }
 }

@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.join
+package io.github.kezhenxu94.validators.basic.eq
 
-import io.github.kezhenxu94.RootConstructor
-import org.yaml.snakeyaml.constructor.AbstractConstruct
-import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.Tag
+import io.github.kezhenxu94.Validatable
+import io.github.kezhenxu94.annotations.TagProcessor
+import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.validators.Referable
 
-internal class JoinConstruct : AbstractConstruct() {
-  override fun construct(node: Node): Any {
-    val nodes = RootConstructor.constructs[Tag.SEQ]?.construct(node)
-    if (nodes is List<*>) {
-      return JoinValidator(nodes)
+@TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
+internal open class EqualValidator(private val expected: String?) : Validatable, Referable<Any> {
+  override var reference: Any? = null
+
+  override fun validate(any: Any?) {
+    reference = any
+
+    if (expected?.equals(any) != true) {
+      throw ValidateException()
     }
-    return JoinValidator(emptyList<String>())
   }
 }

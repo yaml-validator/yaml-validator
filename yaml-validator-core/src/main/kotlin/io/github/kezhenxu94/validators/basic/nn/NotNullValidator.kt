@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.not
+package io.github.kezhenxu94.validators.basic.nn
 
-import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.Validatable
-import org.yaml.snakeyaml.constructor.AbstractConstruct
-import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.Tag
+import io.github.kezhenxu94.annotations.TagProcessor
+import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.validators.Referable
 
-internal class NotConstruct : AbstractConstruct() {
-  override fun construct(node: Node): Any {
-    node.tag = Tag(node.tag.value.replace("!not.", "!"))
-    val construct = RootConstructor.constructs[node.tag] ?: throw IllegalStateException()
-    return NotValidator(construct.construct(node) as Validatable)
+@TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
+internal class NotNullValidator : Validatable, Referable<Any> {
+  override var reference: Any? = null
+
+  override fun validate(any: Any?) {
+    reference = any
+
+    if (any == null) {
+      throw ValidateException()
+    }
   }
 }

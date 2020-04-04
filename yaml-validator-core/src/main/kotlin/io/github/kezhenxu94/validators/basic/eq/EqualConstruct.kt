@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.nn
+package io.github.kezhenxu94.validators.basic.eq
 
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
+import org.yaml.snakeyaml.nodes.ScalarNode
 
-internal class NotNullConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = NotNullValidator()
+internal class EqualConstruct : AbstractConstruct() {
+  override fun construct(node: Node) = EqualValidator((node as ScalarNode).value)
 }

@@ -18,4 +18,7 @@ package io.github.kezhenxu94.core
 
 import org.yaml.snakeyaml.nodes.Node
 
+/**
+ * [Context] holds the context of a validation process.
+ */
 class Context(val node: Node)

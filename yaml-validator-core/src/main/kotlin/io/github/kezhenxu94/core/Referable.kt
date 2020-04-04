@@ -7,5 +7,8 @@ package io.github.kezhenxu94.core
 interface Referable<T> {
   val reference: T?
 
+  /**
+   * Reset the [reference] to null.
+   */
   fun reset()
 }

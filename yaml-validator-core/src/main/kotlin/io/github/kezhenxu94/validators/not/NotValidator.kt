@@ -17,13 +17,17 @@
 package io.github.kezhenxu94.validators.not
 
 import io.github.kezhenxu94.Validatable
-import io.github.kezhenxu94.annotations.Validator
+import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.validators.Referable
 
-@Validator(prefixes = ["!not."], construct = NotConstruct::class)
-internal class NotValidator(private val validatable: Validatable) : Validatable {
-  @Throws(ValidateException::class)
+@TagProcessor(prefixes = ["!not."], construct = NotConstruct::class)
+internal class NotValidator(private val validatable: Validatable) : Validatable, Referable<Any> {
+  override var reference: Any? = null
+
   override fun validate(any: Any?) {
+    reference = any
+
     try {
       validatable.validate(any)
     } catch (_: ValidateException) {

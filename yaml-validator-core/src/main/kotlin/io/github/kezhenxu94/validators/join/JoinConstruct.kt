@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.gt
+package io.github.kezhenxu94.validators.join
 
+import io.github.kezhenxu94.RootConstructor
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
-import org.yaml.snakeyaml.nodes.ScalarNode
+import org.yaml.snakeyaml.nodes.Tag
 
-internal class GreaterThanConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = GreaterThanValidator((node as ScalarNode).value.toDouble())
+internal class JoinConstruct : AbstractConstruct() {
+  override fun construct(node: Node): Any {
+    val nodes = RootConstructor.constructs[Tag.SEQ]?.construct(node)
+    if (nodes is List<*>) {
+      return JoinValidator(nodes)
+    }
+    return JoinValidator(emptyList<String>())
+  }
 }

@@ -14,40 +14,36 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.lt
+package io.github.kezhenxu94.validators.math
 
 import io.github.kezhenxu94.Validatable
-import io.github.kezhenxu94.annotations.Validator
 import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.validators.Referable
 
-@Validator(tags = ["!lt"], construct = LessThanConstruct::class)
-internal class LessThanValidator(private val expected: Double = 0.0) : Validatable {
-  private var actual: Double? = null
+internal abstract class MathValidator(protected val expected: Number = 0.0) : Validatable, Referable<Any> {
+  protected abstract val tag: String
 
-  @Throws(ValidateException::class)
+  override var reference: Any? = null
+
   override fun validate(any: Any?) {
     val actual = when (any) {
       is Number -> any.toDouble()
       is String -> any.toDouble()
-      else      -> throw ValidateException("!lt validator cannot be applied to non-number values, actual: $any")
+      else      -> throw ValidateException("$tag validator cannot be applied to non-number values, actual: $any")
     }
 
-    if (this.actual == null) {
-      validateAnchor(actual.also { this.actual = it })
-    } else {
-      validateAlias(actual)
+    try {
+      if (reference == null) {
+        validateAnchor(actual)
+      } else {
+        validateAlias(actual)
+      }
+    } finally {
+      reference = any
     }
   }
 
-  private fun validateAnchor(anchor: Number) {
-    if (anchor.toDouble() >= expected) {
-      throw ValidateException()
-    }
-  }
+  protected abstract fun validateAnchor(anchor: Number)
 
-  private fun validateAlias(alias: Number) {
-    if (alias.toDouble() != actual) {
-      throw ValidateException()
-    }
-  }
+  protected abstract fun validateAlias(alias: Number)
 }

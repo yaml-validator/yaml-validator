@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-internal class TestValidatorGT {
+internal class TestTagProcessorGT {
   @Test
   internal fun `should pass when greater than`() {
     val toValidate = Yaml().loadAs("""
@@ -82,6 +82,6 @@ internal class TestValidatorGT {
   }
 
   companion object {
-    private val yamlInputStream get() = TestValidatorGT::class.java.getResourceAsStream("/nn.v.yaml")
+    private val yamlInputStream get() = TestTagProcessorGT::class.java.getResourceAsStream("/nn.v.yaml")
   }
 }

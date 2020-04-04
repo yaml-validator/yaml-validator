@@ -14,21 +14,28 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.nn
+package io.github.kezhenxu94.validators.join
 
 import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.validators.Referable
 
-@TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
-internal class NotNullValidator : Validatable, Referable<Any> {
-  override var reference: Any? = null
+@TagProcessor(tags = ["!join"], construct = JoinConstruct::class)
+internal class JoinValidator(private val expected: List<*>) : Validatable, Referable<String> {
+  override var reference: String? = null
 
   override fun validate(any: Any?) {
-    reference = any
+    val expectedString = expected.joinToString("", transform = {
+      when (it) {
+        is Referable<*> -> it.reference.toString()
+        else            -> it.toString()
+      }
+    })
 
-    if (any == null) {
+    reference = expectedString
+
+    if (expectedString != any) {
       throw ValidateException()
     }
   }

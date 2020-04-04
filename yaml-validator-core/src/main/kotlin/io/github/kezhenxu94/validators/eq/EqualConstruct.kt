@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.lt
+package io.github.kezhenxu94.validators.eq
 
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.ScalarNode
 
-internal class LessThanConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = LessThanValidator((node as ScalarNode).value.toDouble())
+internal class EqualConstruct : AbstractConstruct() {
+  override fun construct(node: Node) = EqualValidator((node as ScalarNode).value)
 }

@@ -22,15 +22,32 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-internal class TestValidatorLT {
+internal class TestTagProcessorNN {
   @Test
-  internal fun `should pass when less than`() {
+  internal fun `should pass when top level object is validatable`() {
+    val toValidate = Yaml().loadAs("name: abc", Map::class.java)
+    YamlValidator.from("name: !nn")
+        .ignoreMissing()
+        .build()
+        .validate(toValidate)
+  }
+
+  @Test
+  internal fun `should pass when top level object is string`() {
+    YamlValidator.from("name: !nn")
+        .ignoreMissing()
+        .build()
+        .validate("name: abc")
+  }
+
+  @Test
+  internal fun `should pass when nut null`() {
     val toValidate = Yaml().loadAs("""
       students:
-        - name: whatever
-          age: 11
-        - name: whatever
-          age: "11"
+        - name: abc
+          age: 23
+        - name: abc
+          age: 23
     """.trimIndent(), Map::class.java)
     YamlValidator.from(yamlInputStream)
         .ignoreMissing()
@@ -39,31 +56,14 @@ internal class TestValidatorLT {
   }
 
   @Test
-  internal fun `should fail when not less than`() {
+  internal fun `should fail when null`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
         students:
-          - name: whatever
-            age: 12
-          - name: whatever
-            age: 12
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
-    }
-  }
-
-  @Test
-  internal fun `should fail when type mismatch`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: true
-          - name: whatever
-            age: true
+          - name: ~
+            age: 23
+          - name: ~
+            age: "23"
       """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
           .ignoreMissing()
@@ -76,12 +76,53 @@ internal class TestValidatorLT {
   internal fun `should fail when not equal to anchor`() {
     assertThrows<ValidateException> {
       val toValidate = Yaml().loadAs("""
-          students:
-            - name: whatever
-              age: 11
-            - name: whatever
-              age: 10
-        """.trimIndent(), Map::class.java)
+        students:
+          - name: whatever
+            age: 23
+          - name: whatever
+            age: 24
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(yamlInputStream)
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+  }
+
+  @Test
+  internal fun `should fail when type mismatch`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        student:
+          name: whatever
+          age: 23
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(yamlInputStream)
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        student: ~
+      """.trimIndent(), Map::class.java)
+      YamlValidator.from(yamlInputStream)
+          .ignoreMissing()
+          .build()
+          .validate(toValidate)
+    }
+  }
+
+  @Test
+  internal fun `should fail when type mismatch 2`() {
+    assertThrows<ValidateException> {
+      val toValidate = Yaml().loadAs("""
+        students:
+          - name: abc
+            age: 23
+          - 1
+      """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
           .ignoreMissing()
           .build()
@@ -90,6 +131,6 @@ internal class TestValidatorLT {
   }
 
   companion object {
-    private val yamlInputStream get() = TestValidatorLT::class.java.getResourceAsStream("/lt.v.yaml")
+    private val yamlInputStream get() = TestTagProcessorNN::class.java.getResourceAsStream("/nn.v.yaml")
   }
 }

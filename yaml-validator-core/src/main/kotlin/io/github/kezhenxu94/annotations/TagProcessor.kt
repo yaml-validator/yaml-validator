@@ -20,13 +20,13 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import kotlin.reflect.KClass
 
 /**
- * [Validator] declares a validator with [tags] in YAML, YAML rules with these [tags] can perform the validations that
+ * [TagProcessor] declares a validator with [tags] in YAML, YAML rules with these [tags] can perform the validations that
  * are specified in the [construct] class, rules with [prefixes] can be used along with other tags, such as !not. prefix,
  * for more example, please refer to [io.github.kezhenxu94.validators.not.NotValidator].
  */
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
-annotation class Validator(val tags: Array<String> = [],
-                           val prefixes: Array<String> = [],
-                           val construct: KClass<out AbstractConstruct>)
+annotation class TagProcessor(val tags: Array<String> = [],
+                              val prefixes: Array<String> = [],
+                              val construct: KClass<out AbstractConstruct>)

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-internal class TestValidatorNOT {
+internal class TestTagProcessorNOT {
   @Test
   internal fun `should pass when NOT`() {
     val toValidate = Yaml().loadAs("""
@@ -67,6 +67,6 @@ internal class TestValidatorNOT {
   }
 
   companion object {
-    private val yamlInputStream get() = TestValidatorNOT::class.java.getResourceAsStream("/not.v.yaml")
+    private val yamlInputStream get() = TestTagProcessorNOT::class.java.getResourceAsStream("/not.v.yaml")
   }
 }

@@ -16,7 +16,7 @@
 
 package io.github.kezhenxu94
 
-import io.github.kezhenxu94.annotations.Validator
+import io.github.kezhenxu94.annotations.TagProcessor
 import org.reflections.Reflections
 import org.yaml.snakeyaml.constructor.Construct
 import org.yaml.snakeyaml.constructor.Constructor
@@ -24,10 +24,10 @@ import org.yaml.snakeyaml.nodes.Tag
 
 internal object RootConstructor : Constructor() {
   init {
-    val validatorClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(Validator::class.java)
+    val validatorClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
 
     for (klass in validatorClasses) {
-      val validator = klass.getAnnotation(Validator::class.java)
+      val validator = klass.getAnnotation(TagProcessor::class.java)
 
       for (tag in validator.tags) {
         yamlConstructors[Tag(tag)] = validator.construct.java.newInstance()

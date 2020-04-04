@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.nn
+package io.github.kezhenxu94.validators.math.lt
 
-import io.github.kezhenxu94.Validatable
-import io.github.kezhenxu94.annotations.TagProcessor
-import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
+import org.yaml.snakeyaml.constructor.AbstractConstruct
+import org.yaml.snakeyaml.nodes.Node
+import org.yaml.snakeyaml.nodes.ScalarNode
 
-@TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
-internal class NotNullValidator : Validatable, Referable<Any> {
-  override var reference: Any? = null
-
-  override fun validate(any: Any?) {
-    reference = any
-
-    if (any == null) {
-      throw ValidateException()
-    }
-  }
+internal class LessThanConstruct : AbstractConstruct() {
+  override fun construct(node: Node) = LessThanValidator((node as ScalarNode).value.toDouble())
 }

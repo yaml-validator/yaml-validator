@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.nn
+package io.github.kezhenxu94.validators.eq
 
 import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.validators.Referable
 
-@TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
-internal class NotNullValidator : Validatable, Referable<Any> {
+@TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
+internal open class EqualValidator(private val expected: String?) : Validatable, Referable<Any> {
   override var reference: Any? = null
 
   override fun validate(any: Any?) {
     reference = any
 
-    if (any == null) {
+    if (expected?.equals(any) != true) {
       throw ValidateException()
     }
   }

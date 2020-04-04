@@ -2,18 +2,26 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "JSON schema for yaml-validator rules",
   "definitions": {
+    "schemaArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#" }
+    },
+    "simpleTag": {
+      "enum": [
+        "!gt ",
+        "!lt ",
+        "!nn",
+        "!not.",
+        "!not.gt ",
+        "!not.lt ",
+        "!not.nn"
+      ]
+    },
     "validator": {
       "anyOf": [
         {
-          "enum": [
-            "!gt ",
-            "!lt ",
-            "!nn",
-            "!not.",
-            "!not.gt ",
-            "!not.lt ",
-            "!not.nn"
-          ]
+          "$ref": "#/definitions/simpleTag"
         },
         {
           "type": "array",

@@ -14,21 +14,29 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.nn
+package io.github.kezhenxu94.validators.math.ge
 
-import io.github.kezhenxu94.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.Referable
+import io.github.kezhenxu94.validators.math.MathValidator
+import io.github.kezhenxu94.validators.math.ge.GreaterThanOrEqualValidator.Companion.TAG
 
-@TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
-internal class NotNullValidator : Validatable, Referable<Any> {
-  override var reference: Any? = null
+@TagProcessor(tags = [TAG], construct = GreaterThanOrEqualConstruct::class)
+internal class GreaterThanOrEqualValidator(expected: Number = 0.0) : MathValidator(expected) {
+  companion object {
+    internal const val TAG = "!ge"
+  }
 
-  override fun validate(any: Any?) {
-    reference = any
+  override val tag = TAG
 
-    if (any == null) {
+  override fun validateAnchor(anchor: Number) {
+    if (anchor.toDouble() < expected.toDouble()) {
+      throw ValidateException()
+    }
+  }
+
+  override fun validateAlias(alias: Number) {
+    if (alias.toDouble() != (reference as? Double)) {
       throw ValidateException()
     }
   }

@@ -23,7 +23,7 @@ import org.yaml.snakeyaml.constructor.Constructor
 import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag
 
-internal object RootConstructor : Constructor() {
+object RootConstructor : Constructor() {
   init {
     val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
 

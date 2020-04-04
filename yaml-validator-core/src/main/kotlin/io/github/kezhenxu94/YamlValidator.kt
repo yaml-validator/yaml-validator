@@ -19,7 +19,6 @@ package io.github.kezhenxu94
 import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
-import io.github.kezhenxu94.validators.basic.nn.NotNullValidator
 import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
 
@@ -76,7 +75,7 @@ class YamlValidator private constructor(private val builder: Builder) {
     if (builder.disableReference) {
       (validator as? Referable<*>)?.reset()
     }
-    if (!builder.ignoreMissing || validator is NotNullValidator || toValidate != null) {
+    if (!builder.ignoreMissing || toValidate != null) {
       validator.validate(toValidate)
     }
   }
@@ -90,8 +89,7 @@ class YamlValidator private constructor(private val builder: Builder) {
     ) {
 
       /**
-       * Ignore the missing fields when validating, if the corresponding validator is [NotNullValidator], this option
-       * takes no effect.
+       * Ignore the missing fields when validating.
        */
       fun ignoreMissing() = this.also { ignoreMissing = true }
 

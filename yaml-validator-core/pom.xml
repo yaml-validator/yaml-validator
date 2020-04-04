@@ -28,5 +28,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>yaml-validator-core</artifactId>
+  <description>The core API of yaml-validator</description>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>

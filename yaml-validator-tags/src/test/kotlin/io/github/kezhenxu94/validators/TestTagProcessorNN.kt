@@ -67,7 +67,6 @@ internal class TestTagProcessorNN {
             age: "23"
       """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
           .build()
           .validate(toValidate)
     }

@@ -45,11 +45,93 @@ internal class TestTagProcessorEQ {
         students:
           - name: whatever
             age: 11
+          - name: whatever
+            age: 11
       """.trimIndent(), Map::class.java)
       YamlValidator.from(yamlInputStream)
           .ignoreMissing()
           .build()
           .validate(toValidate)
+    }
+  }
+
+  @Test
+  internal fun `should fail when not eq to anchor`() {
+    val validator = YamlValidator.from(yamlInputStream)
+        .ignoreMissing()
+        .build()
+
+    assertThrows<ValidateException> {
+      validator.validate(
+          Yaml().loadAs("""
+            students:
+              - name: whatever
+                age: 12
+              - name: whatever
+                age: 19
+          """.trimIndent(), Map::class.java)
+      )
+    }
+  }
+
+  @Test
+  internal fun `should pass when eq to anchor`() {
+    val validator = YamlValidator.from(yamlInputStream)
+        .ignoreMissing()
+        .build()
+
+    assertThrows<ValidateException> {
+      validator.validate(
+          Yaml().loadAs("""
+            students:
+              - name: whatever
+                age: 11
+              - name: whatever
+                age: 19
+          """.trimIndent(), Map::class.java)
+      )
+    }
+
+    validator.validate(
+        Yaml().loadAs("""
+          students:
+            - name: whatever
+              age: 11
+            - name: whatever
+              age: 11
+        """.trimIndent(), Map::class.java)
+    )
+  }
+
+  @Test
+  internal fun `should pass when reset and not eq to anchor`() {
+    val validator = YamlValidator.from(yamlInputStream)
+        .ignoreMissing()
+        .disableReference()
+        .build()
+
+    assertThrows<ValidateException> {
+      validator.validate(
+          Yaml().loadAs("""
+            students:
+              - name: whatever
+                age: 11
+              - name: whatever
+                age: 19
+          """.trimIndent(), Map::class.java)
+      )
+    }
+
+    assertThrows<ValidateException> {
+      validator.validate(
+          Yaml().loadAs("""
+          students:
+            - name: whatever
+              age: 11
+            - name: whatever
+              age: 11
+        """.trimIndent(), Map::class.java)
+      )
     }
   }
 

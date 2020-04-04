@@ -28,9 +28,26 @@ internal open class EqualValidator(override val context: Context) : Validatable,
   override var reference: Any? = null
 
   override fun validate(any: Any?) {
-    reference = any
+    try {
+      val expected = (context.node as ScalarNode).value
 
-    val expected = (context.node as ScalarNode).value
+      if (reference == null) {
+        validateAnchor(expected, any)
+      } else {
+        validateAlias(any)
+      }
+    } finally {
+      reference = any
+    }
+  }
+
+  private fun validateAlias(any: Any?) {
+    if (reference?.toString() != any?.toString()) {
+      throw ValidateException(context)
+    }
+  }
+
+  private fun validateAnchor(expected: String?, any: Any?) {
     if (expected != any?.toString()) {
       throw ValidateException(context)
     }

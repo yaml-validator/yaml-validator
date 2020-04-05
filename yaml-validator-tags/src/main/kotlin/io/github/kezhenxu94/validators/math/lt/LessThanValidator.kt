@@ -24,24 +24,24 @@ import io.github.kezhenxu94.validators.math.lt.LessThanValidator.Companion.TAG
 import org.yaml.snakeyaml.nodes.ScalarNode
 
 @TagProcessor(tags = [TAG], construct = LessThanConstruct::class)
-internal class LessThanValidator(override val context: Context)
-  : MathValidator((context.node as ScalarNode).value.toDouble()) {
+internal class LessThanValidator(override val context: Context) :
+    MathValidator((context.node as ScalarNode).value.toDouble()) {
 
-  companion object {
-    internal const val TAG = "!lt"
-  }
-
-  override val tag = TAG
-
-  override fun validateAnchor(anchor: Number) {
-    if (anchor.toDouble() >= expected.toDouble()) {
-      throw ValidateException(context, expected, anchor)
+    companion object {
+        internal const val TAG = "!lt"
     }
-  }
 
-  override fun validateAlias(alias: Number) {
-    if (alias.toDouble() != reference.toString().toDouble()) {
-      throw ValidateException(context, reference, alias)
+    override val tag = TAG
+
+    override fun validateAnchor(anchor: Number) {
+        if (anchor.toDouble() >= expected.toDouble()) {
+            throw ValidateException(context, expected, anchor)
+        }
     }
-  }
+
+    override fun validateAlias(alias: Number) {
+        if (alias.toDouble() != reference.toString().toDouble()) {
+            throw ValidateException(context, reference, alias)
+        }
+    }
 }

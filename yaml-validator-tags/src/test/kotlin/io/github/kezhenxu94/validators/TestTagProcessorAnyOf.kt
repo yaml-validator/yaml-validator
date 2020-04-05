@@ -26,51 +26,60 @@ import org.yaml.snakeyaml.Yaml
 
 @Execution(ExecutionMode.CONCURRENT)
 internal class TestTagProcessorAnyOf {
-  @Test
-  internal fun `should pass when any of`() {
-    val toValidate1 = Yaml().loadAs("""
-      grades:
-        - subject: math
-          grade: 61
-        - subject: English
-          grade: 89 
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate1)
+    @Test
+    internal fun `should pass when any of`() {
+        val toValidate1 = Yaml().loadAs(
+            """
+            grades:
+                - subject: math
+                  grade: 61
+                - subject: English
+                  grade: 89 
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate1)
 
-    val toValidate2 = Yaml().loadAs("""
-      grades:
-        - subject: math
-          grade: 59
-        - subject: English
-          grade: 91
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate2)
-  }
-
-  @Test
-  internal fun `should fail when none of`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        grades:
-          - name: math
-            grade: 59
-          - name: English
-            grade: 89
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+        val toValidate2 = Yaml().loadAs(
+            """
+            grades:
+                - subject: math
+                  grade: 59
+                - subject: English
+                  grade: 91
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate2)
     }
-  }
 
-  companion object {
-    private val yamlInputStream get() = TestTagProcessorAnyOf::class.java.getResourceAsStream("/anyOf.v.yaml")
-  }
+    @Test
+    internal fun `should fail when none of`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                grades:
+                    - name: math
+                      grade: 59
+                    - name: English
+                      grade: 89
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
+
+    companion object {
+        private val yamlInputStream get() = TestTagProcessorAnyOf::class.java.getResourceAsStream("/anyOf.v.yaml")
+    }
 }

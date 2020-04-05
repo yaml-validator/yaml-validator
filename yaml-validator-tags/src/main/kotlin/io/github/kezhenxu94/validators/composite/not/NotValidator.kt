@@ -25,24 +25,25 @@ import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(prefixes = [PREFIX], construct = NotConstruct::class)
 internal class NotValidator(override val context: Context) : Validatable {
-  companion object {
-    internal const val PREFIX = "!not."
-  }
-
-  private val validatable: Validatable
-
-  init {
-    val node = context.node
-    node.tag = Tag(node.tag.value.replace(PREFIX, "!"))
-    validatable = context.root?.constructs!![node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
-  }
-
-  override fun validate(any: Any?) {
-    try {
-      validatable.validate(any)
-    } catch (_: ValidateException) {
-      return
+    companion object {
+        internal const val PREFIX = "!not."
     }
-    throw ValidateException()
-  }
+
+    private val validatable: Validatable
+
+    init {
+        val node = context.node
+        node.tag = Tag(node.tag.value.replace(PREFIX, "!"))
+        validatable =
+            context.root?.constructs!![node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
+    }
+
+    override fun validate(any: Any?) {
+        try {
+            validatable.validate(any)
+        } catch (_: ValidateException) {
+            return
+        }
+        throw ValidateException()
+    }
 }

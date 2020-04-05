@@ -16,25 +16,25 @@
 
 package io.github.kezhenxu94.validators.basic.nn
 
-import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context
-import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.core.Referable
+import io.github.kezhenxu94.core.Validatable
+import io.github.kezhenxu94.exceptions.ValidateException
 
 @TagProcessor(tags = ["!nn"], construct = NotNullConstruct::class)
 internal class NotNullValidator(override val context: Context) : Validatable, Referable<Any> {
-  override var reference: Any? = null
+    override var reference: Any? = null
 
-  override fun validate(any: Any?) {
-    reference = any
+    override fun validate(any: Any?) {
+        reference = any
 
-    if (any == null) {
-      throw ValidateException()
+        if (any == null) {
+            throw ValidateException()
+        }
     }
-  }
 
-  override fun reset() {
-    reference = null
-  }
+    override fun reset() {
+        reference = null
+    }
 }

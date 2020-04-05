@@ -22,8 +22,8 @@ import org.yaml.snakeyaml.nodes.Tag
 import org.yaml.snakeyaml.representer.Representer
 
 internal class MapRepresenter : Representer() {
-  override fun representJavaBean(properties: MutableSet<Property>?, javaBean: Any): MappingNode {
-    addClassTag(javaBean.javaClass, Tag.MAP)
-    return super.representJavaBean(properties, javaBean)
-  }
+    override fun representJavaBean(properties: MutableSet<Property>?, javaBean: Any): MappingNode {
+        addClassTag(javaBean.javaClass, Tag.MAP)
+        return super.representJavaBean(properties, javaBean)
+    }
 }

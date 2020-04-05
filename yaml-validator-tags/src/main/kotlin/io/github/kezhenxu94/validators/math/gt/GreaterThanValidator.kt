@@ -24,24 +24,24 @@ import io.github.kezhenxu94.validators.math.gt.GreaterThanValidator.Companion.TA
 import org.yaml.snakeyaml.nodes.ScalarNode
 
 @TagProcessor(tags = [TAG], construct = GreaterThanConstruct::class)
-internal class GreaterThanValidator(override val context: Context)
-  : MathValidator((context.node as ScalarNode).value.toDouble()) {
+internal class GreaterThanValidator(override val context: Context) :
+    MathValidator((context.node as ScalarNode).value.toDouble()) {
 
-  companion object {
-    internal const val TAG = "!gt"
-  }
-
-  override val tag = TAG
-
-  override fun validateAnchor(anchor: Number) {
-    if (anchor.toDouble() <= expected.toDouble()) {
-      throw ValidateException(context, expected, anchor)
+    companion object {
+        internal const val TAG = "!gt"
     }
-  }
 
-  override fun validateAlias(alias: Number) {
-    if (alias.toDouble() != reference.toString().toDouble()) {
-      throw ValidateException(context, reference, alias)
+    override val tag = TAG
+
+    override fun validateAnchor(anchor: Number) {
+        if (anchor.toDouble() <= expected.toDouble()) {
+            throw ValidateException(context, expected, anchor)
+        }
     }
-  }
+
+    override fun validateAlias(alias: Number) {
+        if (alias.toDouble() != reference.toString().toDouble()) {
+            throw ValidateException(context, reference, alias)
+        }
+    }
 }

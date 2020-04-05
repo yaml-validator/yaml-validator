@@ -21,5 +21,5 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
 internal class NotNullConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = NotNullValidator(Context(node))
+    override fun construct(node: Node) = NotNullValidator(Context(node))
 }

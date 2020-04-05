@@ -25,35 +25,35 @@ import org.yaml.snakeyaml.nodes.ScalarNode
 
 @TagProcessor(tags = ["!eq"], construct = EqualConstruct::class)
 internal open class EqualValidator(override val context: Context) : Validatable, Referable<Any> {
-  override var reference: Any? = null
+    override var reference: Any? = null
 
-  override fun validate(any: Any?) {
-    try {
-      val expected = (context.node as ScalarNode).value
+    override fun validate(any: Any?) {
+        try {
+            val expected = (context.node as ScalarNode).value
 
-      if (reference == null) {
-        validateAnchor(expected, any)
-      } else {
-        validateAlias(any)
-      }
-    } finally {
-      reference = any
+            if (reference == null) {
+                validateAnchor(expected, any)
+            } else {
+                validateAlias(any)
+            }
+        } finally {
+            reference = any
+        }
     }
-  }
 
-  private fun validateAlias(any: Any?) {
-    if (reference?.toString() != any?.toString()) {
-      throw ValidateException(context, reference, any)
+    private fun validateAlias(any: Any?) {
+        if (reference?.toString() != any?.toString()) {
+            throw ValidateException(context, reference, any)
+        }
     }
-  }
 
-  private fun validateAnchor(expected: String?, any: Any?) {
-    if (expected != any?.toString()) {
-      throw ValidateException(context, expected, any)
+    private fun validateAnchor(expected: String?, any: Any?) {
+        if (expected != any?.toString()) {
+            throw ValidateException(context, expected, any)
+        }
     }
-  }
 
-  override fun reset() {
-    reference = null
-  }
+    override fun reset() {
+        reference = null
+    }
 }

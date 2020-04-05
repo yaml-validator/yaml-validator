@@ -21,5 +21,5 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
 internal class EqualConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = EqualValidator(Context(node))
+    override fun construct(node: Node) = EqualValidator(Context(node))
 }

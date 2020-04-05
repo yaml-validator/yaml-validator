@@ -21,33 +21,33 @@ import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
 
 internal abstract class MathValidator(protected val expected: Number = 0.0) : Validatable, Referable<Any> {
-  protected abstract val tag: String
+    protected abstract val tag: String
 
-  override var reference: Any? = null
+    override var reference: Any? = null
 
-  override fun validate(any: Any?) {
-    val actual = when (any) {
-      is Number -> any.toDouble()
-      is String -> any.toDouble()
-      else      -> throw ValidateException("$tag validator cannot be applied to non-number values, actual: $any")
+    override fun validate(any: Any?) {
+        val actual = when (any) {
+            is Number -> any.toDouble()
+            is String -> any.toDouble()
+            else -> throw ValidateException("$tag validator cannot be applied to non-number values, actual: $any")
+        }
+
+        try {
+            if (reference == null) {
+                validateAnchor(actual)
+            } else {
+                validateAlias(actual)
+            }
+        } finally {
+            reference = any
+        }
     }
 
-    try {
-      if (reference == null) {
-        validateAnchor(actual)
-      } else {
-        validateAlias(actual)
-      }
-    } finally {
-      reference = any
+    override fun reset() {
+        reference = null
     }
-  }
 
-  override fun reset() {
-    reference = null
-  }
+    protected abstract fun validateAnchor(anchor: Number)
 
-  protected abstract fun validateAnchor(anchor: Number)
-
-  protected abstract fun validateAlias(alias: Number)
+    protected abstract fun validateAlias(alias: Number)
 }

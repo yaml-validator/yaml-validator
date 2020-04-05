@@ -25,26 +25,26 @@ import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(tags = ["!join"], construct = JoinConstruct::class)
 internal class JoinValidator(override val context: Context) : Validatable, Referable<String> {
-  override var reference: String? = null
+    override var reference: String? = null
 
-  private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node)
+    private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node)
 
-  override fun validate(any: Any?) {
-    val expected = (nodes as List<*>).joinToString("", transform = {
-      when (it) {
-        is Referable<*> -> it.reference.toString()
-        else            -> it.toString()
-      }
-    })
+    override fun validate(any: Any?) {
+        val expected = (nodes as List<*>).joinToString("", transform = {
+            when (it) {
+                is Referable<*> -> it.reference.toString()
+                else -> it.toString()
+            }
+        })
 
-    reference = expected
+        reference = expected
 
-    if (expected != any) {
-      throw ValidateException(context, expected, any)
+        if (expected != any) {
+            throw ValidateException(context, expected, any)
+        }
     }
-  }
 
-  override fun reset() {
-    reference = null
-  }
+    override fun reset() {
+        reference = null
+    }
 }

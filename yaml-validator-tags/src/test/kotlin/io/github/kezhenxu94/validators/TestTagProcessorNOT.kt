@@ -23,50 +23,59 @@ import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorNOT {
-  @Test
-  internal fun `should pass when NOT`() {
-    val toValidate = Yaml().loadAs("""
-      students:
-        - name: null
-          age: 12
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
-  }
-
-  @Test
-  internal fun `should fail when not NOT NN`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: 12
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should pass when NOT`() {
+        val toValidate = Yaml().loadAs(
+            """
+            students:
+              - name: null
+                age: 12
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
     }
-  }
 
-  @Test
-  internal fun `should fail when not NOT GT`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: ~
-            age: 13
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should fail when not NOT NN`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: 12
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
     }
-  }
 
-  companion object {
-    private val yamlInputStream get() = TestTagProcessorNOT::class.java.getResourceAsStream("/not.v.yaml")
-  }
+    @Test
+    internal fun `should fail when not NOT GT`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: ~
+                    age: 13
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
+
+    companion object {
+        private val yamlInputStream get() = TestTagProcessorNOT::class.java.getResourceAsStream("/not.v.yaml")
+    }
 }

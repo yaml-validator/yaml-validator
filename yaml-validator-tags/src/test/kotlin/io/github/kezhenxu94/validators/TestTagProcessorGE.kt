@@ -23,86 +23,100 @@ import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorGE {
-  @Test
-  internal fun `should pass when ge`() {
-    val toValidate = Yaml().loadAs("""
-      students:
-        - name: whatever
-          age: 12
-        - name: whatever
-          age: "12"
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
-  }
-
-  @Test
-  internal fun `should fail when not ge`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: 11
-          - name: whatever
-            age: 10
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should pass when ge`() {
+        val toValidate = Yaml().loadAs(
+            """
+            students:
+              - name: whatever
+                age: 12
+              - name: whatever
+                age: "12"
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
     }
-  }
 
-  @Test
-  internal fun `should fail when not eq anchor`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: 13
-          - name: whatever
-            age: 12
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should fail when not ge`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: 11
+                  - name: whatever
+                    age: 10
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
     }
-  }
 
-  @Test
-  internal fun `should fail when type mismatch`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: true
-          - name: whatever
-            age: true
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should fail when not eq anchor`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: 13
+                  - name: whatever
+                    age: 12
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
     }
-  }
 
-  @Test
-  internal fun `should pass with POJO`() {
-    val toValidate = mapOf("students" to listOf(
-        Student(name = "whatever", age = 12),
-        Student(name = "whatever", age = 12)
-    ))
+    @Test
+    internal fun `should fail when type mismatch`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: true
+                  - name: whatever
+                    age: true
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
 
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
-  }
+    @Test
+    internal fun `should pass with POJO`() {
+        val toValidate = mapOf(
+            "students" to listOf(
+                Student(name = "whatever", age = 12),
+                Student(name = "whatever", age = 12)
+            )
+        )
 
-  companion object {
-    private val yamlInputStream get() = TestTagProcessorGE::class.java.getResourceAsStream("/ge.v.yaml")
-  }
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
+    }
+
+    companion object {
+        private val yamlInputStream get() = TestTagProcessorGE::class.java.getResourceAsStream("/ge.v.yaml")
+    }
 }

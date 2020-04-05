@@ -23,73 +23,85 @@ import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorLT {
-  @Test
-  internal fun `should pass when lt`() {
-    val toValidate = Yaml().loadAs("""
-      students:
-        - name: whatever
-          age: 11
-        - name: whatever
-          age: "11"
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
-  }
-
-  @Test
-  internal fun `should fail when not lt`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: 12
-          - name: whatever
-            age: 12
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should pass when lt`() {
+        val toValidate = Yaml().loadAs(
+            """
+            students:
+              - name: whatever
+                age: 11
+              - name: whatever
+                age: "11"
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
     }
-  }
 
-  @Test
-  internal fun `should fail when type mismatch`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        students:
-          - name: whatever
-            age: true
-          - name: whatever
-            age: true
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should fail when not lt`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: 12
+                  - name: whatever
+                    age: 12
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
     }
-  }
 
-  @Test
-  internal fun `should fail when not equal to anchor`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-          students:
-            - name: whatever
-              age: 11
-            - name: whatever
-              age: 10
-        """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should fail when type mismatch`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: true
+                  - name: whatever
+                    age: true
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
     }
-  }
 
-  companion object {
-    private val yamlInputStream get() = TestTagProcessorLT::class.java.getResourceAsStream("/lt.v.yaml")
-  }
+    @Test
+    internal fun `should fail when not equal to anchor`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: whatever
+                    age: 11
+                  - name: whatever
+                    age: 10
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
+
+    companion object {
+        private val yamlInputStream get() = TestTagProcessorLT::class.java.getResourceAsStream("/lt.v.yaml")
+    }
 }

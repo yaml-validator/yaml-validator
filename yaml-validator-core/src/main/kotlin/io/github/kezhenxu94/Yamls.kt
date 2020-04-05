@@ -23,5 +23,5 @@ import org.yaml.snakeyaml.Yaml
 internal class Loader : Yaml()
 
 internal class Dumper : Yaml(MapRepresenter(), DumperOptions().apply {
-  isAllowReadOnlyProperties = true
+    isAllowReadOnlyProperties = true
 })

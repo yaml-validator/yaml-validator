@@ -16,8 +16,8 @@
 
 package io.github.kezhenxu94.annotations
 
-import org.yaml.snakeyaml.constructor.AbstractConstruct
 import kotlin.reflect.KClass
+import org.yaml.snakeyaml.constructor.AbstractConstruct
 
 /**
  * [TagProcessor] declares a validator with [tags] in YAML, YAML rules with these [tags] can perform the validations that
@@ -27,6 +27,8 @@ import kotlin.reflect.KClass
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
-annotation class TagProcessor(val tags: Array<String> = [],
-                              val prefixes: Array<String> = [],
-                              val construct: KClass<out AbstractConstruct>)
+annotation class TagProcessor(
+    val tags: Array<String> = [],
+    val prefixes: Array<String> = [],
+    val construct: KClass<out AbstractConstruct>
+)

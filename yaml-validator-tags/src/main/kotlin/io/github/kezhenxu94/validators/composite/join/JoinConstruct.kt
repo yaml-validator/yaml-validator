@@ -22,7 +22,7 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
 internal class JoinConstruct(private val root: RootConstructor) : AbstractConstruct() {
-  override fun construct(node: Node): Any {
-    return JoinValidator(Context(node, root))
-  }
+    override fun construct(node: Node): Any {
+        return JoinValidator(Context(node, root))
+    }
 }

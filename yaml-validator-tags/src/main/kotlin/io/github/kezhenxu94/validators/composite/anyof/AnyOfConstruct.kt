@@ -21,7 +21,7 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
 internal class AnyOfConstruct : AbstractConstruct() {
-  override fun construct(node: Node): Any {
-    return AnyOfValidator(Context(node))
-  }
+    override fun construct(node: Node): Any {
+        return AnyOfValidator(Context(node))
+    }
 }

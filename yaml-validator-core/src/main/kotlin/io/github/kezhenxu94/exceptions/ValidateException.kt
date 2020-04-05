@@ -22,12 +22,12 @@ import io.github.kezhenxu94.core.Context
  * [Exception] indicates the validations are failed.
  */
 class ValidateException(message: String? = null) : Exception(message) {
-  constructor(context: Context, expected: Any? = null, actual: Any? = null) : this(
-      """
-      ${context.node.tag?.value} validation failed
-      at line: ${context.node.startMark.line + 1}, column: ${context.node.startMark.column + 1}
-      expected: ${context.node.tag?.value} $expected
-      actual: $actual
-      """.trimIndent()
-  )
+    constructor(context: Context, expected: Any? = null, actual: Any? = null) : this(
+        """
+        ${context.node.tag?.value} validation failed
+        at line: ${context.node.startMark.line + 1}, column: ${context.node.startMark.column + 1}
+        expected: ${context.node.tag?.value} $expected
+        actual: $actual
+        """.trimIndent()
+    )
 }

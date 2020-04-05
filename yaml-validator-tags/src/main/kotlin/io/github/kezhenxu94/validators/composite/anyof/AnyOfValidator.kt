@@ -27,30 +27,30 @@ import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(tags = ["!anyOf"], construct = AnyOfConstruct::class)
 internal class AnyOfValidator(override val context: Context) : Validatable, Referable<Any> {
-  override var reference: Any? = null
+    override var reference: Any? = null
 
-  private val validator: Any
+    private val validator: Any
 
-  init {
-    val node = context.node
-    validator = (RootConstructor().constructs[Tag.MAP] ?: error("should never happen")).construct(node)
-  }
+    init {
+        val node = context.node
+        validator = (RootConstructor().constructs[Tag.MAP] ?: error("should never happen")).construct(node)
+    }
 
-  override fun validate(any: Any?) {
-    val yamlValidator = YamlValidator.from(validator = validator).disableReference().build()
+    override fun validate(any: Any?) {
+        val yamlValidator = YamlValidator.from(validator = validator).disableReference().build()
 
-    (any as List<*>).firstOrNull {
-      try {
-        yamlValidator.validate(it)
-        reference = it
-        true
-      } catch (_: ValidateException) {
-        false
-      }
-    } ?: throw ValidateException(context)
-  }
+        (any as List<*>).firstOrNull {
+            try {
+                yamlValidator.validate(it)
+                reference = it
+                true
+            } catch (_: ValidateException) {
+                false
+            }
+        } ?: throw ValidateException(context)
+    }
 
-  override fun reset() {
-    reference = null
-  }
+    override fun reset() {
+        reference = null
+    }
 }

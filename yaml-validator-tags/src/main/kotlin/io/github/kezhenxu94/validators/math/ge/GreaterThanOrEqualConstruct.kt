@@ -21,5 +21,5 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
 internal class GreaterThanOrEqualConstruct : AbstractConstruct() {
-  override fun construct(node: Node) = GreaterThanOrEqualValidator(Context(node))
+    override fun construct(node: Node) = GreaterThanOrEqualValidator(Context(node))
 }

@@ -23,41 +23,47 @@ import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorJoin {
-  @Test
-  internal fun `should pass when joining`() {
-    val toValidate = Yaml().loadAs("""
-      graph:
-        - source:
-            id: 1
-        - target:
-            id: 2
-      relation: "1_2"
-    """.trimIndent(), Map::class.java)
-    YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
-        .build()
-        .validate(toValidate)
-  }
-
-  @Test
-  internal fun `should fail when joining not eq`() {
-    assertThrows<ValidateException> {
-      val toValidate = Yaml().loadAs("""
-        graph:
-          - source:
-              id: 1
-          - target:
-              id: 2
-        relation: "1.0_2.0"
-      """.trimIndent(), Map::class.java)
-      YamlValidator.from(yamlInputStream)
-          .ignoreMissing()
-          .build()
-          .validate(toValidate)
+    @Test
+    internal fun `should pass when joining`() {
+        val toValidate = Yaml().loadAs(
+            """
+            graph:
+              - source:
+                  id: 1
+              - target:
+                  id: 2
+            relation: "1_2"
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
     }
-  }
 
-  companion object {
-    private val yamlInputStream get() = TestTagProcessorJoin::class.java.getResourceAsStream("/join.v.yaml")
-  }
+    @Test
+    internal fun `should fail when joining not eq`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                graph:
+                  - source:
+                      id: 1
+                  - target:
+                      id: 2
+                relation: "1.0_2.0"
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
+
+    companion object {
+        private val yamlInputStream get() = TestTagProcessorJoin::class.java.getResourceAsStream("/join.v.yaml")
+    }
 }

@@ -26,27 +26,27 @@ import org.yaml.snakeyaml.nodes.Tag
  * The root [Constructor] in the validation, which can be used to recursively construct POJOs.
  */
 class RootConstructor : Constructor() {
-  init {
-    val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
+    init {
+        val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
 
-    tagClasses.forEach { klass ->
-      klass.getAnnotation(TagProcessor::class.java).apply {
-        val instance = try {
-          construct.java.getDeclaredConstructor(RootConstructor::class.java).newInstance(this@RootConstructor)
-        } catch (_: Throwable) {
-          construct.java.newInstance()
-        }
+        tagClasses.forEach { klass ->
+            klass.getAnnotation(TagProcessor::class.java).apply {
+                val instance = try {
+                    construct.java.getDeclaredConstructor(RootConstructor::class.java).newInstance(this@RootConstructor)
+                } catch (_: Throwable) {
+                    construct.java.newInstance()
+                }
 
-        tags.forEach {
-          yamlConstructors[Tag(it)] = instance
-        }
+                tags.forEach {
+                    yamlConstructors[Tag(it)] = instance
+                }
 
-        prefixes.forEach {
-          yamlMultiConstructors[it] = instance
+                prefixes.forEach {
+                    yamlMultiConstructors[it] = instance
+                }
+            }
         }
-      }
     }
-  }
 
-  val constructs: Map<Tag, Construct> get() = yamlConstructors
+    val constructs: Map<Tag, Construct> get() = yamlConstructors
 }

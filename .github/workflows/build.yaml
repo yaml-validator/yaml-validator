@@ -27,9 +27,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source codes
+      - name: Checkout Source Codes
         uses: actions/checkout@v2
-      - name: Run test cases
-        run: ./mvnw --batch-mode -s settings.xml test
-      - name: Upload coverage data
+      - name: Test & Install
+        run: ./mvnw --batch-mode -s settings.xml install
+      - name: Upload Coverage
         run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}

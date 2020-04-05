@@ -4,6 +4,6 @@ import org.junit.jupiter.api.Test
 
 internal class YamlValidatorCLITest {
     @Test
-    fun test() {
+    internal fun test() {
     }
 }

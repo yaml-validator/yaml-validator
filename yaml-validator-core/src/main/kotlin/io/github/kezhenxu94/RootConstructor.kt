@@ -20,7 +20,6 @@ import io.github.kezhenxu94.annotations.TagProcessor
 import org.reflections.Reflections
 import org.yaml.snakeyaml.constructor.Construct
 import org.yaml.snakeyaml.constructor.Constructor
-import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag
 
 /**

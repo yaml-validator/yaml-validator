@@ -35,13 +35,13 @@ internal class LessThanValidator(override val context: Context)
 
   override fun validateAnchor(anchor: Number) {
     if (anchor.toDouble() >= expected.toDouble()) {
-      throw ValidateException()
+      throw ValidateException(context)
     }
   }
 
   override fun validateAlias(alias: Number) {
     if (alias.toDouble() != reference.toString().toDouble()) {
-      throw ValidateException()
+      throw ValidateException(context)
     }
   }
 }

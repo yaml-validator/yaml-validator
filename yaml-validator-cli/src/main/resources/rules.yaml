@@ -12,24 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Build
-
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
-jobs:
-  Build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source codes
-        uses: actions/checkout@v2
-      - name: Run test cases
-        run: ./mvnw --batch-mode -s settings.xml test
-      - name: Upload coverage data
-        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
+# tag::content[]
+students:
+  - name: !nn # <1>
+    age: &age !gt 12 # <2>
+    height: !lt 200 # <3>
+  - name: !nn
+    age: *age # <4>
+    height: !lt 200
+# end::content[]

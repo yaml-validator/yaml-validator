@@ -30,22 +30,38 @@
       <id>bintray</id>
       <repositories>
         <repository>
-          <id>bintray</id>
-          <name>bintray</name>
+          <id>bintray-bmuschko-maven</id>
+          <name>bintray-bmuschko-maven</name>
           <url>https://dl.bintray.com/bmuschko/maven</url>
           <snapshots>
             <enabled>false</enabled>
           </snapshots>
         </repository>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>bintray-kotlin-kotlinx</id>
+          <name>bintray</name>
+          <url>https://kotlin.bintray.com/kotlinx</url>
+        </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <id>bintray</id>
-          <name>bintray-plugins</name>
+          <id>bintray-bmuschko-maven</id>
+          <name>bintray-bmuschko-maven</name>
           <url>https://dl.bintray.com/bmuschko/maven</url>
           <snapshots>
             <enabled>false</enabled>
           </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>bintray-kotlin-kotlinx</id>
+          <name>bintray-plugins</name>
+          <url>https://kotlin.bintray.com/kotlinx</url>
         </pluginRepository>
       </pluginRepositories>
     </profile>

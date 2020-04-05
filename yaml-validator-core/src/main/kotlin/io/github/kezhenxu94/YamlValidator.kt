@@ -37,10 +37,11 @@ class YamlValidator private constructor(private val builder: Builder) {
    */
   fun validate(toValidate: Any?) {
     return when (toValidate) {
-      is String  -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
+      is InputStream -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
+      is String      -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
       is Map<*, *>,
-      is List<*> -> traverse(validator, toValidate)
-      else       -> traverse(validator, Loader().loadAs(Dumper().dump(toValidate), Map::class.java))
+      is List<*>     -> traverse(validator, toValidate)
+      else           -> traverse(validator, Loader().loadAs(Dumper().dump(toValidate), Map::class.java))
     }
   }
 

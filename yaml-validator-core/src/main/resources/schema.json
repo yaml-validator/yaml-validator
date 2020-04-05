@@ -5,7 +5,9 @@
     "schemaArray": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#" }
+      "items": {
+        "$ref": "#"
+      }
     },
     "simpleTag": {
       "enum": [

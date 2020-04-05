@@ -179,6 +179,7 @@
                         <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
                         <attributes>
                             <idprefix/>
+                            <sectnums/>
                             <toc>left</toc>
                             <icons>font</icons>
                             <docinfo1>true</docinfo1>

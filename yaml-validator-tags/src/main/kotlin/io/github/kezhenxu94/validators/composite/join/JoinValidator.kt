@@ -40,7 +40,7 @@ internal class JoinValidator(override val context: Context) : Validatable, Refer
     reference = expected
 
     if (expected != any) {
-      throw ValidateException(context)
+      throw ValidateException(context, expected, any)
     }
   }
 

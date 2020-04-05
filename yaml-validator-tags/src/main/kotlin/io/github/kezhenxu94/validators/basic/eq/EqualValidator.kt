@@ -43,13 +43,13 @@ internal open class EqualValidator(override val context: Context) : Validatable,
 
   private fun validateAlias(any: Any?) {
     if (reference?.toString() != any?.toString()) {
-      throw ValidateException(context)
+      throw ValidateException(context, reference, any)
     }
   }
 
   private fun validateAnchor(expected: String?, any: Any?) {
     if (expected != any?.toString()) {
-      throw ValidateException(context)
+      throw ValidateException(context, expected, any)
     }
   }
 

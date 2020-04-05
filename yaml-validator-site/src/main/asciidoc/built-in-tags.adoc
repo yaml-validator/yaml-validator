@@ -1,0 +1,29 @@
+== Built-in Tags
+include::attributes.adoc[]
+
+There're dozens of built-in tags that can be used out of box, provided by {project-name} officially.
+
+=== `!eq`
+Equal to
+
+=== `!nn`
+Not null
+
+=== `!anyOf`
+Any one in the list matches this rule
+
+=== `!join`
+Join the list into `String` and perform an `equal to` validation
+
+=== `!not.<tag>`
+Logical `NOT` of another tag, i.e. `!not.eq liar`
+
+=== `!ge`
+Greater than or equal to
+
+=== `!gt`
+Greater than
+
+=== `!lt`
+Less than
+

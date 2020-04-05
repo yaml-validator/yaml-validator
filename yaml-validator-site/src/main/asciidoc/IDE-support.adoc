@@ -1,0 +1,2 @@
+== IDE Support
+include::attributes.adoc[]

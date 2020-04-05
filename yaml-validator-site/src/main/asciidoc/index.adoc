@@ -1,0 +1,23 @@
+= Yaml-validator User Guide
+kezhenxu94 <kezhenxu94@163.com>
+include::attributes.adoc[]
+
+Yaml-validator is a data validator based on {yaml-spec-url}[YAML] rules, providing both Kotlin/Java APIs and CLI tools, it is open-sourced
+and the source codes are hosted on https://github.com/kezhenxu94/yaml-validator[GitHub].
+
+== Why Yaml-validator
+
+When writing tests, no matter unit tests, integration tests or end to end tests, we have to validate the actual result
+with the expected result, it's sometimes painful to compose the expected data and write codes to compare between the
+actual result and the expected result, {project-name} simplifies the composition of expected data with YAML, and the
+comparision with some fluent Java/Kotlin APIs.
+
+include::quick-start.adoc[]
+
+include::built-in-tags.adoc[]
+
+include::customize-tags.adoc[]
+
+include::IDE-support.adoc[]
+
+include::cli.adoc[]

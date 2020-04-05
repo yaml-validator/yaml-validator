@@ -41,20 +41,22 @@ internal class TestTagProcessorNN {
         .validate("name: abc")
   }
 
+  // tag::demo[]
   @Test
   internal fun `should pass when nn`() {
     val toValidate = Yaml().loadAs("""
       students:
-        - name: abc
-          age: 23
-        - name: abc
-          age: 23
+        - name: abc # <1>
+          age: 23 # <2>
+        - name: abcd
+          age: 23 # <3>
     """.trimIndent(), Map::class.java)
     YamlValidator.from(yamlInputStream)
-        .ignoreMissing()
+        .ignoreMissing() // <4>
         .build()
         .validate(toValidate)
   }
+  // end::demo[]
 
   @Test
   internal fun `should fail when null`() {

@@ -26,7 +26,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>yaml-validator-report</artifactId>
-  <description>A module just for aggregating the test coverage</description>
+  <description>The module just for aggregating the test coverage</description>
 
   <dependencies>
     <dependency>

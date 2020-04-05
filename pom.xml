@@ -28,8 +28,9 @@
 
   <modules>
     <module>yaml-validator-core</module>
-    <module>yaml-validator-tags</module>
     <module>yaml-validator-report</module>
+    <module>yaml-validator-site</module>
+    <module>yaml-validator-tags</module>
   </modules>
 
   <properties>
@@ -39,10 +40,12 @@
     <snakeyaml.version>1.26</snakeyaml.version>
     <reflections.version>0.9.12</reflections.version>
     <junit-jupiter.version>5.6.0</junit-jupiter.version>
+    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
     <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <asciidoctor-maven-plugin.version>1.6.0</asciidoctor-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -138,6 +141,43 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.asciidoctor</groupId>
+          <artifactId>asciidoctor-maven-plugin</artifactId>
+          <version>${asciidoctor-maven-plugin.version}</version>
+          <configuration>
+            <backend>html5</backend>
+            <sourceHighlighter>coderay</sourceHighlighter>
+            <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
+            <attributes>
+              <idprefix/>
+              <toc>left</toc>
+              <icons>font</icons>
+              <docinfo1>true</docinfo1>
+              <idseparator>-</idseparator>
+              <sectanchors>true</sectanchors>
+              <project-version>${project.version}</project-version>
+            </attributes>
+          </configuration>
+          <executions>
+            <execution>
+              <id>asciidoc-to-html</id>
+              <phase>site</phase>
+              <goals>
+                <goal>process-asciidoc</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>com.bmuschko</groupId>
+              <artifactId>asciidoctorj-tabbed-code-extension</artifactId>
+              <version>0.2</version>
+              <scope>runtime</scope>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>

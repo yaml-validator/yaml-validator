@@ -1,0 +1,51 @@
+== Quick Start
+include::attributes.adoc[]
+
+To start, you need to add the dependency into your maven `pom.xml` or gradle `build.gradle`.
+
+[source,xml,role="primary"]
+[subs=attributes+]
+.pom.xml
+----
+<dependency>
+    <artifactId>yaml-validator</artifactId>
+    <groupId>io.github.kezhenxu94</groupId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+[source,groovy,role="secondary"]
+[subs=attributes+]
+.build.gradle
+----
+implementation("io.github.kezhenxu94:yaml-validator:{project-version}")
+----
+
+== Example
+
+As mentioned above, the validator rules are all based on YAML format, {project-name} provides many built-in YAML tags to
+compose the expected result. Here is an example of the `expected.yaml`:
+
+[source,yaml,role="primary"]
+.expected.yaml
+----
+include::{tagsdir}/src/test/resources/nn.v.yaml[tags=content,indent=0]
+----
+<1> The `name` must be `**n**ot **n**ull (!nn)`.
+<2> The `age` must be `**g**reater **t**han (!gt) 12`, and the actual value is saved into a variable named `age` by `&age` syntax.
+<3> The `height` must be `**l**ess **t**han (!lt) 200`.
+<4> The `age` must be the same as the actual value in the first `student` <2>.
+
+Let's see how to do the validation in Kotlin codes.
+
+[source,kotlin,role="primary"]
+.test.kt
+----
+include::{tagsdir}/src/test/kotlin/io/github/kezhenxu94/validators/TestTagProcessorNN.kt[tags=demo,indent=0]
+----
+<1> The `name` is `not null`.
+<2> The `age` is `greater than 12`.
+<3> The `age` is `equal to` the previous `age`.
+<4> The missing field `height` is simply ignored.
+
+And thus the validation passes.

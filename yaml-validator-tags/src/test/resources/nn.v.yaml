@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# tag::content[]
 students:
+  - name: !nn # <1>
+    age: &age !gt 12 # <2>
+    height: !lt 200 # <3>
   - name: !nn
-    age: &age !gt 12
+    age: *age # <4>
     height: !lt 200
-  - name: !nn
-    age: *age
-    height: !lt 200
+# end::content[]

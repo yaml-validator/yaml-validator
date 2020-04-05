@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 internal class TestYamlValidator {
+  // tag::simple[]
   @Test
   fun `should pass when no tag and raw strings match`() {
     YamlValidator.from("""
@@ -30,6 +31,7 @@ internal class TestYamlValidator {
         .build()
         .validate(mapOf("test" to "abc"))
   }
+  // end::simple[]
 
   @Test
   fun `should fail when no tag and raw string mismatch`() {

@@ -1,0 +1,10 @@
+:revnumber: {project-version}
+
+:imagesdir: images
+:rootdir: ../../../..
+:coredir: {rootdir}/yaml-validator-core
+:tagsdir: {rootdir}/yaml-validator-tags
+
+:project-name: yaml-validator
+
+:yaml-spec-url: https://yaml.org/spec/1.2/spec.html

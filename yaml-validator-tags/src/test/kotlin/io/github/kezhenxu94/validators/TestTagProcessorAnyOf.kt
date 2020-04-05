@@ -20,8 +20,11 @@ import io.github.kezhenxu94.YamlValidator
 import io.github.kezhenxu94.exceptions.ValidateException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode
 import org.yaml.snakeyaml.Yaml
 
+@Execution(ExecutionMode.CONCURRENT)
 internal class TestTagProcessorAnyOf {
   @Test
   internal fun `should pass when any of`() {

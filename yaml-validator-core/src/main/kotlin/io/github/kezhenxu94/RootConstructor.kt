@@ -23,13 +23,17 @@ import org.yaml.snakeyaml.constructor.Constructor
 import org.yaml.snakeyaml.nodes.Node
 import org.yaml.snakeyaml.nodes.Tag
 
-object RootConstructor : Constructor() {
+class RootConstructor : Constructor() {
   init {
     val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
 
     tagClasses.forEach { klass ->
       klass.getAnnotation(TagProcessor::class.java).apply {
-        val instance = construct.java.newInstance()
+        val instance = try {
+          construct.java.getDeclaredConstructor(RootConstructor::class.java).newInstance(this@RootConstructor)
+        } catch (_: Throwable) {
+          construct.java.newInstance()
+        }
 
         tags.forEach {
           yamlConstructors[Tag(it)] = instance

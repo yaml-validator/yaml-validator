@@ -33,7 +33,7 @@ internal class AnyOfValidator(override val context: Context) : Validatable, Refe
 
   init {
     val node = context.node
-    validator = (RootConstructor.constructs[Tag.MAP] ?: error("should never happen")).construct(node)
+    validator = (RootConstructor().constructs[Tag.MAP] ?: error("should never happen")).construct(node)
   }
 
   override fun validate(any: Any?) {

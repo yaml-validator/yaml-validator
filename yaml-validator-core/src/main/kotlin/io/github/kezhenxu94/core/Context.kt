@@ -16,9 +16,10 @@
 
 package io.github.kezhenxu94.core
 
+import io.github.kezhenxu94.RootConstructor
 import org.yaml.snakeyaml.nodes.Node
 
 /**
  * [Context] holds the context of a validation process.
  */
-class Context(val node: Node)
+class Context(val node: Node, val root: RootConstructor? = null)

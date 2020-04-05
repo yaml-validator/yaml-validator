@@ -20,8 +20,8 @@ import io.github.kezhenxu94.representers.MapRepresenter
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 
-internal object Loader : Yaml()
+internal class Loader : Yaml()
 
-internal object Dumper : Yaml(MapRepresenter, DumperOptions().apply {
+internal class Dumper : Yaml(MapRepresenter(), DumperOptions().apply {
   isAllowReadOnlyProperties = true
 })

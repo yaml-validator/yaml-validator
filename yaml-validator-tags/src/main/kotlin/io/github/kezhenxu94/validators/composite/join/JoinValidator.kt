@@ -16,7 +16,6 @@
 
 package io.github.kezhenxu94.validators.composite.join
 
-import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context
 import io.github.kezhenxu94.core.Referable
@@ -28,7 +27,7 @@ import org.yaml.snakeyaml.nodes.Tag
 internal class JoinValidator(override val context: Context) : Validatable, Referable<String> {
   override var reference: String? = null
 
-  private val nodes = RootConstructor.constructs[Tag.SEQ]?.construct(context.node)
+  private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node)
 
   override fun validate(any: Any?) {
     val expected = (nodes as List<*>).joinToString("", transform = {

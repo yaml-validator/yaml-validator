@@ -16,12 +16,13 @@
 
 package io.github.kezhenxu94.validators.composite.join
 
+import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.core.Context
 import org.yaml.snakeyaml.constructor.AbstractConstruct
 import org.yaml.snakeyaml.nodes.Node
 
-internal class JoinConstruct : AbstractConstruct() {
+internal class JoinConstruct(private val root: RootConstructor) : AbstractConstruct() {
   override fun construct(node: Node): Any {
-    return JoinValidator(Context(node))
+    return JoinValidator(Context(node, root))
   }
 }

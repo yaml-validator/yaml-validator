@@ -16,7 +16,6 @@
 
 package io.github.kezhenxu94.validators.composite.not
 
-import io.github.kezhenxu94.RootConstructor
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context
 import io.github.kezhenxu94.core.Validatable
@@ -35,7 +34,7 @@ internal class NotValidator(override val context: Context) : Validatable {
   init {
     val node = context.node
     node.tag = Tag(node.tag.value.replace(PREFIX, "!"))
-    validatable = RootConstructor.constructs[node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
+    validatable = context.root?.constructs!![node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
   }
 
   override fun validate(any: Any?) {

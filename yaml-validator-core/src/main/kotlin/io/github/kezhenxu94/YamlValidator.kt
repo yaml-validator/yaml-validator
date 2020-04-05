@@ -28,7 +28,7 @@ import java.io.InputStream
 class YamlValidator private constructor(private val builder: Builder) {
   private val validator = when {
     builder.validator != null   -> builder.validator
-    builder.inputStream != null -> Yaml(RootConstructor).loadAs(builder.inputStream, Map::class.java)
+    builder.inputStream != null -> Yaml(RootConstructor()).loadAs(builder.inputStream, Map::class.java)
     else                        -> throw IllegalStateException()
   }
 
@@ -37,10 +37,10 @@ class YamlValidator private constructor(private val builder: Builder) {
    */
   fun validate(toValidate: Any?) {
     return when (toValidate) {
-      is String  -> traverse(validator, Loader.loadAs(toValidate, Map::class.java))
+      is String  -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
       is Map<*, *>,
       is List<*> -> traverse(validator, toValidate)
-      else       -> traverse(validator, Loader.loadAs(Dumper.dump(toValidate), Map::class.java))
+      else       -> traverse(validator, Loader().loadAs(Dumper().dump(toValidate), Map::class.java))
     }
   }
 
@@ -49,7 +49,7 @@ class YamlValidator private constructor(private val builder: Builder) {
       is Validatable -> validate0(validator, toValidate)
 
       is Map<*, *>   -> validator.forEach { (k, v) ->
-        traverse(v!!, ((toValidate as? Map<*, *>) ?: Loader.loadAs(Dumper.dump(toValidate), Map::class.java))[k])
+        traverse(v!!, ((toValidate as? Map<*, *>) ?: Loader().loadAs(Dumper().dump(toValidate), Map::class.java))[k])
       }
 
       is List<*>     -> validator.forEachIndexed { index, v ->

@@ -21,8 +21,8 @@ import kotlin.reflect.KClass
 
 /**
  * [TagProcessor] declares a validator with [tags] in YAML, YAML rules with these [tags] can perform the validations that
- * are specified in the [construct] class, rules with [prefixes] can be used along with other tags, such as !not. prefix,
- * for more example, please refer to [io.github.kezhenxu94.validators.not.NotValidator].
+ * are specified in the [construct] class, rules with [prefixes] can be used along with other tags, such as `!not.` prefix,
+ * for more example, please refer to `io.github.kezhenxu94.validators.not.NotValidator`.
  */
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)

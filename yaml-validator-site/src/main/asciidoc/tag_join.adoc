@@ -1,0 +1,3 @@
+=== `!join`
+
+Join the list into `String` and perform an `equal to` validation

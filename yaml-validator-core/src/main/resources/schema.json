@@ -23,19 +23,26 @@
     "validator": {
       "anyOf": [
         {
+          "$ref": "#"
+        },
+        {
           "$ref": "#/definitions/simpleTag"
         },
         {
           "type": "array",
           "items": {
-            "$ref": "#"
+            "anyOf": [
+              {
+                "$ref": "#/definitions/validator"
+              }
+            ]
           }
         },
         {
-          "type": "object"
-        },
-        {
-          "$ref": "#"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/validator"
+          }
         }
       ]
     }

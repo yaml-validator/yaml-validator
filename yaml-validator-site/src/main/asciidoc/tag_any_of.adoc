@@ -1,0 +1,3 @@
+=== `!anyOf`
+
+Any one in the list matches this rule

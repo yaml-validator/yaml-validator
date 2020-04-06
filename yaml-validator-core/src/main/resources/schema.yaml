@@ -1,0 +1,30 @@
+---
+$schema: "http://github.com/kezhenxu94/yaml-validator/draft-01"
+id: "http://github.com/kezhenxu94/yaml-validator/metadata-1.0.0"
+tag: "tag:github.com/kezhenxu94/yaml-validator:foo/metadata-1.0.0"
+
+definitions:
+  simpleTag:
+    enum:
+      - "!gt "
+      - "!join "
+      - "!lt "
+      - "!nn"
+      - "!not."
+      - "!not.gt "
+      - "!not.lt "
+      - "!not.nn"
+  validator:
+    anyOf:
+      - type: object
+      - type: string
+      - type: number
+      - type: null
+      - type: boolean
+      - type: array
+      - $ref: "#/definitions/simpleTag"
+      - $ref: "#/definitions/validator"
+
+patternProperties:
+  ^.*$:
+    $ref: "#/definitions/validator"

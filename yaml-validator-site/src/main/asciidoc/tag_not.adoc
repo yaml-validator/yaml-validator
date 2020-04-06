@@ -1,0 +1,3 @@
+=== `!not.<tag>`
+
+Logical `NOT` of another tag, i.e. `!not.eq liar`

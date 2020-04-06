@@ -1,29 +1,19 @@
 == Built-in Tags
+
 include::attributes.adoc[]
 
 There're dozens of built-in tags that can be used out of box, provided by {project-name} officially.
 
-=== `!eq`
-Equal to
+include::tag_eq.adoc[]
 
-=== `!nn`
-Not null
+include::tag_nn.adoc[]
 
-=== `!anyOf`
-Any one in the list matches this rule
+include::tag_any_of.adoc[]
 
-=== `!join`
-Join the list into `String` and perform an `equal to` validation
+include::tag_not.adoc[]
 
-=== `!not.<tag>`
-Logical `NOT` of another tag, i.e. `!not.eq liar`
+include::tag_ge.adoc[]
 
-=== `!ge`
-Greater than or equal to
+include::tag_gt.adoc[]
 
-=== `!gt`
-Greater than
-
-=== `!lt`
-Less than
-
+include::tag_lt.adoc[]

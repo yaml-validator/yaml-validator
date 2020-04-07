@@ -45,3 +45,26 @@ jobs:
 
       - name: Deploy to GitHub
         run: ./mvnw --batch-mode --settings settings.xml -Pgithub clean deploy
+
+  deploy-sonatype:
+    name: Sonatype
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache Maven Repositories
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-maven-repositories
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: Import GPG Keys
+        run: |
+          gpg --keyserver keyserver.ubuntu.com --recv-keys ${{ secrets.GPG_PUBLIC_KEY }}
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --no-tty --batch --yes -
+      - name: Deploy to Sonatype
+        run: ./mvnw --batch-mode --settings settings.xml -Possrh,sign clean deploy

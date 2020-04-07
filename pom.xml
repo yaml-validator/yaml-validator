@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,6 +24,10 @@
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
     <version>0.4-SNAPSHOT</version>
+
+    <name>yaml-validator</name>
+    <description>A data validator based on YAML rules</description>
+    <url>https://github.com/kezhenxu94/yaml-validator</url>
 
     <modules>
         <module>yaml-validator-core</module>
@@ -48,6 +53,7 @@
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <dokka-maven-plugin.version>0.10.1</dokka-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
@@ -96,6 +102,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
             </plugin>
         </plugins>
 
@@ -179,8 +190,8 @@
                         <sourceHighlighter>coderay</sourceHighlighter>
                         <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
                         <attributes>
-                            <idprefix />
-                            <sectnums />
+                            <idprefix/>
+                            <sectnums/>
                             <toc>left</toc>
                             <icons>font</icons>
                             <docinfo1>true</docinfo1>
@@ -218,8 +229,9 @@
                             <phase>verify</phase>
                             <configuration>
                                 <target name="ktlint">
-                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
-                                        <arg value="src/**/*.kt" />
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true"
+                                          classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="src/**/*.kt"/>
                                     </java>
                                 </target>
                             </configuration>
@@ -231,9 +243,10 @@
                             <id>ktlint-format</id>
                             <configuration>
                                 <target name="ktlint">
-                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
-                                        <arg value="-F" />
-                                        <arg value="src/**/*.kt" />
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true"
+                                          classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="-F"/>
+                                        <arg value="src/**/*.kt"/>
                                     </java>
                                 </target>
                             </configuration>
@@ -249,6 +262,22 @@
                             <version>${ktlint.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jetbrains.dokka</groupId>
+                    <artifactId>dokka-maven-plugin</artifactId>
+                    <version>${dokka-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>dokka</goal>
+                                <goal>javadoc</goal>
+                                <goal>javadocJar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -341,8 +370,8 @@
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
         <url>https://github.com/kezhenxu94/yaml-validator</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <issueManagement>
         <system>GitHub</system>

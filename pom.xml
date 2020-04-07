@@ -32,6 +32,7 @@
         <module>yaml-validator-site</module>
         <module>yaml-validator-tags</module>
         <module>yaml-validator-cli</module>
+        <module>yaml-validator-all</module>
     </modules>
 
     <properties>

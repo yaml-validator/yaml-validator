@@ -22,7 +22,7 @@
     <groupId>io.github.kezhenxu94</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
-    <version>0.7-SNAPSHOT</version>
+    <version>0.7</version>
 
     <name>yaml-validator</name>
     <description>A data validator based on YAML rules</description>
@@ -367,7 +367,7 @@
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
         <url>https://github.com/kezhenxu94/yaml-validator</url>
-        <tag>HEAD</tag>
+        <tag>v0.7</tag>
     </scm>
 
     <issueManagement>

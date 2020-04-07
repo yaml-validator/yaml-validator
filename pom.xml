@@ -15,16 +15,14 @@
   ~ limitations under the License.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.kezhenxu94</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
     <modules>
         <module>yaml-validator-core</module>
@@ -181,8 +179,8 @@
                         <sourceHighlighter>coderay</sourceHighlighter>
                         <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
                         <attributes>
-                            <idprefix/>
-                            <sectnums/>
+                            <idprefix />
+                            <sectnums />
                             <toc>left</toc>
                             <icons>font</icons>
                             <docinfo1>true</docinfo1>
@@ -220,14 +218,8 @@
                             <phase>verify</phase>
                             <configuration>
                                 <target name="ktlint">
-                                    <java
-                                        fork="true"
-                                        dir="${basedir}"
-                                        taskname="ktlint"
-                                        failonerror="true"
-                                        classpathref="maven.plugin.classpath"
-                                        classname="com.pinterest.ktlint.Main">
-                                        <arg value="src/**/*.kt"/>
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="src/**/*.kt" />
                                     </java>
                                 </target>
                             </configuration>
@@ -239,15 +231,9 @@
                             <id>ktlint-format</id>
                             <configuration>
                                 <target name="ktlint">
-                                    <java
-                                        fork="true"
-                                        dir="${basedir}"
-                                        taskname="ktlint"
-                                        failonerror="true"
-                                        classpathref="maven.plugin.classpath"
-                                        classname="com.pinterest.ktlint.Main">
-                                        <arg value="-F"/>
-                                        <arg value="src/**/*.kt"/>
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="-F" />
+                                        <arg value="src/**/*.kt" />
                                     </java>
                                 </target>
                             </configuration>
@@ -302,7 +288,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub kezhenxu94 Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/kezhenxu94/cache-lite</url>
+                    <url>https://maven.pkg.github.com/kezhenxu94/yaml-validator</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -355,7 +341,8 @@
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
         <url>https://github.com/kezhenxu94/yaml-validator</url>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
 
     <issueManagement>
         <system>GitHub</system>

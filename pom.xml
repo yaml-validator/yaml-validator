@@ -15,15 +15,14 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.kezhenxu94</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.4</version>
 
     <name>yaml-validator</name>
     <description>A data validator based on YAML rules</description>
@@ -190,8 +189,8 @@
                         <sourceHighlighter>coderay</sourceHighlighter>
                         <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
                         <attributes>
-                            <idprefix/>
-                            <sectnums/>
+                            <idprefix />
+                            <sectnums />
                             <toc>left</toc>
                             <icons>font</icons>
                             <docinfo1>true</docinfo1>
@@ -229,9 +228,8 @@
                             <phase>verify</phase>
                             <configuration>
                                 <target name="ktlint">
-                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true"
-                                          classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
-                                        <arg value="src/**/*.kt"/>
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="src/**/*.kt" />
                                     </java>
                                 </target>
                             </configuration>
@@ -243,10 +241,9 @@
                             <id>ktlint-format</id>
                             <configuration>
                                 <target name="ktlint">
-                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true"
-                                          classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
-                                        <arg value="-F"/>
-                                        <arg value="src/**/*.kt"/>
+                                    <java fork="true" dir="${basedir}" taskname="ktlint" failonerror="true" classpathref="maven.plugin.classpath" classname="com.pinterest.ktlint.Main">
+                                        <arg value="-F" />
+                                        <arg value="src/**/*.kt" />
                                     </java>
                                 </target>
                             </configuration>
@@ -370,7 +367,7 @@
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
         <url>https://github.com/kezhenxu94/yaml-validator</url>
-        <tag>HEAD</tag>
+        <tag>v0.4</tag>
     </scm>
 
     <issueManagement>

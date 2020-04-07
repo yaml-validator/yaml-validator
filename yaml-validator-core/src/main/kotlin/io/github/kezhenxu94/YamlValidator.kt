@@ -28,7 +28,7 @@ import org.yaml.snakeyaml.Yaml
 class YamlValidator private constructor(private val builder: Builder) {
     private val validator = when {
         builder.validator != null -> builder.validator
-        builder.inputStream != null -> Yaml(RootConstructor()).loadAs(builder.inputStream, Map::class.java)
+        builder.inputStream != null -> Yaml(RootConstructor()).load(builder.inputStream)
         else -> throw IllegalStateException()
     }
 
@@ -37,11 +37,11 @@ class YamlValidator private constructor(private val builder: Builder) {
      */
     fun validate(toValidate: Any?) {
         return when (toValidate) {
-            is InputStream -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
-            is String -> traverse(validator, Loader().loadAs(toValidate, Map::class.java))
+            is InputStream -> traverse(validator, Loader().load(toValidate))
+            is String -> traverse(validator, Loader().load(toValidate))
             is Map<*, *>,
             is List<*> -> traverse(validator, toValidate)
-            else -> traverse(validator, Loader().loadAs(Dumper().dump(toValidate), Map::class.java))
+            else -> traverse(validator, Loader().load(Dumper().dump(toValidate)))
         }
     }
 
@@ -50,10 +50,13 @@ class YamlValidator private constructor(private val builder: Builder) {
             is Validatable -> validate0(validator, toValidate)
 
             is Map<*, *> -> validator.forEach { (k, v) ->
-                traverse(
-                    v!!,
-                    ((toValidate as? Map<*, *>) ?: Loader().loadAs(Dumper().dump(toValidate), Map::class.java))[k]
-                )
+                val asMap = { any: Any? -> Loader().loadAs(Dumper().dump(any), Map::class.java) }
+                val valToValidate = ((toValidate as? Map<*, *>) ?: asMap(toValidate))[k]
+                if (v != null) {
+                    traverse(v, valToValidate)
+                } else if (valToValidate != null) {
+                    throw ValidateException()
+                }
             }
 
             is List<*> -> validator.forEachIndexed { index, v ->
@@ -67,10 +70,10 @@ class YamlValidator private constructor(private val builder: Builder) {
     private fun validateString(validator: Any, toValidate: Any?) {
         if (validator != toValidate?.toString()) {
             val message = """
-      raw validation failed
-      Expect: $validator
-      Actual: $toValidate
-      """.trimIndent()
+            raw validation failed
+            Expect: $validator
+            Actual: $toValidate
+            """.trimIndent()
             throw ValidateException(message)
         }
     }

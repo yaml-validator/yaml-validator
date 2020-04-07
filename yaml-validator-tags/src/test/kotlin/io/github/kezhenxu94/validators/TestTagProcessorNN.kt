@@ -44,6 +44,24 @@ internal class TestTagProcessorNN {
             .validate("name: abc")
     }
 
+    @Test
+    internal fun `should pass when top level is list`() {
+        YamlValidator.from(
+            """
+            - name: !nn
+              age: &age !gt 12
+            """.trimIndent()
+        )
+            .ignoreMissing()
+            .build()
+            .validate(
+                """
+                - name: Nakajima Miyuki
+                  age: 13
+                """.trimIndent()
+            )
+    }
+
     // tag::demo[]
     @Test
     internal fun `should pass when nn`() {

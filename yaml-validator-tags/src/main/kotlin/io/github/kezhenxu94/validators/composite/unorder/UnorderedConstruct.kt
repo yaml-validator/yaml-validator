@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.representers
+package io.github.kezhenxu94.validators.composite.unorder
 
-import org.yaml.snakeyaml.introspector.Property
-import org.yaml.snakeyaml.nodes.MappingNode
-import org.yaml.snakeyaml.nodes.Tag
-import org.yaml.snakeyaml.representer.Representer
+import io.github.kezhenxu94.RootConstructor
+import io.github.kezhenxu94.core.Context
+import org.yaml.snakeyaml.constructor.AbstractConstruct
+import org.yaml.snakeyaml.nodes.Node
 
-/**
- * A [Representer] that always represents the Java Beans as a map.
- */
-class MapRepresenter : Representer() {
-    override fun representJavaBean(properties: MutableSet<Property>?, javaBean: Any): MappingNode {
-        addClassTag(javaBean.javaClass, Tag.MAP)
-        return super.representJavaBean(properties, javaBean)
+internal class UnorderedConstruct(private val root: RootConstructor) : AbstractConstruct() {
+    override fun construct(node: Node): Any {
+        return UnorderedValidator(Context(node, root))
     }
 }

@@ -75,7 +75,7 @@ internal class TestTagProcessorNOT {
         }
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorNOT::class.java.getResourceAsStream("/not.v.yaml")
     }
 }

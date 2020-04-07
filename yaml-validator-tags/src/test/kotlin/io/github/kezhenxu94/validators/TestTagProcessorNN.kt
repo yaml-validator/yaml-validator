@@ -171,7 +171,7 @@ internal class TestTagProcessorNN {
         }
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorNN::class.java.getResourceAsStream("/nn.v.yaml")
     }
 }

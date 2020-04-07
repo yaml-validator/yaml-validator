@@ -19,7 +19,7 @@ package io.github.kezhenxu94.exceptions
 import io.github.kezhenxu94.core.Context
 
 /**
- * [Exception] indicates the validations are failed.
+ * Exception indicates the validations are failed.
  */
 class ValidateException(message: String? = null) : Exception(message) {
     constructor(context: Context, expected: Any? = null, actual: Any? = null) : this(

@@ -27,7 +27,7 @@ import org.yaml.snakeyaml.nodes.ScalarNode
 internal class GreaterThanOrEqualValidator(override val context: Context) :
     MathValidator((context.node as ScalarNode).value.toDouble()) {
 
-    companion object {
+    internal companion object {
         internal const val TAG = "!ge"
     }
 

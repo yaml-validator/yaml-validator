@@ -33,7 +33,7 @@ class YamlValidator private constructor(private val builder: Builder) {
     }
 
     /**
-     * @see [Validatable.validate]
+     * See [Validatable.validate]
      */
     fun validate(toValidate: Any?) {
         return when (toValidate) {
@@ -88,6 +88,9 @@ class YamlValidator private constructor(private val builder: Builder) {
     }
 
     companion object {
+        /**
+         * Builder pattern to help build a `YamlValidator`.
+         */
         class Builder(
             internal val inputStream: InputStream? = null,
             internal val validator: Any? = null,

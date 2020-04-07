@@ -17,7 +17,7 @@
 package io.github.kezhenxu94
 
 /**
- * A dummy class used for referencing the package in a safe manner, without this, a [String] literal must be used, and
+ * A dummy class used for referencing the package in a safe manner, without this, a `String` literal must be used, and
  * refactoring (i.e. renaming packages) may mess things up.
  */
 object Package

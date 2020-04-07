@@ -79,7 +79,7 @@ internal class TestTagProcessorAnyOf {
         }
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorAnyOf::class.java.getResourceAsStream("/anyOf.v.yaml")
     }
 }

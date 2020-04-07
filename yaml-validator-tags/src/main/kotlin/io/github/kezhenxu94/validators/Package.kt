@@ -19,3 +19,4 @@ package io.github.kezhenxu94.validators
 /**
  * All the tag processors are `internal`, just to make the JavaDoc happy.
  */
+object Package

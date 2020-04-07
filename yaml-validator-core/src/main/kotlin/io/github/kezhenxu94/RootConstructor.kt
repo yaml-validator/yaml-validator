@@ -23,7 +23,7 @@ import org.yaml.snakeyaml.constructor.Constructor
 import org.yaml.snakeyaml.nodes.Tag
 
 /**
- * The root [Constructor] in the validation, which can be used to recursively construct POJOs.
+ * The root `Constructor` in the validation, which can be used to recursively construct POJOs.
  */
 class RootConstructor : Constructor() {
     init {
@@ -48,5 +48,8 @@ class RootConstructor : Constructor() {
         }
     }
 
+    /**
+     * The `yamlConstructors` of of `Constructor`.
+     */
     val constructs: Map<Tag, Construct> get() = yamlConstructors
 }

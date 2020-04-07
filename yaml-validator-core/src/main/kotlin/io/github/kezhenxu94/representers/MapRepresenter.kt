@@ -22,7 +22,7 @@ import org.yaml.snakeyaml.nodes.Tag
 import org.yaml.snakeyaml.representer.Representer
 
 /**
- * A [Representer] that always represents the Java Beans as a map.
+ * A `Representer` that always represents the Java Beans as a map.
  */
 class MapRepresenter : Representer() {
     override fun representJavaBean(properties: MutableSet<Property>?, javaBean: Any): MappingNode {

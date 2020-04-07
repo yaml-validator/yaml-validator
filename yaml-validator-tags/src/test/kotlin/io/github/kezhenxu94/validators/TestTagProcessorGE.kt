@@ -116,7 +116,7 @@ internal class TestTagProcessorGE {
             .validate(toValidate)
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorGE::class.java.getResourceAsStream("/ge.v.yaml")
     }
 }

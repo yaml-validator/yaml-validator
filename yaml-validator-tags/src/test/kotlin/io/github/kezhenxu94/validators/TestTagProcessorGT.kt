@@ -92,7 +92,7 @@ internal class TestTagProcessorGT {
             .validate(toValidate)
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorGT::class.java.getResourceAsStream("/nn.v.yaml")
     }
 }

@@ -101,7 +101,7 @@ internal class TestTagProcessorLT {
         }
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorLT::class.java.getResourceAsStream("/lt.v.yaml")
     }
 }

@@ -10,13 +10,13 @@ import kotlinx.cli.default
 import kotlinx.cli.required
 
 /**
- * [YamlValidatorCLI] is a CLI wrapper for yaml-validator.
+ * A CLI wrapper for yaml-validator.
  */
 class YamlValidatorCLI {
 
-    companion object {
+    internal companion object {
         /**
-         * [main] entrance of the CLI tool.
+         * Main entrance of the CLI tool.
          */
         @JvmStatic
         fun main(args: Array<String>) {

@@ -25,7 +25,7 @@ import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(prefixes = [PREFIX], construct = NotConstruct::class)
 internal class NotValidator(override val context: Context) : Validatable {
-    companion object {
+    internal companion object {
         internal const val PREFIX = "!not."
     }
 

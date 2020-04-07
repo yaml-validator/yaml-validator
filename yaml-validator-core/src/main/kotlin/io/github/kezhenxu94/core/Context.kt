@@ -20,6 +20,15 @@ import io.github.kezhenxu94.RootConstructor
 import org.yaml.snakeyaml.nodes.Node
 
 /**
- * [Context] holds the context of a validation process.
+ * Holds the context of a validation process.
  */
-class Context(val node: Node, val root: RootConstructor? = null)
+class Context(
+    /**
+     * The [Node] that this validation belongs to.
+     */
+    val node: Node,
+    /**
+     * The root `Constructor` in the validation context.
+     */
+    val root: RootConstructor? = null
+)

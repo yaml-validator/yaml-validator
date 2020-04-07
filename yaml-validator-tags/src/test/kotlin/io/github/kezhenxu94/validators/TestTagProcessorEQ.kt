@@ -189,7 +189,7 @@ internal class TestTagProcessorEQ {
             .validate(toValidate)
     }
 
-    companion object {
+    private companion object {
         private val yamlInputStream get() = TestTagProcessorEQ::class.java.getResourceAsStream("/eq.v.yaml")
     }
 }

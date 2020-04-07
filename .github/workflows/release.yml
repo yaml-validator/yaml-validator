@@ -30,6 +30,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
+
+      - name: Cache Maven Repositories
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-maven-repositories
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest

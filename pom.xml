@@ -22,7 +22,7 @@
     <groupId>io.github.kezhenxu94</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3</version>
 
     <modules>
         <module>yaml-validator-core</module>
@@ -341,7 +341,7 @@
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
         <url>https://github.com/kezhenxu94/yaml-validator</url>
-      <tag>HEAD</tag>
+      <tag>v0.3</tag>
   </scm>
 
     <issueManagement>

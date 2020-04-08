@@ -27,5 +27,3 @@ target/
 build/
 .DS_Store
 *.iml
-*.releaseBackup
-release.properties

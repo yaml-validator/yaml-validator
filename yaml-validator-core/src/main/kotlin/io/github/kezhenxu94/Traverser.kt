@@ -3,6 +3,8 @@ package io.github.kezhenxu94
 import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
+import io.github.kezhenxu94.utils.Dumper
+import io.github.kezhenxu94.utils.Loader
 
 internal class Traverser(private val builder: YamlValidator.Companion.Builder) {
 
@@ -11,7 +13,8 @@ internal class Traverser(private val builder: YamlValidator.Companion.Builder) {
             is Validatable -> validate0(validator, candidate)
 
             is Map<*, *> -> validator.forEach { (k, v) ->
-                val asMap = { any: Any? -> Loader().loadAs(Dumper().dump(any), Map::class.java) }
+                val asMap = { any: Any? -> Loader()
+                    .loadAs(Dumper().dump(any), Map::class.java) }
                 val candidateVal = ((candidate as? Map<*, *>) ?: asMap(candidate))[k]
                 if (v != null) {
                     traverse(v, candidateVal)

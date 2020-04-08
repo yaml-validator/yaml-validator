@@ -17,6 +17,8 @@
 package io.github.kezhenxu94
 
 import io.github.kezhenxu94.core.Validatable
+import io.github.kezhenxu94.utils.Dumper
+import io.github.kezhenxu94.utils.Loader
 import java.io.InputStream
 import org.yaml.snakeyaml.Yaml
 
@@ -30,14 +32,14 @@ class YamlValidator private constructor(builder: Builder) {
     /**
      * See [Validatable.validate]
      */
-    fun validate(candidate: Any?) {
-        return when (candidate) {
-            is String -> traverser.traverse(validator, Loader().load(candidate))
-            is InputStream -> traverser.traverse(validator, Loader().load(candidate))
-            is Map<*, *>, is List<*> -> traverser.traverse(validator, candidate)
-            else -> traverser.traverse(validator, Loader().load(Dumper().dump(candidate)))
+    fun validate(candidate: Any?) = traverser.traverse(
+        validator, when (candidate) {
+            is Map<*, *>, is List<*> -> candidate
+            is String -> Loader().load(candidate)
+            is InputStream -> Loader().load(candidate)
+            else -> Loader().load(Dumper().dump(candidate))
         }
-    }
+    )
 
     companion object {
         /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94
+package io.github.kezhenxu94.utils
 
 import io.github.kezhenxu94.representers.MapRepresenter
 import org.yaml.snakeyaml.DumperOptions

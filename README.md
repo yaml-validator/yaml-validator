@@ -8,3 +8,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%20v2.0-blue.svg)](https://apache.org)
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-1.3.71-blue.svg)](https://kotlinlang.org)
 [![LOC](https://tokei.rs/b1/github/kezhenxu94/yaml-validator?category=lines)](https://github.com/XAMPPRocky/tokei)
+
+## Documentation
+
+Please refer to the [User Guide](https://yaml-validator.com) for details.

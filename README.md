@@ -12,3 +12,8 @@
 ## Documentation
 
 Please refer to the [User Guide](https://yaml-validator.com) for details.
+
+## Contribution
+
+This project is under actively development, and we welcome any kind of contributions including but not limited to [bug report](https://github.com/kezhenxu94/yaml-validator/issues/new),
+[pull request](https://github.com/kezhenxu94/yaml-validator/pulls), documentation, and :star: .

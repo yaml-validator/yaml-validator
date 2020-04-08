@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Build
+name: Site
 
 on:
   push:
@@ -20,8 +20,8 @@ on:
       - master
 
 jobs:
-  Build:
-    name: Build
+  DeploySite:
+    name: Deploy Site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Codes

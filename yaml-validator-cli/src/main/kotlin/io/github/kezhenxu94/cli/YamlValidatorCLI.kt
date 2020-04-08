@@ -20,7 +20,7 @@ class YamlValidatorCLI {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-            val parser = ArgParser("yv")
+            val parser = ArgParser("yaml-validator")
 
             val rules by parser.option(ArgType.String, shortName = "r", description = "rules file").required()
 

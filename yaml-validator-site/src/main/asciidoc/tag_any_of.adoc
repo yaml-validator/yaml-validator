@@ -7,7 +7,7 @@ But on the contrary, `!anyOf` means that any item of the candidate list matches 
 
 ==== Example
 
-[source,yaml,role="primary"]
+[source,yaml]
 .expected.yaml
 ----
 grades: !anyOf # <1>
@@ -18,7 +18,7 @@ grades: !anyOf # <1>
 <2> `subject` must be `not null`.
 <3> `grade` must be `greater than 60`.
 
-[source,yaml,role="primary"]
+[source,yaml]
 .candidates.yaml
 ----
 grades:

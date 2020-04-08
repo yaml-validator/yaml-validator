@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# tag::content[]
 students:
   - name: whatever not null 1
     age: 13
@@ -19,3 +20,4 @@ students:
   - name: whatever not null 2
     age: 13
     height: 199
+# end::content[]

@@ -5,7 +5,7 @@ include::attributes.adoc[]
 As mentioned above, the validator rules are all based on YAML format, {project-name} provides a bunch of built-in YAML tags to compose the expected result.
 Here is an example of the `expected.yaml`:
 
-[source,yaml,role="primary"]
+[source,yaml]
 .expected.yaml
 ----
 include::{tagsdir}/src/test/resources/nn.v.yaml[tags=content,indent=0]
@@ -20,7 +20,7 @@ Instead, it's a notation in YAML indicating the following word is a {yaml-spec-t
 
 Let's see how to do the validation in Kotlin codes.
 
-[source,kotlin,role="primary"]
+[source,kotlin]
 .test.kt
 ----
 include::{tagsdir}/src/test/kotlin/io/github/kezhenxu94/validators/TestTagProcessorNN.kt[tags=demo,indent=0]

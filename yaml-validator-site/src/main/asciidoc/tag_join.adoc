@@ -9,7 +9,7 @@ When composing rules, you may want to reference some existed anchors, but, more 
 
 ==== Example
 
-[source,yaml,role="primary"]
+[source,yaml]
 .expected.yaml
 ----
 include::{tagsdir}/src/test/resources/join.v.yaml[tags=content,indent=0]
@@ -18,7 +18,7 @@ include::{tagsdir}/src/test/resources/join.v.yaml[tags=content,indent=0]
 <2> The `id` of the `target` must be `greater than` 0, and the actual value is saved into anchor `target`(`&target`).
 <3> The `relation` must be `equal to` the **actual** `source` and `target`, joined by a underscore `_`.
 
-[source,yaml,role="primary"]
+[source,yaml]
 .candidates.yaml
 ----
 graph:

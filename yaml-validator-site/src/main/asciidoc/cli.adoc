@@ -16,5 +16,65 @@ The usage of the yaml-validator CLI is rather simple, simply run the following c
 
 [source,shell]
 ----
-java -jar yaml-validator-cli.jar
+$ java -jar yaml-validator-cli.jar
+Exception in thread "main" java.lang.IllegalStateException: Value for option --rules should be always provided in command line.
+Usage: yv options_list
+Options:
+    --rules, -r -> rules file (always required) { String }
+    --data, -f -> yaml file to validate (always required) { String }
+    --ignore-missing [false] -> ignore missing fields
+    --disable-reference [false] -> disable references
+    --help, -h -> Usage info
+----
+
+Let's say you have a file (`rules.yaml`) containing the rules, and two files (`actual0.yaml`, `actual1.yaml`) containing the candidates to be validated.
+
+[source,yaml]
+.rules.yaml
+----
+include::{clidir}/src/test/resources/rules.yaml[tag=content,indent=0]
+----
+
+[source,yaml]
+.actual0.yaml
+----
+include::{clidir}/src/test/resources/actual0.yaml[tag=content,indent=0]
+----
+
+[source,yaml]
+.actual1.yaml
+----
+include::{clidir}/src/test/resources/actual1.yaml[tag=content,indent=0]
+----
+
+When the validation failed, the error messages contain the detail reason as follows, and the exit code is non-zero.
+
+[source,shell]
+----
+$ java -jar yaml-validator-cli.jar --rules rules.yaml --data actual1.yaml
+Exception in thread "main" io.github.kezhenxu94.exceptions.ValidateException: !lt validation failed
+at line: 19, column: 13
+expected: !lt 200.0
+actual: 201.0
+	at io.github.kezhenxu94.validators.math.lt.LessThanValidator.validateAnchor(LessThanValidator.kt:38)
+	at io.github.kezhenxu94.validators.math.MathValidator.validate(MathValidator.kt:37)
+	at io.github.kezhenxu94.YamlValidator.validate0(YamlValidator.kt:86)
+	at io.github.kezhenxu94.YamlValidator.traverse(YamlValidator.kt:50)
+	at io.github.kezhenxu94.YamlValidator.traverse(YamlValidator.kt:56)
+	at io.github.kezhenxu94.YamlValidator.traverse(YamlValidator.kt:63)
+	at io.github.kezhenxu94.YamlValidator.traverse(YamlValidator.kt:56)
+	at io.github.kezhenxu94.YamlValidator.validate(YamlValidator.kt:40)
+	at io.github.kezhenxu94.cli.YamlValidatorCLI$Companion.main(YamlValidatorCLI.kt:38)
+	at io.github.kezhenxu94.cli.YamlValidatorCLI.main(YamlValidatorCLI.kt)
+$ echo $?
+1
+----
+
+When the validation passes, there's no output, and the exit code is `0`.
+
+[source,shell]
+----
+$ java -jar yaml-validator-cli.jar --rules rules.yaml --data actual0.yaml
+$ echo $?
+0
 ----

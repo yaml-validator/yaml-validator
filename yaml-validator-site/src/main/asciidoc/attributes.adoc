@@ -5,6 +5,7 @@
 :rootdir: ../../../..
 :coredir: {rootdir}/yaml-validator-core
 :tagsdir: {rootdir}/yaml-validator-tags
+:clidir: {rootdir}/yaml-validator-cli
 
 :project-name: yaml-validator
 :project-release-url: https://github.com/kezhenxu94/yaml-validator/releases

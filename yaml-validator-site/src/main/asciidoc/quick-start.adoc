@@ -9,8 +9,8 @@ To start, you need to add the dependency into your maven `pom.xml` or gradle `bu
 .pom.xml
 ----
 <dependency>
-    <artifactId>yaml-validator</artifactId>
     <groupId>io.github.kezhenxu94</groupId>
+    <artifactId>yaml-validator-all</artifactId>
     <version>{project-version}</version>
 </dependency>
 ----
@@ -19,5 +19,5 @@ To start, you need to add the dependency into your maven `pom.xml` or gradle `bu
 [subs=attributes+]
 .build.gradle
 ----
-implementation("io.github.kezhenxu94:yaml-validator:{project-version}")
+implementation("io.github.kezhenxu94:yaml-validator-all:{project-version}")
 ----

@@ -1,3 +1,36 @@
 === `!anyOf`
 
-Any one in the list matches this rule
+Any one in the **candidate** list matches this rule.
+
+WARNING: It's a common **misunderstanding** that `!anyOf` is a rule list, and if the candidate matches any of the rule, the validation passes.
+But on the contrary, `!anyOf` means that any item of the candidate list matches this single rule, the validation passes.
+
+==== Example
+
+[source,yaml,role="primary"]
+.expected.yaml
+----
+grades: !anyOf # <1>
+  subject: !nn # <2>
+  grade: !gt 60 # <3>
+----
+<1> Any item of the `grades` in the candidate must match this rule.
+<2> `subject` must be `not null`.
+<3> `grade` must be `greater than 60`.
+
+[source,yaml,role="primary"]
+.candidates.yaml
+----
+grades:
+  - subject: ~  # <1>
+    grade: 70
+  - subject: Chinese # <2>
+    grade: 59
+  - subject: Math # <3>
+    grade: 61
+----
+<1> This item doesn't match the rule, because `subject` is null.
+<2> This item doesn't match the rule, because `grade` is not greater than 60.
+<3> This item matches the rule, because `subject` is `not null`, and `grade` is greater than 60.
+
+Thus the validation passes.

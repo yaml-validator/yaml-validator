@@ -13,10 +13,10 @@ include::{tagsdir}/src/test/resources/nn.v.yaml[tags=content,indent=0]
 <1> The `name` must be `**n**ot **n**ull (!nn)`.
 <2> The `age` must be `**g**reater **t**han (!gt) 12`, and the actual value is saved into a variable named `age` by `&age` syntax.
 <3> The `height` must be `**l**ess **t**han (!lt) 200`.
-<4> The `age` must be the same as the actual value in the first `student` <2>.
+<4> The `age` must be the same as the actual value in the first `student`.
 
 NOTE: the exclamation mark `!` is NOT the same meaning as what it is in most programing languages, where it means `NOT`.
-Instead, it's a notation in YAML indicating the following word is a tag, thus `!gt` means **greater than**, instead of **not greater than**, i.e. less than or equal to.
+Instead, it's a notation in YAML indicating the following word is a {yaml-spec-tag-url}[tag], thus `!gt` means **greater than**, instead of **not greater than**, i.e. less than or equal to.
 
 Let's see how to do the validation in Kotlin codes.
 

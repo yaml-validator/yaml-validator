@@ -1,4 +1,5 @@
 :revnumber: {project-version}
+:toclevels: 4
 
 :imagesdir: images
 :rootdir: ../../../..
@@ -8,3 +9,5 @@
 :project-name: yaml-validator
 
 :yaml-spec-url: https://yaml.org/spec/1.2/spec.html
+:yaml-spec-tag-url: https://yaml.org/spec/1.2/spec.html#id2761292
+:yaml-spec-anchor-url: https://yaml.org/spec/1.2/spec.html#id2765878

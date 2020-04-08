@@ -5,11 +5,13 @@ include::attributes.adoc[]
 Yaml-validator is a data validator based on {yaml-spec-url}[YAML] rules, providing both Kotlin/Java APIs and CLI tools.
 It is open-sourced and the source codes are hosted on https://github.com/kezhenxu94/yaml-validator[GitHub].
 
-== Why Yaml-validator
+== Why yaml-validator
 
 When writing tests, no matter unit tests, integration tests or end to end tests, we have to validate the actual result with the expected result.
 It's sometimes painful to compose the expected data and write codes to compare between the actual result and the expected result.
 {project-name} simplifies the composition of expected data with YAML, and the comparision with some fluent yet powerful Java/Kotlin APIs.
+
+Yaml-validator is built upon the {yaml-spec-url}[YAML specification] entirely, therefore, having some background knowledge about YAML, such as {yaml-spec-tag-url}[tags], {yaml-spec-anchor-url}[anchors and alias], may help a lot to get you started quickly.
 
 include::quick-start.adoc[]
 

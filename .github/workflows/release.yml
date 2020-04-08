@@ -51,7 +51,10 @@ jobs:
           prerelease: false
 
       - name: Build CLI
-        run: ./mvnw --batch-mode -s settings.xml install
+        id: build-cli
+        run: |
+          ./mvnw --batch-mode -s settings.xml install
+          echo ::set-output name=jar::$(ls yaml-validator-cli/target/yaml-validator-cli-*-jar-with-dependencies.jar)
 
       - name: Upload CLI
         id: upload-release-asset
@@ -60,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: yaml-validator-cli/target/yaml-validator-cli-*-jar-with-dependencies.jar
+          asset_path: ${{ steps.build-cli.outputs.jar }}
           asset_name: yaml-validator-cli.jar
           asset_content_type: application/java-archive

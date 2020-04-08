@@ -187,7 +187,7 @@
                     <configuration>
                         <backend>html5</backend>
                         <sourceHighlighter>coderay</sourceHighlighter>
-                        <outputDirectory>${project.build.directory}/site/${project.version}</outputDirectory>
+                        <outputDirectory>${project.build.directory}/site</outputDirectory>
                         <attributes>
                             <idprefix />
                             <sectnums />

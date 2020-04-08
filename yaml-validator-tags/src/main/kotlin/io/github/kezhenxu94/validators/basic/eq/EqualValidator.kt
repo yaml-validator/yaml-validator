@@ -52,8 +52,4 @@ internal open class EqualValidator(override val context: Context) : Validatable,
             throw ValidateException(context, expected, any)
         }
     }
-
-    override fun reset() {
-        reference = null
-    }
 }

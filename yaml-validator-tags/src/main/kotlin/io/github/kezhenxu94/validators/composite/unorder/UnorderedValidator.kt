@@ -56,8 +56,4 @@ internal class UnorderedValidator(override val context: Context) : Validatable, 
             throw ValidateException(context)
         }
     }
-
-    override fun reset() {
-        reference = null
-    }
 }

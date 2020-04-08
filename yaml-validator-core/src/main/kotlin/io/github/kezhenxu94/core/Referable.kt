@@ -5,10 +5,12 @@ package io.github.kezhenxu94.core
  * and be retrieved by `reference`.
  */
 interface Referable<T> {
-    val reference: T?
+    var reference: T?
 
     /**
      * Reset the [reference] to null.
      */
-    fun reset()
+    fun reset() {
+        reference = null
+    }
 }

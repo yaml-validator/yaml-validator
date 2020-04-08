@@ -43,8 +43,4 @@ internal class JoinValidator(override val context: Context) : Validatable, Refer
             throw ValidateException(context, expected, any)
         }
     }
-
-    override fun reset() {
-        reference = null
-    }
 }

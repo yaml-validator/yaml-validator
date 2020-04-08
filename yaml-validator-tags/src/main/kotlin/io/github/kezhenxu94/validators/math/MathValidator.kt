@@ -43,10 +43,6 @@ internal abstract class MathValidator(protected val expected: Number = 0.0) : Va
         }
     }
 
-    override fun reset() {
-        reference = null
-    }
-
     protected abstract fun validateAnchor(anchor: Number)
 
     protected abstract fun validateAlias(alias: Number)

@@ -33,8 +33,4 @@ internal class NotNullValidator(override val context: Context) : Validatable, Re
             throw ValidateException()
         }
     }
-
-    override fun reset() {
-        reference = null
-    }
 }

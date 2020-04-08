@@ -49,8 +49,4 @@ internal class AnyOfValidator(override val context: Context) : Validatable, Refe
             }
         } ?: throw ValidateException(context)
     }
-
-    override fun reset() {
-        reference = null
-    }
 }

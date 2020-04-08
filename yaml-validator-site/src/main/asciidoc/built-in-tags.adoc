@@ -8,12 +8,14 @@ include::tag_eq.adoc[]
 
 include::tag_nn.adoc[]
 
-include::tag_any_of.adoc[]
-
-include::tag_not.adoc[]
-
 include::tag_ge.adoc[]
 
 include::tag_gt.adoc[]
 
 include::tag_lt.adoc[]
+
+include::tag_any_of.adoc[]
+
+include::tag_join.adoc[]
+
+include::tag_not.adoc[]

@@ -16,74 +16,26 @@
 
 package io.github.kezhenxu94
 
-import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
-import io.github.kezhenxu94.exceptions.ValidateException
 import java.io.InputStream
 import org.yaml.snakeyaml.Yaml
 
 /**
  * A helper class to make it easy to construct a real [Validatable] instance.
  */
-class YamlValidator private constructor(private val builder: Builder) {
-    private val validator = when {
-        builder.validator != null -> builder.validator
-        builder.inputStream != null -> Yaml(RootConstructor()).load(builder.inputStream)
-        else -> throw IllegalStateException()
-    }
+class YamlValidator private constructor(builder: Builder) {
+    private val traverser = Traverser(builder)
+    private val validator = builder.validator ?: Yaml(RootConstructor()).load(builder.inputStream)
 
     /**
      * See [Validatable.validate]
      */
-    fun validate(toValidate: Any?) {
-        return when (toValidate) {
-            is InputStream -> traverse(validator, Loader().load(toValidate))
-            is String -> traverse(validator, Loader().load(toValidate))
-            is Map<*, *>,
-            is List<*> -> traverse(validator, toValidate)
-            else -> traverse(validator, Loader().load(Dumper().dump(toValidate)))
-        }
-    }
-
-    private fun traverse(validator: Any, toValidate: Any?) {
-        when (validator) {
-            is Validatable -> validate0(validator, toValidate)
-
-            is Map<*, *> -> validator.forEach { (k, v) ->
-                val asMap = { any: Any? -> Loader().loadAs(Dumper().dump(any), Map::class.java) }
-                val valToValidate = ((toValidate as? Map<*, *>) ?: asMap(toValidate))[k]
-                if (v != null) {
-                    traverse(v, valToValidate)
-                } else if (valToValidate != null) {
-                    throw ValidateException()
-                }
-            }
-
-            is List<*> -> validator.forEachIndexed { index, v ->
-                traverse(v!!, (toValidate as List<*>)[index])
-            }
-
-            is String -> validateString(validator, toValidate)
-        }
-    }
-
-    private fun validateString(validator: Any, toValidate: Any?) {
-        if (validator != toValidate?.toString()) {
-            val message = """
-            raw validation failed
-            Expect: $validator
-            Actual: $toValidate
-            """.trimIndent()
-            throw ValidateException(message)
-        }
-    }
-
-    private fun validate0(validator: Validatable, toValidate: Any?) {
-        if (builder.disableReference) {
-            (validator as? Referable<*>)?.reset()
-        }
-        if (!builder.ignoreMissing || toValidate != null) {
-            validator.validate(toValidate)
+    fun validate(candidate: Any?) {
+        return when (candidate) {
+            is String -> traverser.traverse(validator, Loader().load(candidate))
+            is InputStream -> traverser.traverse(validator, Loader().load(candidate))
+            is Map<*, *>, is List<*> -> traverser.traverse(validator, candidate)
+            else -> traverser.traverse(validator, Loader().load(Dumper().dump(candidate)))
         }
     }
 

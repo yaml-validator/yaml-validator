@@ -2,3 +2,19 @@
 
 include::attributes.adoc[]
 
+=== Prerequisites
+
+The current CLI of yaml-validator requires a JRE 8+.
+
+=== Download
+
+Go to the {project-release-url}[release page] and download the latest `yaml-validator-cli.jar`.
+
+=== Usage
+
+The usage of the yaml-validator CLI is rather simple, simply run the following command to get help.
+
+[source,shell]
+----
+java -jar yaml-validator-cli.jar
+----

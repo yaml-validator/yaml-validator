@@ -30,43 +30,30 @@ import org.yaml.snakeyaml.nodes.Tag
 internal class UnorderedValidator(override val context: Context) : Validatable, Referable<String> {
     override var reference: String? = null
 
-    private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node)
+    private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node) as List<*>
 
     override fun validate(any: Any?) {
-        if (nodes !is List<*>) {
-            throw ValidateException(context, expected = "list", actual = nodes?.javaClass)
-        }
-
-        val candidates = when (any) {
-            is List<*> -> any
-            else -> Yaml().loadAs(Yaml(MapRepresenter()).dump(any), List::class.java)
-        }
-
-        if (nodes.size != candidates.size) {
-            throw ValidateException(
-                context, expected = "size ${nodes.size}", actual = "size ${candidates.size}"
-            )
-        }
+        val candidates = any as? List<*> ?: Yaml().loadAs(Yaml(MapRepresenter()).dump(any), List::class.java)
 
         val candidateSatisfies = { validator: Any? ->
             candidates.any { candidate ->
-                try {
-                    if (validator == candidate) {
-                        return@any true
-                    }
+                if (validator == candidate)
+                    true
+                else try {
                     if (validator is Validatable) {
                         validator.validate(candidate)
+                    } else {
+                        YamlValidator.from(validator = validator!!).build().validate(candidate)
                     }
-                    YamlValidator.from(validator = validator!!).build().validate(candidate)
-                    return@any true
+                    true
                 } catch (_: ValidateException) {
-                    return@any false
+                    false
                 }
             }
         }
 
         if (!nodes.all { candidateSatisfies(it) }) {
-            throw ValidateException()
+            throw ValidateException(context)
         }
     }
 

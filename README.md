@@ -5,3 +5,6 @@
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-1.3.71-blue.svg)](https://kotlinlang.org)
 [![Codecov](https://codecov.io/gh/kezhenxu94/yaml-validator/branch/master/graph/badge.svg?token=7QsMaboevj)](https://codecov.io/gh/kezhenxu94/yaml-validator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e55c50232844fee86d4eb895f2849f3)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kezhenxu94/yaml-validator&amp;utm_campaign=Badge_Grade)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.kezhenxu94/yaml-validator)](https://mvnrepository.com/artifact/io.github.kezhenxu94/yaml-validator-all)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cbabe3360b884d3b8a03/maintainability)](https://codeclimate.com/github/kezhenxu94/yaml-validator/maintainability)
+

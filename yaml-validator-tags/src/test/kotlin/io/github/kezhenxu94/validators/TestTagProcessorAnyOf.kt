@@ -31,10 +31,10 @@ internal class TestTagProcessorAnyOf {
         val toValidate1 = Yaml().loadAs(
             """
             grades:
-                - subject: math
-                  grade: 61
-                - subject: English
-                  grade: 89 
+              - subject: math
+                grade: 61
+              - subject: English
+                grade: 89 
             """.trimIndent(),
             Map::class.java
         )
@@ -46,10 +46,10 @@ internal class TestTagProcessorAnyOf {
         val toValidate2 = Yaml().loadAs(
             """
             grades:
-                - subject: math
-                  grade: 59
-                - subject: English
-                  grade: 91
+              - subject: math
+                grade: 59
+              - subject: English
+                grade: 91
             """.trimIndent(),
             Map::class.java
         )
@@ -65,10 +65,10 @@ internal class TestTagProcessorAnyOf {
             val toValidate = Yaml().loadAs(
                 """
                 grades:
-                    - name: math
-                      grade: 59
-                    - name: English
-                      grade: 89
+                  - name: math
+                    grade: 59
+                  - name: English
+                    grade: 89
                 """.trimIndent(),
                 Map::class.java
             )

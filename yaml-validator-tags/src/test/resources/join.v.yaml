@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# tag::content[]
 graph:
   - source:
-      id: &source !gt 0
+      id: &source !gt 0 # <1>
   - target:
-      id: &target !gt 0
-relation: !join [*source, _, *target]
+      id: &target !gt 0 # <2>
+relation: !join [*source, _, *target] # <3>
+# end::content[]

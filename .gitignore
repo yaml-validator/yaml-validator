@@ -26,3 +26,6 @@ hs_err_pid*
 target/
 build/
 .DS_Store
+*.iml
+*.releaseBackup
+release.properties

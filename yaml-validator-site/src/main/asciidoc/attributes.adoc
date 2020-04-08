@@ -7,6 +7,7 @@
 :tagsdir: {rootdir}/yaml-validator-tags
 
 :project-name: yaml-validator
+:project-release-url: https://github.com/kezhenxu94/yaml-validator/releases
 
 :yaml-spec-url: https://yaml.org/spec/1.2/spec.html
 :yaml-spec-tag-url: https://yaml.org/spec/1.2/spec.html#id2761292

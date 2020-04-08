@@ -36,6 +36,17 @@ internal class TestYamlValidator {
     // end::simple[]
 
     @Test
+    fun `should pass when no tag and raw number match`() {
+        YamlValidator.from(
+            """
+            test: 123.5
+            """.trimIndent()
+        )
+            .build()
+            .validate(mapOf("test" to "123.5"))
+    }
+
+    @Test
     fun `should fail when no tag and raw string mismatch`() {
         assertThrows<ValidateException> {
             YamlValidator.from(

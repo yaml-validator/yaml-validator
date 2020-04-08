@@ -1,3 +1,35 @@
 === `!join`
 
-Join the list into `String` and perform an `equal to` validation
+include::attributes.adoc[]
+
+Join the list into `String` and perform an `equal to` validation.
+
+When composing rules, you may want to reference some existed anchors, but, more cases are that you want to concatenate more than one anchor, or concatenate them with some literal strings,
+`!join` tag is a great fit in this scenario, which joins the list into a single string and then perform an `equal to` validation.
+
+==== Example
+
+[source,yaml,role="primary"]
+.expected.yaml
+----
+include::{tagsdir}/src/test/resources/join.v.yaml[tags=content,indent=0]
+----
+<1> The `id` of the `source` must be `greater than` 0, and the actual value is saved into anchor `source`(`&source`).
+<2> The `id` of the `target` must be `greater than` 0, and the actual value is saved into anchor `target`(`&target`).
+<3> The `relation` must be `equal to` the **actual** `source` and `target`, joined by a underscore `_`.
+
+[source,yaml,role="primary"]
+.candidates.yaml
+----
+graph:
+  - source:
+      id: 24 # <1>
+  - target:
+      id: 48 # <2>
+relation: 24_48 # <3>
+----
+<1> The `id` of `source` is `24`, which is `greater than` `0`, and the anchor `source` is set to `24`.
+<2> The `id` of `target` is `48`, which is `greater than` `0`, and the anchor `target` is set to `48`.
+<3> Joining the anchor `source`, `target` and `_` produces `24_48`, which is what the rule expects, checked.
+
+TIP: The `!join` tag is specifically designed for joining anchors, if all the parts to be joined are literal strings, please join them manually and use `!eq` validator or raw validation.

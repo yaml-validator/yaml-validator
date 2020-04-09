@@ -1,3 +1,1 @@
-=== `!ge`
-
-Greater than or equal to
+=== `!ge` - Greater than or Equal to

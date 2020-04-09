@@ -1,4 +1,4 @@
-=== `!eq`
+=== `!eq` - Equal to
 
 Equality comparison.
 This is possibly the most widely used operation in validation, it can be used to validate numbers, strings, etc., and because it's so widely used, it can be simply omitted in the rules.

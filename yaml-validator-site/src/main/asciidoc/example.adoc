@@ -3,10 +3,10 @@
 include::attributes.adoc[]
 
 As mentioned above, the validator rules are all based on YAML format, {project-name} provides a bunch of built-in YAML tags to compose the expected result.
-Here is an example of the `expected.yaml`:
+Here is an example of the `rules.yaml`:
 
 [source,yaml]
-.expected.yaml
+.rules.yaml
 ----
 include::{tagsdir}/src/test/resources/nn.v.yaml[tags=content,indent=0]
 ----

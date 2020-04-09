@@ -1,4 +1,2 @@
-=== `!lt`
-
-Less than
+=== `!lt` - Less Than
 

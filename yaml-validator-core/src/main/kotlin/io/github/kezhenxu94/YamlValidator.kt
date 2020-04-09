@@ -72,16 +72,19 @@ class YamlValidator private constructor(builder: Builder) {
         /**
          * Create a [Builder] from the YAML [InputStream].
          */
+        @JvmStatic
         fun from(inputStream: InputStream) = Builder(inputStream)
 
         /**
          * Create a [Builder] from the [yaml] text string.
          */
+        @JvmStatic
         fun from(yaml: String) = Builder(yaml.byteInputStream())
 
         /**
          * Create a [Builder] from the [validator].
          */
+        @JvmStatic
         fun from(validator: Any) = Builder(validator = validator)
     }
 }

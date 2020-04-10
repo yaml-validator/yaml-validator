@@ -1,0 +1,22 @@
+=== `!unordered`, `!uo`
+
+include::attributes.adoc[]
+
+All the **candidate** list matches this rule list, regardless of the list order.
+
+==== Example
+
+[source,yaml]
+.rules.yaml
+----
+include::{tagsdir}/src/test/resources/uo.v.yaml[tag=content,indent=0]
+----
+<1> The candidate list should match this rule list, but regardless of the order.
+
+[source,yaml]
+.candidates.yaml
+----
+include::{tagsdir}/src/test/kotlin/io/github/kezhenxu94/validators/TestTagProcessorUO.kt[tag=test,indent=0]
+----
+
+All the items in the candidate list are in the rules list, thus, the validation passes.

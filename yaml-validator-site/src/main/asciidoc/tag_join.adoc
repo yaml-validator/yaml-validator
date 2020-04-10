@@ -10,7 +10,7 @@ When composing rules, you may want to reference some existed anchors, but, more 
 ==== Example
 
 [source,yaml]
-.expected.yaml
+.rules.yaml
 ----
 include::{tagsdir}/src/test/resources/join.v.yaml[tags=content,indent=0]
 ----

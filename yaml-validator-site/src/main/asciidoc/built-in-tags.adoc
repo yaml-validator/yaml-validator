@@ -16,6 +16,8 @@ include::tag_lt.adoc[]
 
 include::tag_any_of.adoc[]
 
+include::tag_unordered.adoc[]
+
 include::tag_join.adoc[]
 
 include::tag_not.adoc[]

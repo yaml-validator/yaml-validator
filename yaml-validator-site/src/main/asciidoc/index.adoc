@@ -15,8 +15,6 @@ Yaml-validator is built upon the {yaml-spec-url}[YAML specification] entirely, t
 
 include::quick-start.adoc[]
 
-include::example.adoc[]
-
 include::built-in-tags.adoc[]
 
 include::customize-tags.adoc[]

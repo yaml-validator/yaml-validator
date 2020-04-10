@@ -27,13 +27,15 @@ internal class TestTagProcessorUO {
     internal fun `should pass when unordered`() {
         val toValidate = Yaml().loadAs(
             """
+            # tag::test[]
             songs:
+              - name: この世に二人だけ
+                artist: Nakajima Miyuki
               - name: Singles Bar
                 artist: Nakajima Miyuki
               - name: 永遠の嘘をついてくれ
                 artist: Nakajima Miyuki
-              - name: この世に二人だけ
-                artist: Nakajima Miyuki
+            # end::test[]
             """.trimIndent(),
             Map::class.java
         )
@@ -110,6 +112,6 @@ internal class TestTagProcessorUO {
     private companion object {
         private val yamlInputStream
             get() =
-                TestTagProcessorUO::class.java.getResourceAsStream("/unordered.v.yaml")
+                TestTagProcessorUO::class.java.getResourceAsStream("/uo.v.yaml")
     }
 }

@@ -21,3 +21,5 @@ To start, you need to add the dependency into your maven `pom.xml` or gradle `bu
 ----
 implementation("io.github.kezhenxu94:yaml-validator-all:{project-version}")
 ----
+
+include::example.adoc[]

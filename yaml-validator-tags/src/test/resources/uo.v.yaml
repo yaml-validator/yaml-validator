@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-songs: !unordered
+# tag::content[]
+songs: !unordered # <1>
   - name: Singles Bar
     artist: &artist !nn
   - name: 永遠の嘘をついてくれ
     artist: *artist
   - name: この世に二人だけ
     artist: *artist
+# end::content[]

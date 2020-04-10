@@ -133,7 +133,6 @@ internal class TestTagProcessorUO {
 
     private companion object {
         private val yamlInputStream
-            get() =
-                TestTagProcessorUO::class.java.getResourceAsStream("/uo.v.yaml")
+            get() = TestTagProcessorUO::class.java.getResourceAsStream("/uo.v.yaml")
     }
 }

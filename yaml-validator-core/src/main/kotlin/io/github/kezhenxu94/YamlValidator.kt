@@ -20,6 +20,7 @@ import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.utils.Dumper
 import io.github.kezhenxu94.utils.Loader
 import java.io.InputStream
+import kotlin.reflect.KClass
 import org.yaml.snakeyaml.Yaml
 
 /**
@@ -27,7 +28,10 @@ import org.yaml.snakeyaml.Yaml
  */
 class YamlValidator private constructor(builder: Builder) {
     private val traverser = Traverser(builder)
-    private val validator = builder.validator ?: Yaml(RootConstructor()).load(builder.inputStream)
+    private val validator = builder.validator ?: Yaml(RootConstructor(
+        builder.tagClasses,
+        builder.tagPackage
+    )).load(builder.inputStream)
 
     /**
      * See [Validatable.validate]
@@ -49,7 +53,9 @@ class YamlValidator private constructor(builder: Builder) {
             internal val inputStream: InputStream? = null,
             internal val validator: Any? = null,
             internal var ignoreMissing: Boolean = false,
-            internal var disableReference: Boolean = false
+            internal var disableReference: Boolean = false,
+            internal val tagClasses: MutableSet<Class<*>> = mutableSetOf(),
+            internal val tagPackage: MutableSet<String> = mutableSetOf()
         ) {
 
             /**
@@ -62,6 +68,27 @@ class YamlValidator private constructor(builder: Builder) {
              * validator is used.
              */
             fun disableReference() = this.also { disableReference = true }
+
+            /**
+             * Register custom tag class.
+             */
+            fun register(klass: Class<*>) = this.also {
+                tagClasses += klass
+            }
+
+            /**
+             * Register custom tag class.
+             */
+            fun register(klass: KClass<*>) = this.also {
+                tagClasses += klass.java
+            }
+
+            /**
+             * Register all custom tag classes in [package].
+             */
+            fun register(`package`: String) = this.also {
+                tagPackage += `package`
+            }
 
             /**
              * Build a real [Validatable] instance from this [Builder].

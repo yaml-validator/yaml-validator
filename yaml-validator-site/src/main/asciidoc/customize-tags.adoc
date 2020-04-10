@@ -1,3 +1,52 @@
 == Customize Tags
 
 include::attributes.adoc[]
+
+Although there're a bunch of built-in tags out of box, you may want to have some customized tags to fit your specific scenarios, {project-name} provides the ability to add the customized tags into the core, without hacking the core codes.
+
+To illustrate, let's say that we want to add a tag that is always failed, and throws `ValidateException`, basically, there're three steps to achieve the goal.
+
+=== Write Tag Constructor
+
+The goal of a tag constructor is to construct a `Validatable` instance from the raw YAML node(s).
+
+In our example, the tag `!fail` comes from any YAML node whose value is `!fail`, i.e. `yaml-key: !fail`, simple enough for demonstration purpose.
+
+[source,kotlin]
+.AlwaysFailConstruct.kt
+----
+include::{coredir}/src/test/kotlin/io/github/kezhenxu94/validators/TestCustomTag.kt[tag=customConstruct,indent=0]
+----
+<1> The tag constructor should extend `org.yaml.snakeyaml.constructor.AbstractConstruct`.
+<2> In the `construct` method, we simply return the `Validatable` instance, `AlwaysFailTag` in this case, which we will define later.
+
+=== Write Tag Processor
+
+Now comes to the tag processor which actually does the validation.
+
+[source,kotlin]
+.AlwaysFailTag.kt
+----
+include::{coredir}/src/test/kotlin/io/github/kezhenxu94/validators/TestCustomTag.kt[tag=customTag,indent=0]
+----
+<1> The annotation `TagProcessor` indicates that this is a tag processor that should be adopted when parsing the YAML stream, and the `tags` field indicates that this processor can only handle the tag `!fail`, and the `construct` indicates that this validator is constructed by `AlwaysFailConstruct`.
+<2> The tag processor should extend `io.github.kezhenxu94.core.Validatable` and override the method `validate`.
+<3> In the method `validate`, we simply throw an exception `ValidateException`.
+
+=== Register Tag
+
+After the tag constructor and processor are ready, now we'll register it to the core before using it, we can register the tag class one by one, or register a package including all the customized tags.
+
+[source,kotlin]
+.Test.kt
+----
+include::{coredir}/src/test/kotlin/io/github/kezhenxu94/validators/TestCustomTag.kt[tag=test,indent=0]
+----
+<1> Compose the rules that use the customized tag.
+<2> Register the customized tag to the core.
+
+As the assertion shows, the validation should always throw `ValidateException`.
+
+=== One More Thing
+
+Apart from the `tags` in `TagProcessor`, you can also specify some `prefixes` that this processor can handle, for more detail, please refer to `io.github.kezhenxu94.validators.composite.not.NotValidator`.

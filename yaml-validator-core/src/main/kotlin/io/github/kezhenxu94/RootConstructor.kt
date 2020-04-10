@@ -25,25 +25,36 @@ import org.yaml.snakeyaml.nodes.Tag
 /**
  * The root `Constructor` in the validation, which can be used to recursively construct POJOs.
  */
-class RootConstructor : Constructor() {
+class RootConstructor(
+    tagClasses: MutableSet<Class<*>> = mutableSetOf(),
+    tagPackage: MutableSet<String> = mutableSetOf()
+) : Constructor() {
     init {
-        val tagClasses = Reflections(Package::class.java.`package`.name).getTypesAnnotatedWith(TagProcessor::class.java)
+        registerPrefix(Package::class.java.`package`.name)
 
-        tagClasses.forEach { klass ->
-            klass.getAnnotation(TagProcessor::class.java).apply {
-                val instance = try {
-                    construct.java.getDeclaredConstructor(RootConstructor::class.java).newInstance(this@RootConstructor)
-                } catch (_: Throwable) {
-                    construct.java.newInstance()
-                }
+        tagPackage.forEach { registerPrefix(it) }
 
-                tags.forEach {
-                    yamlConstructors[Tag(it)] = instance
-                }
+        tagClasses.forEach { registerClass(it) }
+    }
 
-                prefixes.forEach {
-                    yamlMultiConstructors[it] = instance
-                }
+    private fun registerPrefix(prefix: String) {
+        Reflections(prefix).getTypesAnnotatedWith(TagProcessor::class.java).forEach { registerClass(it) }
+    }
+
+    private fun registerClass(klass: Class<*>) {
+        klass.getAnnotation(TagProcessor::class.java).apply {
+            val instance = try {
+                construct.java.getDeclaredConstructor(RootConstructor::class.java).newInstance(this@RootConstructor)
+            } catch (_: Throwable) {
+                construct.java.newInstance()
+            }
+
+            tags.forEach {
+                yamlConstructors[Tag(it)] = instance
+            }
+
+            prefixes.forEach {
+                yamlMultiConstructors[it] = instance
             }
         }
     }

@@ -19,7 +19,6 @@ package io.github.kezhenxu94.validators.composite.unorder
 import io.github.kezhenxu94.YamlValidator
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context
-import io.github.kezhenxu94.core.Referable
 import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
 import io.github.kezhenxu94.representers.MapRepresenter
@@ -27,8 +26,7 @@ import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.nodes.Tag
 
 @TagProcessor(tags = ["!unordered", "!uo"], construct = UnorderedConstruct::class)
-internal class UnorderedValidator(override val context: Context) : Validatable, Referable<String> {
-    override var reference: String? = null
+internal class UnorderedValidator(override val context: Context) : Validatable {
 
     private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node) as List<*>
 

@@ -61,4 +61,32 @@ internal class TestCustomTag {
         }
     }
     // end::test[]
+
+    @Test
+    fun `should pass when custom tag 1`() {
+        assertThrows<ValidateException> {
+            YamlValidator.from(
+                """
+                test: !fail
+                """.trimIndent()
+            )
+                .register(AlwaysFailTag::class.java)
+                .build()
+                .validate(mapOf("test" to "abc"))
+        }
+    }
+
+    @Test
+    fun `should pass when custom tag from package`() {
+        assertThrows<ValidateException> {
+            YamlValidator.from(
+                """
+                test: !fail
+                """.trimIndent()
+            )
+                .register(AlwaysFailTag::class.java.`package`.name)
+                .build()
+                .validate(mapOf("test" to "abc"))
+        }
+    }
 }

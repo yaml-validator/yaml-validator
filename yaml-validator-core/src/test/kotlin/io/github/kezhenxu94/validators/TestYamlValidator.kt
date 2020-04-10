@@ -36,6 +36,17 @@ internal class TestYamlValidator {
     // end::simple[]
 
     @Test
+    fun `should pass when candidate is stream`() {
+        YamlValidator.from(
+            """
+            test: 123.5
+            """.trimIndent()
+        )
+            .build()
+            .validate("test: 123.5".byteInputStream())
+    }
+
+    @Test
     fun `should pass when no tag and raw number match`() {
         YamlValidator.from(
             """
@@ -44,6 +55,19 @@ internal class TestYamlValidator {
         )
             .build()
             .validate(mapOf("test" to "123.5"))
+    }
+
+    @Test
+    fun `should fail when validator null but candidate not null`() {
+        assertThrows<ValidateException> {
+            YamlValidator.from(
+                """
+                test: ~
+                """.trimIndent()
+            )
+                .build()
+                .validate(mapOf("test" to "123.5"))
+        }
     }
 
     @Test

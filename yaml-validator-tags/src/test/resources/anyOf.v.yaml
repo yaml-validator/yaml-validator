@@ -13,5 +13,5 @@
 # limitations under the License.
 
 grades: !anyOf
-  subject: !nn
-  grade: !gt 60
+  - subject: !nn
+    grade: !gt 60

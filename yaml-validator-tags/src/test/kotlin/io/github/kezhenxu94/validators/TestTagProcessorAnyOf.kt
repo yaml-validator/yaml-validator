@@ -60,12 +60,30 @@ internal class TestTagProcessorAnyOf {
     }
 
     @Test
+    internal fun `should pass when simple any of`() {
+        YamlValidator.from(
+            """
+            simple-key: !any
+              - abc
+            """.trimIndent()
+        )
+            .build()
+            .validate(
+                """
+                simple-key:
+                  - def
+                  - abc
+                """.trimIndent()
+            )
+    }
+
+    @Test
     internal fun `should pass when any of is the top level section`() {
         val validator = YamlValidator.from(
             """
             !anyOf
-            subject: !nn
-            grade: !gt 60
+            - subject: !nn
+              grade: !gt 60
         """.trimIndent()
         ).ignoreMissing().build()
 
@@ -111,6 +129,22 @@ internal class TestTagProcessorAnyOf {
                 .ignoreMissing()
                 .build()
                 .validate(toValidate)
+        }
+    }
+
+    @Test
+    internal fun `should fail when any list size lt 1`() {
+        assertThrows<IllegalArgumentException> {
+            YamlValidator.from(
+                """
+                !any
+                - whatever1
+                - whatever2
+                """.trimIndent()
+            )
+                .ignoreMissing()
+                .build()
+                .validate("- a")
         }
     }
 

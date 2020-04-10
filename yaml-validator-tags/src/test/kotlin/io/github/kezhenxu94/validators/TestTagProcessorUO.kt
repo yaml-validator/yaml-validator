@@ -44,6 +44,28 @@ internal class TestTagProcessorUO {
     }
 
     @Test
+    internal fun `should pass when simple`() {
+        val toValidate = Yaml().loadAs(
+            """
+            songs:
+              - abc
+              - def
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(
+            """
+            songs: !uo
+              - abc
+              - def
+            """.trimIndent()
+        )
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
+    }
+
+    @Test
     internal fun `should pass when nested`() {
         val toValidate = Yaml().loadAs(
             """
@@ -86,7 +108,8 @@ internal class TestTagProcessorUO {
     }
 
     private companion object {
-        private val yamlInputStream get() =
-            TestTagProcessorUO::class.java.getResourceAsStream("/unordered.v.yaml")
+        private val yamlInputStream
+            get() =
+                TestTagProcessorUO::class.java.getResourceAsStream("/unordered.v.yaml")
     }
 }

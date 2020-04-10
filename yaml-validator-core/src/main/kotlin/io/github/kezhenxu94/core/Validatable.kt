@@ -27,8 +27,8 @@ interface Validatable {
     /**
      * [validate]s the given object.
      *
-     * @param any the object to validate
+     * @param candidate the object to validate
      */
     @Throws(ValidateException::class)
-    fun validate(any: Any?)
+    fun validate(candidate: Any?)
 }

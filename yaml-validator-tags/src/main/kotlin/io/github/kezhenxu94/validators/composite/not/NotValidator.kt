@@ -38,9 +38,9 @@ internal class NotValidator(override val context: Context) : Validatable {
             context.root?.constructs!![node.tag]?.construct(node) as? Validatable ?: throw IllegalStateException()
     }
 
-    override fun validate(any: Any?) {
+    override fun validate(candidate: Any?) {
         try {
-            validatable.validate(any)
+            validatable.validate(candidate)
         } catch (_: ValidateException) {
             return
         }

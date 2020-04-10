@@ -29,7 +29,7 @@ internal class JoinValidator(override val context: Context) : Validatable, Refer
 
     private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node)
 
-    override fun validate(any: Any?) {
+    override fun validate(candidate: Any?) {
         val expected = (nodes as List<*>).joinToString("", transform = {
             when (it) {
                 is Referable<*> -> it.reference.toString()
@@ -39,8 +39,8 @@ internal class JoinValidator(override val context: Context) : Validatable, Refer
 
         reference = expected
 
-        if (expected != any) {
-            throw ValidateException(context, expected, any)
+        if (expected != candidate) {
+            throw ValidateException(context, expected, candidate)
         }
     }
 }

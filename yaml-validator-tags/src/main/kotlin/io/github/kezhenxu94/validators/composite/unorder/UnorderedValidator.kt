@@ -30,8 +30,10 @@ internal class UnorderedValidator(override val context: Context) : Validatable {
 
     private val nodes = context.root?.constructs!![Tag.SEQ]?.construct(context.node) as List<*>
 
-    override fun validate(any: Any?) {
-        val candidates = any as? List<*> ?: Yaml().loadAs(Yaml(MapRepresenter()).dump(any), List::class.java)
+    override fun validate(candidate: Any?) {
+        val candidates = candidate as? List<*> ?: Yaml().loadAs(
+            Yaml(MapRepresenter()).dump(candidate), List::class.java
+        )
 
         val candidateSatisfies = { validator: Any? ->
             candidates.any { candidate ->

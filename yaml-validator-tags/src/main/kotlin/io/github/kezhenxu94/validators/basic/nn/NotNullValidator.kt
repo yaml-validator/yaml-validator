@@ -26,10 +26,10 @@ import io.github.kezhenxu94.exceptions.ValidateException
 internal class NotNullValidator(override val context: Context) : Validatable, Referable<Any> {
     override var reference: Any? = null
 
-    override fun validate(any: Any?) {
-        reference = any
+    override fun validate(candidate: Any?) {
+        reference = candidate
 
-        if (any == null) {
+        if (candidate == null) {
             throw ValidateException()
         }
     }

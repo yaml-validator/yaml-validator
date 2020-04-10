@@ -27,17 +27,17 @@ import org.yaml.snakeyaml.nodes.ScalarNode
 internal open class EqualValidator(override val context: Context) : Validatable, Referable<Any> {
     override var reference: Any? = null
 
-    override fun validate(any: Any?) {
+    override fun validate(candidate: Any?) {
         try {
             val expected = (context.node as ScalarNode).value
 
             if (reference == null) {
-                validateAnchor(expected, any)
+                validateAnchor(expected, candidate)
             } else {
-                validateAlias(any)
+                validateAlias(candidate)
             }
         } finally {
-            reference = any
+            reference = candidate
         }
     }
 

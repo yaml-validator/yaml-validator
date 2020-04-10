@@ -31,7 +31,7 @@ internal class TestCustomTag {
         // tag::customTag[]
         @TagProcessor(tags = ["!fail"], construct = AlwaysFailConstruct::class) // <1>
         class AlwaysFailTag(override val context: Context) : Validatable { // <2>
-            override fun validate(any: Any?) {
+            override fun validate(candidate: Any?) {
                 throw ValidateException("always fail") // <3>
             }
         }

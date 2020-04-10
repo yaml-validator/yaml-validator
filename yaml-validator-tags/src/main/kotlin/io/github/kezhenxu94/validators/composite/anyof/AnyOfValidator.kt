@@ -29,21 +29,17 @@ import org.yaml.snakeyaml.nodes.Tag
 internal class AnyOfValidator(override val context: Context) : Validatable, Referable<Any> {
     override var reference: Any? = null
 
-    private val validator: List<*>
+    private val validator: List<*> =
+        (RootConstructor().constructs[Tag.SEQ] ?: error("should never happen")).construct(context.node) as List<*>
 
-    init {
-        val node = context.node
-        validator = (RootConstructor().constructs[Tag.SEQ] ?: error("should never happen")).construct(node) as List<*>
-    }
-
-    override fun validate(any: Any?) {
+    override fun validate(candidate: Any?) {
         if (validator.size != 1) {
             throw IllegalArgumentException("tag !any/!anyOf can only have one item, but got ${validator.size}")
         }
 
         val yamlValidator = YamlValidator.from(validator = validator.first()!!).disableReference().build()
 
-        (any as List<*>).firstOrNull {
+        (candidate as List<*>).firstOrNull {
             try {
                 yamlValidator.validate(it)
                 reference = it

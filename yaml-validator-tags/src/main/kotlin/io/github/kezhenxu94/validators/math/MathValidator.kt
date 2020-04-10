@@ -25,11 +25,11 @@ internal abstract class MathValidator(protected val expected: Number = 0.0) : Va
 
     override var reference: Any? = null
 
-    override fun validate(any: Any?) {
-        val actual = when (any) {
-            is Number -> any.toDouble()
-            is String -> any.toDouble()
-            else -> throw ValidateException("$tag validator cannot be applied to non-number values, actual: $any")
+    override fun validate(candidate: Any?) {
+        val actual = when (candidate) {
+            is Number -> candidate.toDouble()
+            is String -> candidate.toDouble()
+            else -> throw ValidateException("$tag validator cannot be applied to non-number values, actual: $candidate")
         }
 
         try {
@@ -39,7 +39,7 @@ internal abstract class MathValidator(protected val expected: Number = 0.0) : Va
                 validateAlias(actual)
             }
         } finally {
-            reference = any
+            reference = candidate
         }
     }
 

@@ -8,7 +8,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.kezhenxu94/yaml-validator-all)](https://mvnrepository.com/artifact/io.github.kezhenxu94/yaml-validator-all)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%20v2.0-blue.svg)](https://apache.org)
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-1.3.71-blue.svg)](https://kotlinlang.org)
-[![LOC](https://tokei.rs/b1/github/kezhenxu94/yaml-validator?category=lines)](https://github.com/XAMPPRocky/tokei)
 
 ## Documentation
 

@@ -13,8 +13,7 @@ internal class Traverser(private val builder: YamlValidator.Companion.Builder) {
             is Validatable -> validate0(validator, candidate)
 
             is Map<*, *> -> validator.forEach { (k, v) ->
-                val asMap = { any: Any? -> Loader()
-                    .loadAs(Dumper().dump(any), Map::class.java) }
+                val asMap = { any: Any? -> Loader().loadAs(Dumper().dump(any), Map::class.java) }
                 val candidateVal = ((candidate as? Map<*, *>) ?: asMap(candidate))[k]
                 if (v != null) {
                     traverse(v, candidateVal)

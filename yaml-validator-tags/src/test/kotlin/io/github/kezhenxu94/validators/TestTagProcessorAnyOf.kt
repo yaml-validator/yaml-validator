@@ -60,6 +60,41 @@ internal class TestTagProcessorAnyOf {
     }
 
     @Test
+    internal fun `should pass when any of is the top level section`() {
+        val validator = YamlValidator.from(
+            """
+            !anyOf
+            subject: !nn
+            grade: !gt 60
+        """.trimIndent()
+        ).ignoreMissing().build()
+
+        validator.validate(
+            Yaml().load(
+                """
+                - subject: math
+                  grade: 59
+                - subject: English
+                  grade: 89 
+                """.trimIndent()
+            )
+        )
+
+        assertThrows<ValidateException> {
+            validator.validate(
+                Yaml().load(
+                    """
+                    - subject: math
+                      grade: 59
+                    - subject: English
+                      grade: 59
+                    """.trimIndent()
+                )
+            )
+        }
+    }
+
+    @Test
     internal fun `should fail when none of`() {
         assertThrows<ValidateException> {
             val toValidate = Yaml().loadAs(

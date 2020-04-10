@@ -25,7 +25,7 @@ import io.github.kezhenxu94.core.Validatable
 import io.github.kezhenxu94.exceptions.ValidateException
 import org.yaml.snakeyaml.nodes.Tag
 
-@TagProcessor(tags = ["!anyOf"], construct = AnyOfConstruct::class)
+@TagProcessor(tags = ["!anyOf", "!any"], construct = AnyOfConstruct::class)
 internal class AnyOfValidator(override val context: Context) : Validatable, Referable<Any> {
     override var reference: Any? = null
 

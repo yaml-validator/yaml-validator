@@ -10,6 +10,7 @@
 
     <artifactId>yaml-validator-site</artifactId>
     <description>The official web site of yaml-validator</description>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>

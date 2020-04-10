@@ -26,6 +26,7 @@
 
     <artifactId>yaml-validator-all</artifactId>
     <description>The all-in-one module that includes all necessary modules to use yaml-validator</description>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

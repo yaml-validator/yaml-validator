@@ -46,6 +46,28 @@ internal class TestTagProcessorUO {
     }
 
     @Test
+    internal fun `should pass when validator`() {
+        val toValidate = Yaml().loadAs(
+            """
+            songs:
+              - 123
+              - abc
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(
+            """
+            songs: !uo
+              - !nn
+              - !gt 100
+            """.trimIndent()
+        )
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
+    }
+
+    @Test
     internal fun `should pass when simple`() {
         val toValidate = Yaml().loadAs(
             """

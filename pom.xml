@@ -22,7 +22,7 @@
     <groupId>com.yaml-validator</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
-    <version>0.12-SNAPSHOT</version>
+    <version>0.12</version>
 
     <name>yaml-validator</name>
     <description>A data validator based on YAML rules</description>
@@ -369,7 +369,7 @@
         <connection>scm:git:git://github.com/yaml-validator/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:yaml-validator/yaml-validator.git</developerConnection>
         <url>https://github.com/yaml-validator/yaml-validator</url>
-        <tag>HEAD</tag>
+        <tag>v0.12</tag>
     </scm>
 
     <issueManagement>

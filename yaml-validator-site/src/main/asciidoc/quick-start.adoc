@@ -9,7 +9,7 @@ To start, you need to add the dependency into your maven `pom.xml` or gradle `bu
 .pom.xml
 ----
 <dependency>
-    <groupId>io.github.kezhenxu94</groupId>
+    <groupId>com.yaml-validator</groupId>
     <artifactId>yaml-validator-all</artifactId>
     <version>{project-version}</version>
 </dependency>

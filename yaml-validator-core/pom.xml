@@ -20,7 +20,7 @@
 
     <parent>
         <artifactId>yaml-validator</artifactId>
-        <groupId>io.github.kezhenxu94</groupId>
+        <groupId>com.yaml-validator</groupId>
         <version>0.10-SNAPSHOT</version>
     </parent>
 

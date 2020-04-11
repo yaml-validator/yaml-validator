@@ -3,7 +3,7 @@ kezhenxu94 <kezhenxu94@163.com>
 include::attributes.adoc[]
 
 Yaml-validator is a data validator based on {yaml-spec-url}[YAML] rules, providing both Kotlin/Java APIs and CLI tools.
-It is open-sourced and the source codes are hosted on https://github.com/kezhenxu94/yaml-validator[GitHub].
+It is open-sourced and the source codes are hosted on https://github.com/yaml-validator/yaml-validator[GitHub].
 
 == Why yaml-validator
 

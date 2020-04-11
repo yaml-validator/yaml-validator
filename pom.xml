@@ -19,14 +19,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.kezhenxu94</groupId>
+    <groupId>com.yaml-validator</groupId>
     <artifactId>yaml-validator</artifactId>
     <packaging>pom</packaging>
     <version>0.10-SNAPSHOT</version>
 
     <name>yaml-validator</name>
     <description>A data validator based on YAML rules</description>
-    <url>https://github.com/kezhenxu94/yaml-validator</url>
+    <url>https://github.com/yaml-validator/yaml-validator</url>
 
     <modules>
         <module>yaml-validator-core</module>
@@ -354,18 +354,18 @@
     <scm>
         <connection>scm:git:git://github.com/kezhenxu94/yaml-validator.git</connection>
         <developerConnection>scm:git:git@github.com:kezhenxu94/yaml-validator.git</developerConnection>
-        <url>https://github.com/kezhenxu94/yaml-validator</url>
+        <url>https://github.com/yaml-validator/yaml-validator</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/kezhenxu94/yaml-validator/issues</url>
+        <url>https://github.com/yaml-validator/yaml-validator/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>GitHub Actions</system>
-        <url>https://github.com/kezhenxu94/yaml-validator/actions</url>
+        <url>https://github.com/yaml-validator/yaml-validator/actions</url>
     </ciManagement>
 
 </project>

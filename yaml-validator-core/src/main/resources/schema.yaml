@@ -1,5 +1,5 @@
-$schema: "https://github.com/kezhenxu94/yaml-validator/draft-01"
-id: "https://github.com/kezhenxu94/yaml-validator/metadata-1.0.0"
+$schema: "https://github.com/yaml-validator/yaml-validator/draft-01"
+id: "https://github.com/yaml-validator/yaml-validator/metadata-1.0.0"
 
 definitions:
   tag:

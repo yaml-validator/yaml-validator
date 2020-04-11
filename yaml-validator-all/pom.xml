@@ -18,7 +18,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>yaml-validator</artifactId>
-        <groupId>io.github.kezhenxu94</groupId>
+        <groupId>com.yaml-validator</groupId>
         <version>0.10-SNAPSHOT</version>
     </parent>
 
@@ -30,13 +30,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.kezhenxu94</groupId>
+            <groupId>com.yaml-validator</groupId>
             <artifactId>yaml-validator-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>io.github.kezhenxu94</groupId>
+            <groupId>com.yaml-validator</groupId>
             <artifactId>yaml-validator-tags</artifactId>
             <version>${project.version}</version>
         </dependency>

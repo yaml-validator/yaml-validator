@@ -185,6 +185,8 @@
                             <idseparator>-</idseparator>
                             <sectanchors>true</sectanchors>
                             <project-version>${project.version}</project-version>
+                            <project-group-id>${project.groupId}</project-group-id>
+                            <project-artifact-id>${project.parent.artifactId}-all</project-artifact-id>
                         </attributes>
                     </configuration>
                     <executions>

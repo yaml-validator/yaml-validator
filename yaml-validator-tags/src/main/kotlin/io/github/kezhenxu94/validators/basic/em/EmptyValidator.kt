@@ -24,7 +24,6 @@ import io.github.kezhenxu94.exceptions.ValidateException
 
 @TagProcessor(tags = ["!empty"], construct = EmptyConstruct::class)
 internal class EmptyValidator(override val context: Context) : Validatable, Referable<Any> {
-    
     override var reference: Any? = null
 
     override fun validate(candidate: Any?) {

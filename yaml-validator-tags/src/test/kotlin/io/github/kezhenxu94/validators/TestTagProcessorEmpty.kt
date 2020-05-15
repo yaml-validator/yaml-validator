@@ -23,7 +23,6 @@ import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
 internal class TestTagProcessorEmpty {
-    
     @Test
     internal fun `should pass when empty`() {
         val toValidate = Yaml().loadAs(

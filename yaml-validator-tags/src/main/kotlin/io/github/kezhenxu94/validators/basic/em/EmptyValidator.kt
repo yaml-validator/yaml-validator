@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators.basic.em;
+package io.github.kezhenxu94.validators.basic.em
 
 import io.github.kezhenxu94.annotations.TagProcessor
 import io.github.kezhenxu94.core.Context

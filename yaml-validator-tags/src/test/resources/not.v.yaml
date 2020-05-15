@@ -15,3 +15,4 @@
 students:
   - name: !not.nn
     age: !not.gt 12
+    address: !not.empty

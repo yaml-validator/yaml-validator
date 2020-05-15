@@ -178,8 +178,8 @@ internal class TestTagProcessorEQ {
     internal fun `should pass with POJO`() {
         val toValidate = mapOf(
             "students" to listOf(
-                Student(name = "whatever", age = 12),
-                Student(name = "whatever", age = 12)
+                Student(name = "whatever", age = 12, address = "wherever"),
+                Student(name = "whatever", age = 12, address = "wherever")
             )
         )
 

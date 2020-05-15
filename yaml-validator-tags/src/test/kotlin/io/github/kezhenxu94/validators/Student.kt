@@ -16,4 +16,4 @@
 
 package io.github.kezhenxu94.validators
 
-internal class Student(val name: String, val age: Int)
+internal class Student(val name: String, val age: Int, val address: String)

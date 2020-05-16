@@ -30,6 +30,7 @@ internal class TestTagProcessorNOT {
             students:
               - name: null
                 age: 12
+                address: beijing
             """.trimIndent(),
             Map::class.java
         )
@@ -47,6 +48,7 @@ internal class TestTagProcessorNOT {
                 students:
                   - name: whatever
                     age: 12
+                    address: beijing
                 """.trimIndent(),
                 Map::class.java
             )
@@ -65,6 +67,26 @@ internal class TestTagProcessorNOT {
                 students:
                   - name: ~
                     age: 13
+                    address: beijing
+                """.trimIndent(),
+                Map::class.java
+            )
+            YamlValidator.from(yamlInputStream)
+                .ignoreMissing()
+                .build()
+                .validate(toValidate)
+        }
+    }
+
+    @Test
+    internal fun `should fail when not NOT Empty`() {
+        assertThrows<ValidateException> {
+            val toValidate = Yaml().loadAs(
+                """
+                students:
+                  - name: ~
+                    age: 13
+                    address: ~
                 """.trimIndent(),
                 Map::class.java
             )

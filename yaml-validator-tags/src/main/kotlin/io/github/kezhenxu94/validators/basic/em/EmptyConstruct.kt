@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.kezhenxu94.validators
+package io.github.kezhenxu94.validators.basic.em
 
-internal class Student(val name: String, val age: Int, val address: String)
+import io.github.kezhenxu94.core.Context
+import org.yaml.snakeyaml.constructor.AbstractConstruct
+import org.yaml.snakeyaml.nodes.Node
+
+internal class EmptyConstruct : AbstractConstruct() {
+    override fun construct(node: Node) = EmptyValidator(Context(node))
+}

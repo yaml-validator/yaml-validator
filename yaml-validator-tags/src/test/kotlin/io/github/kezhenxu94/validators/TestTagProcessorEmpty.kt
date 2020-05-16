@@ -22,16 +22,14 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.yaml.snakeyaml.Yaml
 
-internal class TestTagProcessorGE {
+internal class TestTagProcessorEmpty {
     @Test
-    internal fun `should pass when ge`() {
+    internal fun `should pass when empty`() {
         val toValidate = Yaml().loadAs(
             """
             students:
               - name: whatever
-                age: 12
-              - name: whatever
-                age: "12"
+                address: ~
             """.trimIndent(),
             Map::class.java
         )
@@ -42,15 +40,13 @@ internal class TestTagProcessorGE {
     }
 
     @Test
-    internal fun `should fail when not ge`() {
+    internal fun `should fail when not empty`() {
         assertThrows<ValidateException> {
             val toValidate = Yaml().loadAs(
                 """
                 students:
                   - name: whatever
-                    age: 11
-                  - name: whatever
-                    age: 10
+                    address: wherever
                 """.trimIndent(),
                 Map::class.java
             )
@@ -62,51 +58,27 @@ internal class TestTagProcessorGE {
     }
 
     @Test
-    internal fun `should fail when not eq anchor`() {
-        assertThrows<ValidateException> {
-            val toValidate = Yaml().loadAs(
-                """
-                students:
-                  - name: whatever
-                    age: 13
-                  - name: whatever
-                    age: 12
-                """.trimIndent(),
-                Map::class.java
-            )
-            YamlValidator.from(yamlInputStream)
-                .ignoreMissing()
-                .build()
-                .validate(toValidate)
-        }
-    }
-
-    @Test
-    internal fun `should fail when type mismatch`() {
-        assertThrows<ValidateException> {
-            val toValidate = Yaml().loadAs(
-                """
-                students:
-                  - name: whatever
-                    age: true
-                  - name: whatever
-                    age: true
-                """.trimIndent(),
-                Map::class.java
-            )
-            YamlValidator.from(yamlInputStream)
-                .ignoreMissing()
-                .build()
-                .validate(toValidate)
-        }
+    internal fun `should pass when blank`() {
+        val toValidate = Yaml().loadAs(
+            """
+            students:
+              - name: whatever
+                address:
+            """.trimIndent(),
+            Map::class.java
+        )
+        YamlValidator.from(yamlInputStream)
+            .ignoreMissing()
+            .build()
+            .validate(toValidate)
     }
 
     @Test
     internal fun `should pass with POJO`() {
         val toValidate = mapOf(
             "students" to listOf(
-                Student(name = "whatever", age = 12, address = "wherever"),
-                Student(name = "whatever", age = 12, address = "wherever")
+                Student(name = "whatever", age = 12, address = ""),
+                Student(name = "whatever", age = 12, address = "")
             )
         )
 
@@ -117,6 +89,6 @@ internal class TestTagProcessorGE {
     }
 
     private companion object {
-        private val yamlInputStream get() = TestTagProcessorGE::class.java.getResourceAsStream("/ge.v.yaml")
+        private val yamlInputStream get() = TestTagProcessorEmpty::class.java.getResourceAsStream("/empty.v.yaml")
     }
 }

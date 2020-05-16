@@ -81,8 +81,8 @@ internal class TestTagProcessorGT {
     internal fun `should pass with POJO`() {
         val toValidate = mapOf(
             "students" to listOf(
-                Student(name = "whatever", age = 23),
-                Student(name = "whatever", age = 23)
+                Student(name = "whatever", age = 23, address = "wherever"),
+                Student(name = "whatever", age = 23, address = "wherever")
             )
         )
 

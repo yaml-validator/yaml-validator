@@ -42,7 +42,6 @@ jobs:
       - name: Process AsciiDoc
         run: |
           ./mvnw --batch-mode -s settings.xml clean asciidoctor:process-asciidoc
-          echo 'yaml-validator.com' > yaml-validator-site/target/site/CNAME
 
       - name: Deploy Site
         uses: JamesIves/github-pages-deploy-action@releases/v3

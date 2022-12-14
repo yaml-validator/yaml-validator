@@ -44,7 +44,7 @@
 
         <kotlin.version>1.3.71</kotlin.version>
         <ktlint.version>0.36.0</ktlint.version>
-        <snakeyaml.version>1.26</snakeyaml.version>
+        <snakeyaml.version>1.32</snakeyaml.version>
         <kotlinx-cli.version>0.2.1</kotlinx-cli.version>
         <reflections.version>0.9.12</reflections.version>
         <junit-jupiter.version>5.6.0</junit-jupiter.version>
